@@ -6,6 +6,8 @@ const headerTranslations = {
     'submenu_about_intro': { tw: '榮炭介紹', en: 'About Atrans', jp: '会社紹介' },
     'submenu_about_cmp':   { tw: '勤美集團', en: 'CMP Group', jp: '勤美グループ' },
     'submenu_about_esg':   { tw: 'ESG永續', en: 'ESG', jp: 'ESG' },
+    'menu_products':     { tw: '產品介紹', en: 'Products', jp: '産品内容' },
+
     'menu_service':  { tw: '服務內容', en: 'SERVICE', jp: 'サービス内容' },
     'menu_quality':  { tw: '品質與環境', en: 'QUALITY', jp: '品質・環境' },
     'submenu_quality_intro': { tw: '品質介紹', en: 'Quality', jp: '品質紹介' },
@@ -28,6 +30,11 @@ const pageTitleTranslations = {
         tw: '服務內容 | 榮炭科技股份有限公司',
         en: 'Service | Long Time Technology Co., Ltd.',
         jp: 'サービス内容 | 栄炭科技株式会社',
+    },
+    products: {
+        tw: '產品介紹 | 榮炭科技股份有限公司',
+        en: 'Products | Long Time Technology Co., Ltd.',
+        jp: '産品内容 | 栄炭科技株式会社',
     },
     quality: {
         tw: '品質與環境 | 榮炭科技股份有限公司',
