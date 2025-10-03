@@ -1,0 +1,276 @@
+@charset "UTF-8";
+
+#Wapper.investors {
+  padding: 6rem 0 4rem;
+}
+
+.investors .section-block {
+  margin: 0 auto 4rem;
+  max-width: 1080px;
+  padding: 0 1.5rem;
+}
+
+.investors .financial-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.investors .board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.investors .board-card {
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 12px 28px rgba(12, 34, 47, 0.08);
+}
+
+.investors .board-role {
+  color: #e60036;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.investors .board-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+}
+
+.investors .board-org {
+  color: #5f6b75;
+  line-height: 1.6;
+}
+
+.investors .download-card {
+  background: linear-gradient(135deg, rgba(230, 0, 54, 0.08), rgba(230, 0, 54, 0.02));
+  border: 1px solid rgba(230, 0, 54, 0.18);
+  border-radius: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding: 2rem 2.25rem;
+}
+
+.investors #orgchart .orgchart-wrapper {
+  margin-top: 2.5rem;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 18px;
+  background: #edf5f3;
+  padding: 3rem;
+  text-align: center;
+  box-shadow: 0 18px 32px rgba(12, 34, 47, 0.08);
+}
+
+.investors #orgchart .orgchart-wrapper img {
+  display: inline-block;
+  height: auto;
+  max-width: initial;
+}
+
+.investors #orgchart .orgchart-note {
+  color: #e60036;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  margin-top: 0.75rem;
+}
+
+.investors #orgchart .orgchart-note span {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .investors #orgchart .orgchart-wrapper {
+    height: calc(100vh - 70px);
+    padding: 2rem;
+  }
+  .investors #orgchart .orgchart-wrapper img {
+    height: 100%;
+  }
+}
+
+.investors .download-card p {
+  color: #2e3338;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.investors .download-card a {
+  background: #e60036;
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  gap: 0.5rem;
+  padding: 0.8rem 1.8rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.investors .download-card a:hover,
+.investors .download-card a:focus {
+  background: #c7002d;
+  transform: translateY(-1px);
+}
+
+.investors .financial-table {
+  border-collapse: collapse;
+  margin-top: 2rem;
+  width: 100%;
+  min-width: 660px;
+}
+
+.investors .financial-table th,
+.investors .financial-table td {
+  border-bottom: 1px solid #e1e4e8;
+  padding: 1.2rem 1rem;
+  vertical-align: top;
+}
+
+.investors .financial-table thead th {
+  background: #f8f9fb;
+  color: #1f272f;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.investors .financial-table tbody th {
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.investors .financial-table tbody td a {
+  color: #e60036;
+  font-weight: 600;
+}
+
+.investors .financial-table td {
+  text-align: center;
+}
+
+.investors .quarter-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.investors .quarter-links a {
+  border: 1px solid rgba(230, 0, 54, 0.4);
+  border-radius: 999px;
+  color: #e60036;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.45rem 1.1rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.investors .quarter-links a:hover,
+.investors .quarter-links a:focus {
+  background: #e60036;
+  color: #fff;
+}
+
+.investors .info-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+  .investors .info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.investors .info-card {
+  background: #ffffff;
+  border: 1px solid #e7e7e7;
+  border-radius: 14px;
+  padding: 1.75rem;
+  box-shadow: 0 18px 28px rgba(12, 34, 47, 0.06);
+}
+
+.investors .info-card h3 {
+  color: #1f272f;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+}
+
+.investors .info-card p,
+.investors .info-card li {
+  color: #49535a;
+  font-size: 0.97rem;
+  line-height: 1.7;
+}
+
+.investors .info-card a {
+  color: #e60036;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.investors .info-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.investors .info-card li + li {
+  margin-top: 0.4rem;
+}
+
+.investors .contact-list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.investors .contact-list span {
+  color: #1f272f;
+  font-weight: 600;
+}
+
+.investors .contact-list p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  #Wapper.investors {
+    padding: 4rem 0 3rem;
+  }
+
+  .investors .financial-table {
+    min-width: 540px;
+  }
+
+  .investors .download-card {
+    padding: 1.75rem;
+  }
+
+  .investors .board-card {
+    padding: 1.5rem;
+  }
+
+}

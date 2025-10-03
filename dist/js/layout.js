@@ -1,0 +1,1 @@
+if(window.setTimeout((function(){slider_ul_list("topmenu1")}),600),location.hash)var id=$(location.hash);$(window).load((function(){location.hash&&$("html,body").animate({scrollTop:id.offset().top-srtop},600)})),$('#topmenu1 a[href*="#"]:not([href="#"])').click((function(){var o=$(this.hash);return $("html,body").stop().animate({scrollTop:o.offset().top-srtop},1100),!1}));
