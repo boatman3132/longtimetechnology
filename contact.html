@@ -116,7 +116,12 @@
                 <div class="en">Long Time Technology has many years of experience in battery manufacturing. If you have any questions related to batteries, please feel free to contact us.</div>
                 <div class="jp">榮炭は長年にわたり電池製造の経験を持ちます。電池に関するご不明点やご質問がございましたら、ぜひお気軽にお問い合わせください。</div>
             </div>
-            <form class="row asj fade" id="contact" action="https://www.advancision.com/quote/contact.php?lang=tw" method="post" autocomplete="off" enctype="multipart/form-data">
+            <div id="contact-status" class="form-status" hidden aria-live="polite">
+                <span class="tw"></span>
+                <span class="en"></span>
+                <span class="jp"></span>
+            </div>
+            <form class="row asj fade" id="contact" method="post" autocomplete="off" enctype="multipart/form-data" data-sync-lang="true" data-apps-script-url="https://script.google.com/macros/s/AKfycbxK_X9k6EcUmL2VJWrjm490c3GXqA103frddS4vLjYOwwngwjxyDgqQcd9paNCqsKq2vg/exec">
                 <div class="form-group w50">
                     <label>
                         <span class="tw">公司/單位</span>
@@ -199,7 +204,7 @@
                         </a>
                     </div>
                 </div>
-                <input type="hidden" name="ip" value="60.251.155.123">
+                <input type="hidden" name="lang" value="tw">
             </form>
         </section>
     </div>
@@ -209,6 +214,150 @@
     <script src="quote/function.js"></script>
     <script src="dist/js/layout-loader.js"></script>
     <script>
+        const contactStatusMessages = {
+            success: {
+                tw: '您的留言已送出，我們將儘快與您聯繫。',
+                en: 'Your message has been sent. We will get back to you shortly.',
+                jp: 'お問い合わせ内容を受け付けました。担当者より追ってご連絡いたします。'
+            },
+            error: {
+                tw: '訊息寄送時發生問題，請稍後再試或改用其他方式聯絡我們。',
+                en: 'Something went wrong while sending your message. Please try again later or contact us through another channel.',
+                jp: '送信時に問題が発生しました。お手数ですが時間をおいて再度お試しいただくか、別の方法でご連絡ください。'
+            },
+            invalid: {
+                tw: '請檢查必填欄位是否正確填寫後再試一次。',
+                en: 'Please double-check the required fields and try again.',
+                jp: '必須項目が正しく入力されているかご確認のうえ、もう一度お試しください。'
+            }
+        };
+
+        (function handleContactStatus() {
+            const container = document.getElementById('contact-status');
+            if (container) {
+                container.hidden = true;
+                container.classList.remove('is-success', 'is-error');
+                container.removeAttribute('data-status');
+                container.querySelectorAll('span').forEach(span => span.textContent = '');
+            }
+        })();
+
+        (function setupAppsScriptSubmission() {
+            const form = document.getElementById('contact');
+            if (!form) {
+                return;
+            }
+
+            const statusBox = document.getElementById('contact-status');
+            const submitLink = form.querySelector('.btn1');
+            const appsScriptURL = (window.GOOGLE_APPS_SCRIPT_URL || form.dataset.appsScriptUrl || '').trim();
+
+            function resetStatus() {
+                if (!statusBox) {
+                    return;
+                }
+                statusBox.hidden = true;
+                statusBox.classList.remove('is-success', 'is-error');
+                statusBox.removeAttribute('data-status');
+                statusBox.querySelectorAll('span').forEach(span => span.textContent = '');
+            }
+
+            function renderStatus(type) {
+                if (!statusBox || !contactStatusMessages[type]) {
+                    return;
+                }
+                statusBox.dataset.status = type;
+                statusBox.querySelector('.tw').textContent = contactStatusMessages[type].tw;
+                statusBox.querySelector('.en').textContent = contactStatusMessages[type].en;
+                statusBox.querySelector('.jp').textContent = contactStatusMessages[type].jp;
+                statusBox.classList.toggle('is-success', type === 'success');
+                statusBox.classList.toggle('is-error', type !== 'success');
+                statusBox.hidden = false;
+            }
+
+            function toggleSubmitting(isSubmitting) {
+                if (!submitLink) {
+                    return;
+                }
+                if (isSubmitting) {
+                    if (!submitLink.dataset.hrefBackup) {
+                        submitLink.dataset.hrefBackup = submitLink.getAttribute('href') || '';
+                    }
+                    submitLink.removeAttribute('href');
+                    submitLink.classList.add('disabled');
+                    submitLink.setAttribute('aria-disabled', 'true');
+                } else {
+                    const href = submitLink.dataset.hrefBackup || 'javascript:send();';
+                    submitLink.setAttribute('href', href);
+                    submitLink.classList.remove('disabled');
+                    submitLink.removeAttribute('aria-disabled');
+                }
+            }
+
+            function collectPayload() {
+                const formData = new FormData(form);
+                const payload = {};
+                formData.forEach((value, key) => {
+                    if (payload[key] !== undefined) {
+                        if (Array.isArray(payload[key])) {
+                            payload[key].push(value);
+                        } else {
+                            payload[key] = [payload[key], value];
+                        }
+                    } else {
+                        payload[key] = value;
+                    }
+                });
+                payload.timestamp = new Date().toISOString();
+                payload.source = 'website-contact';
+                return payload;
+            }
+
+            async function submitViaAppsScript(event) {
+                event.preventDefault();
+                resetStatus();
+
+                if (!appsScriptURL) {
+                    console.error('Google Apps Script endpoint is not configured.');
+                    renderStatus('error');
+                    return;
+                }
+
+                toggleSubmitting(true);
+
+                try {
+                    const response = await fetch(appsScriptURL, {
+                        method: 'POST',
+                        mode: 'cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(collectPayload()),
+                    });
+
+                    const result = await response.json().catch(() => ({}));
+
+                    if (!response.ok || !result.success) {
+                        renderStatus(result.status === 'invalid' ? 'invalid' : 'error');
+                        return;
+                    }
+
+                    form.reset();
+                    document.querySelectorAll('.checkbg').forEach(element => {
+                        element.classList.remove('active');
+                    });
+                    renderStatus('success');
+                } catch (error) {
+                    console.error('Contact form submission failed.', error);
+                    renderStatus('error');
+                } finally {
+                    toggleSubmitting(false);
+                }
+            }
+
+            form.addEventListener('submit', submitViaAppsScript);
+        })();
+
         rand()
         onLayoutReady(function () {
             $('ul.mmenu > li').eq(6).addClass('active');
@@ -232,14 +381,12 @@
 
             if (id_name == "") {
                 document.cookie = "captcha=" + validate;
-                                    $("#contact").submit();
-                    $("#contact .btn1").removeAttr("href");
+                                    $("#contact").trigger('submit');
                             } else $("#" + id_name + "_span").focus();
         }
 
         function onSubmit(token) {
-            $("#contact").submit();
-            $("#contact .btn1").removeAttr("href");
+            $("#contact").trigger('submit');
         }
     </script>
     <script src="dist/js/language-switcher.js"></script>

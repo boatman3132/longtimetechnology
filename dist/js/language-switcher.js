@@ -97,6 +97,36 @@ function updatePlaceholders(lang) {
 }
 
 /**
+ * 將語系同步到需要的表單或其他元素
+ * @param {string} lang - 目標語言 ('tw', 'en', 'jp')
+ */
+function syncLanguageAttributes(lang) {
+    document.querySelectorAll('[data-sync-lang]').forEach(element => {
+        if (element.tagName === 'FORM') {
+            const baseAction = element.dataset.baseAction || element.getAttribute('action') || '';
+            if (!element.dataset.baseAction && baseAction) {
+                element.dataset.baseAction = baseAction;
+            }
+
+            if (element.dataset.baseAction) {
+                const isAbsolute = /^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(element.dataset.baseAction);
+                const url = isAbsolute ? new URL(element.dataset.baseAction) : new URL(element.dataset.baseAction, window.location.origin);
+                url.searchParams.set('lang', lang);
+                const nextAction = isAbsolute ? url.toString() : `${url.pathname}${url.search}`;
+                element.setAttribute('action', nextAction);
+            }
+
+            const langInput = element.querySelector('input[name="lang"]');
+            if (langInput) {
+                langInput.value = lang;
+            }
+        } else {
+            element.setAttribute('data-current-lang', lang);
+        }
+    });
+}
+
+/**
  * 根據目前頁面與語言更新瀏覽器標籤標題
  * @param {string} lang - 目標語言 ('tw', 'en', 'jp')
  */
@@ -125,6 +155,9 @@ function lang_set(lang) {
 
     // 更新表單 placeholder
     updatePlaceholders(lang);
+
+    // 同步語系設定至需要的元素
+    syncLanguageAttributes(lang);
 
     // 更新語言按鈕的 'active' 狀態
     document.querySelectorAll('.langbtngroup .langbtn').forEach(btn => {
