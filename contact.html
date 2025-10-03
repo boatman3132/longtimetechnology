@@ -328,13 +328,11 @@
 
                 try {
                     const response = await fetch(appsScriptURL, {
-                        method: 'POST',
-                        mode: 'cors',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(collectPayload()),
+                    method: 'POST',
+                    mode: 'cors',
+                    body: JSON.stringify(collectPayload()),
                     });
+
 
                     const result = await response.json().catch(() => ({}));
 
