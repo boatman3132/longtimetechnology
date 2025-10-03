@@ -84,6 +84,19 @@ function updateHeaderText(lang) {
 }
 
 /**
+ * 更新具備多語 placeholder 的輸入欄位
+ * @param {string} lang - 目標語言 ('tw', 'en', 'jp')
+ */
+function updatePlaceholders(lang) {
+    const attribute = `data-placeholder-${lang}`;
+    document.querySelectorAll('[data-placeholder-tw]').forEach(element => {
+        const translatedPlaceholder = element.getAttribute(attribute);
+        const fallbackPlaceholder = element.getAttribute('data-placeholder-tw') || '';
+        element.setAttribute('placeholder', translatedPlaceholder || fallbackPlaceholder);
+    });
+}
+
+/**
  * 根據目前頁面與語言更新瀏覽器標籤標題
  * @param {string} lang - 目標語言 ('tw', 'en', 'jp')
  */
@@ -109,6 +122,9 @@ function lang_set(lang) {
 
     // 更新頁籤標題
     updatePageTitle(lang);
+
+    // 更新表單 placeholder
+    updatePlaceholders(lang);
 
     // 更新語言按鈕的 'active' 狀態
     document.querySelectorAll('.langbtngroup .langbtn').forEach(btn => {
