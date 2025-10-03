@@ -121,7 +121,7 @@
                 <span class="en"></span>
                 <span class="jp"></span>
             </div>
-            <form class="row asj fade" id="contact" method="post" autocomplete="off" enctype="multipart/form-data" data-sync-lang="true" data-apps-script-url="https://script.google.com/macros/s/AKfycbxK_X9k6EcUmL2VJWrjm490c3GXqA103frddS4vLjYOwwngwjxyDgqQcd9paNCqsKq2vg/exec">
+            <form class="row asj fade" id="contact" method="post" autocomplete="off" enctype="multipart/form-data" data-sync-lang="true" data-apps-script-url="https://script.google.com/macros/s/AKfycbxK_X9k6EcUmL2VJWrjm490c3GXqA103frddS4vLjYOwwngwjxyDgqQcd9paNCqsKq2vg/exec" data-redirect-success="index.html">
                 <div class="form-group w50">
                     <label>
                         <span class="tw">公司/單位</span>
@@ -251,6 +251,7 @@
             const statusBox = document.getElementById('contact-status');
             const submitLink = form.querySelector('.btn1');
             const appsScriptURL = (window.GOOGLE_APPS_SCRIPT_URL || form.dataset.appsScriptUrl || '').trim();
+            const successRedirect = (form.dataset.redirectSuccess || '').trim();
 
             function resetStatus() {
                 if (!statusBox) {
@@ -346,6 +347,12 @@
                     document.querySelectorAll('.checkbg').forEach(element => {
                         element.classList.remove('active');
                     });
+
+                    if (successRedirect) {
+                        window.location.href = successRedirect;
+                        return;
+                    }
+
                     renderStatus('success');
                 } catch (error) {
                     console.error('Contact form submission failed.', error);
