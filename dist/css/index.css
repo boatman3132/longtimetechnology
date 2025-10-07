@@ -493,7 +493,7 @@
   width: 80%;
 }
 .banner .bgred {
-  background-color: #c4002e;
+  background-color: rgb(115,115,115);
   height: 91.8%;
   width: 20%;
   z-index: -1;

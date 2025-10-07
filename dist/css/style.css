@@ -53,7 +53,7 @@
   left: 50%;
 }
 .pgkv .bgcolor {
-  background-color: #c4002e;
+  background-color: rgb(115,115,115);
   height: 0;
 }
 @media all and (max-width: 768px) {

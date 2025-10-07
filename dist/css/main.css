@@ -1032,7 +1032,7 @@ footer {
   color: white;
 }
 footer .bgred {
-  background-color: #c4002e;
+  background-color: rgb(62, 62, 62);
 }
 footer .bgred .tel {
   color: white;
