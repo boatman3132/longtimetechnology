@@ -232,3 +232,13 @@ function rand() {
 	}
 	return validate;
 }
+
+$(function () {
+    var path = window.location.pathname;
+    var page = path.split("/").pop();
+    if (page === '') {
+        page = 'index.html';
+    }
+    var target = $('ul.mmenu a[href="' + page + '"]');
+    target.parent('li').addClass('active');
+});
