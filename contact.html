@@ -25,8 +25,9 @@
 
 
     <style>
-        .tw, .en, .jp { display: none; }
+        .tw, .cn, .en, .jp { display: none; }
         body.lang_tw .tw,
+        body.lang_cn .cn,
         body.lang_en .en,
         body.lang_jp .jp { display: initial; }
     </style>
@@ -36,14 +37,15 @@
 <div data-include="header"></div>
     <div class="pgkv">
         <div class="bgcolor"></div>
-        <div class="txt_pos">
-            <h1 class="mtitle">CONTACT</h1>
-            <div>
-                <span class="tw">聯絡我們</span>
-                <span class="en">CONTACT US</span>
-                <span class="jp">お問合せ</span>
+            <div class="txt_pos">
+                <h1 class="mtitle">CONTACT</h1>
+                <div>
+                    <span class="tw">聯絡我們</span>
+                    <span class="cn">联系我们</span>
+                    <span class="en">CONTACT US</span>
+                    <span class="jp">お問合せ</span>
+                </div>
             </div>
-        </div>
         <div class="mimg">
             <div class="bgcover pc_use" style="background-image:url(dist/images/banner/contact.png)"></div>
             <div class="bgcover mo_use" style="background-image:url(dist/images/banner/contact_mo.png)"></div>
@@ -53,6 +55,7 @@
         <div class="row asj fade">
             <div class="titleB">
                 <h2 class="title tw">聯絡榮炭</h2>
+                <h2 class="title cn">联系荣炭</h2>
                 <h2 class="title en">Transportation</h2>
                 <h2 class="title jp">交通手段</h2>
                 <div class="line"></div>
@@ -63,6 +66,7 @@
                 <div class="yline"></div>
                 <div class="fs24">
                     <span class="tw">榮炭科技股份有限公司</span>
+                    <span class="cn">荣炭科技股份有限公司</span>
                     <span class="en">Long Time Technology Co., Ltd.</span>
                     <span class="jp">栄炭科技株式会社</span>
                 </div>
@@ -79,6 +83,7 @@
                         <b><img src="dist/images/icon_add.png"></b>
                         <a href="https://maps.app.goo.gl/8S78YqzpGxwwBM7x5" target="_blank">
                             <span class="tw">221006 新北市汐止區大同路一段237號6樓</span>
+                            <span class="cn">221006 新北市汐止区大同路一段237号6楼</span>
                             <span class="en">6F., No.237, Sec. 1, Datong Rd., Xizhi Dist., New Taipei City 221006, Taiwan</span>
                             <span class="jp">221006 台湾新北市汐止区大同路一段237号6階</span>
                         </a>
@@ -90,6 +95,12 @@
                             <li><i>開車前往</i>國道三號12號出口-新台五路出口，出交流道後開車約5分鐘可抵達。</li>
                             <li><i>搭乘台鐵</i>汐科車站或南港車站，下車後可搭乘當地公車或轉計程車抵達。</li>
                             <li><i>搭乘高鐵</i>高鐵南港站，下車後可搭乘當地公車或轉計程車抵達。</li>
+                        </ul>
+                        <ul class="cn">
+                            <li>交通方式</li>
+                            <li><i>驾车前往</i>国道三号12号出口（新台五路出口），下交流道后约5分钟车程即可抵达。</li>
+                            <li><i>台铁</i>汐科站或南港站下车后，可转乘公车或出租车抵达。</li>
+                            <li><i>高铁</i>高铁南港站下车后，可转乘公车或出租车抵达。</li>
                         </ul>
                         <ul class="en">
                             <li>TRANSPORTATION</li>
@@ -115,11 +126,13 @@
         <section class="formtable">
             <div class="row form-des asj fade">
                 <div class="tw">榮炭擁有多年電池製造經驗，若您有電池相關任何疑問，歡迎與我們聯繫。</div>
+                <div class="cn">荣炭拥有多年电池制造经验，若您对电池有任何疑问，欢迎与我们联系。</div>
                 <div class="en">Long Time Technology has many years of experience in battery manufacturing. If you have any questions related to batteries, please feel free to contact us.</div>
                 <div class="jp">榮炭は長年にわたり電池製造の経験を持ちます。電池に関するご不明点やご質問がございましたら、ぜひお気軽にお問い合わせください。</div>
             </div>
             <div id="contact-status" class="form-status" hidden aria-live="polite">
                 <span class="tw"></span>
+                <span class="cn"></span>
                 <span class="en"></span>
                 <span class="jp"></span>
             </div>
@@ -127,70 +140,76 @@
                 <div class="form-group w50">
                     <label>
                         <span class="tw">公司/單位</span>
+                        <span class="cn">公司/单位</span>
                         <span class="en">Company/Unit</span>
                         <span class="jp">会社/組織</span>
                     </label>
                     <div>
-                        <input type="text" name="unit" placeholder="請輸入公司/單位" data-placeholder-tw="請輸入公司/單位" data-placeholder-en="Enter your company or organization" data-placeholder-jp="会社・団体名をご入力ください" class="checkbg">
+                        <input type="text" name="unit" placeholder="請輸入公司/單位" data-placeholder-tw="請輸入公司/單位" data-placeholder-cn="请输入公司/单位" data-placeholder-en="Enter your company or organization" data-placeholder-jp="会社・団体名をご入力ください" class="checkbg">
                     </div>
                 </div>
                 <div class="form-group w50">
                     <label>
                         <span class="tw">姓名</span>
+                        <span class="cn">姓名</span>
                         <span class="en">Name</span>
                         <span class="jp">お名前</span>
                         <i>*</i>
                     </label>
                     <div class="required">
-                        <input type="text" name="name" required="required" placeholder="請輸入姓名" data-placeholder-tw="請輸入姓名" data-placeholder-en="Enter your name" data-placeholder-jp="お名前をご入力ください" class="checkbg">
+                        <input type="text" name="name" required="required" placeholder="請輸入姓名" data-placeholder-tw="請輸入姓名" data-placeholder-cn="请输入姓名" data-placeholder-en="Enter your name" data-placeholder-jp="お名前をご入力ください" class="checkbg">
                         <div class="required-txt" id="name_span"></div>
                     </div>
                 </div>
                 <div class="form-group w50">
                     <label>
                         <span class="tw">聯絡電話</span>
+                        <span class="cn">联系电话</span>
                         <span class="en">Phone</span>
                         <span class="jp">電話番号</span>
                         <i>*</i>
                     </label>
                     <div class="required">
-                        <input type="tel" name="tel" required="required" placeholder="請輸入聯絡電話" data-placeholder-tw="請輸入聯絡電話" data-placeholder-en="Enter your phone number" data-placeholder-jp="電話番号をご入力ください" class="checkbg">
+                        <input type="tel" name="tel" required="required" placeholder="請輸入聯絡電話" data-placeholder-tw="請輸入聯絡電話" data-placeholder-cn="请输入联系电话" data-placeholder-en="Enter your phone number" data-placeholder-jp="電話番号をご入力ください" class="checkbg">
                         <div class="required-txt" id="tel_span"></div>
                     </div>
                 </div>
                 <div class="form-group w50">
                     <label>
                         <span class="tw">聯絡信箱</span>
+                        <span class="cn">电子邮箱</span>
                         <span class="en">Email</span>
                         <span class="jp">メールアドレス</span>
                         <i>*</i>
                     </label>
                     <div class="required">
-                        <input type="email" name="mail" required="required" placeholder="請輸入聯絡信箱" data-placeholder-tw="請輸入聯絡信箱" data-placeholder-en="Enter your email address" data-placeholder-jp="メールアドレスをご入力ください" class="checkbg">
+                        <input type="email" name="mail" required="required" placeholder="請輸入聯絡信箱" data-placeholder-tw="請輸入聯絡信箱" data-placeholder-cn="请输入电子邮箱" data-placeholder-en="Enter your email address" data-placeholder-jp="メールアドレスをご入力ください" class="checkbg">
                         <div class="required-txt" id="mail_span"></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>
                         <span class="tw">主旨</span>
+                        <span class="cn">主题</span>
                         <span class="en">Subject</span>
                         <span class="jp">件名</span>
                         <i>*</i>
                     </label>
                     <div class="required">
-                        <input type="text" name="title" required="required" placeholder="請輸入主旨" data-placeholder-tw="請輸入主旨" data-placeholder-en="Enter the subject" data-placeholder-jp="件名をご入力ください" class="checkbg">
+                        <input type="text" name="title" required="required" placeholder="請輸入主旨" data-placeholder-tw="請輸入主旨" data-placeholder-cn="请输入主题" data-placeholder-en="Enter the subject" data-placeholder-jp="件名をご入力ください" class="checkbg">
                         <div class="required-txt" id="title_span"></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>
                         <span class="tw">內容</span>
+                        <span class="cn">留言内容</span>
                         <span class="en">Message</span>
                         <span class="jp">内容</span>
                         <i>*</i>
                     </label>
                     <div class="required">
-                        <textarea name="text" required="required" rows="5" placeholder="請輸入內容" data-placeholder-tw="請輸入內容" data-placeholder-en="Enter your message" data-placeholder-jp="内容をご入力ください" class="checkbg"></textarea>
+                        <textarea name="text" required="required" rows="5" placeholder="請輸入內容" data-placeholder-tw="請輸入內容" data-placeholder-cn="请输入留言内容" data-placeholder-en="Enter your message" data-placeholder-jp="内容をご入力ください" class="checkbg"></textarea>
                         <div class="required-txt" id="text_span"></div>
                     </div>
                 </div>
@@ -200,6 +219,7 @@
                         
                         <a href="javascript:send();" class="btn1 red">
                             <span class="tw">送出表單</span>
+                            <span class="cn">提交表单</span>
                             <span class="en">SEND</span>
                             <span class="jp">送信</span>
                             <img src="dist/svg/arrow.svg" class="svg">
@@ -219,16 +239,19 @@
         const contactStatusMessages = {
             success: {
                 tw: '您的留言已送出，我們將儘快與您聯繫。',
+                cn: '您的留言已提交，我们会尽快与您联系。',
                 en: 'Your message has been sent. We will get back to you shortly.',
                 jp: 'お問い合わせ内容を受け付けました。担当者より追ってご連絡いたします。'
             },
             error: {
                 tw: '訊息寄送時發生問題，請稍後再試或改用其他方式聯絡我們。',
+                cn: '提交讯息时发生问题，请稍后再试或改用其他方式联系我们。',
                 en: 'Something went wrong while sending your message. Please try again later or contact us through another channel.',
                 jp: '送信時に問題が発生しました。お手数ですが時間をおいて再度お試しいただくか、別の方法でご連絡ください。'
             },
             invalid: {
                 tw: '請檢查必填欄位是否正確填寫後再試一次。',
+                cn: '请确认必填栏位是否填写正确后再试一次。',
                 en: 'Please double-check the required fields and try again.',
                 jp: '必須項目が正しく入力されているかご確認のうえ、もう一度お試しください。'
             }
@@ -271,6 +294,7 @@
                 }
                 statusBox.dataset.status = type;
                 statusBox.querySelector('.tw').textContent = contactStatusMessages[type].tw;
+                statusBox.querySelector('.cn').textContent = contactStatusMessages[type].cn;
                 statusBox.querySelector('.en').textContent = contactStatusMessages[type].en;
                 statusBox.querySelector('.jp').textContent = contactStatusMessages[type].jp;
                 statusBox.classList.toggle('is-success', type === 'success');

@@ -131,9 +131,9 @@ function lang_set(ver) {
 //訂閱電子報
 function edm(email) {
 	var error_msg = [
-		{ "tw": "請填寫正確Email", "en": "Please fill in the correct email.", "jp": "Please fill in the correct email." },
-		{ "tw": "訂閱成功。", "en": "Successfully subscribed.", "jp": "Successfully subscribed." },
-		{ "tw": "您已訂閱過", "en": "You have subscribed!", "jp": "You have subscribed!" },
+		{ "tw": "請填寫正確Email", "cn": "请输入正确的邮箱", "en": "Please fill in the correct email.", "jp": "Please fill in the correct email." },
+		{ "tw": "訂閱成功。", "cn": "订阅成功。", "en": "Successfully subscribed.", "jp": "Successfully subscribed." },
+		{ "tw": "您已訂閱過", "cn": "您已订阅过", "en": "You have subscribed!", "jp": "You have subscribed!" },
 	];
 	var emailform = /^([a-zA-Z0-9]+[_|\_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\-|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$/;
 	if (!emailform.test(email)) {

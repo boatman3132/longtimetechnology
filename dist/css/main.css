@@ -99,11 +99,17 @@ img {
 .lang_tw .jp {
   display: none !important;
 }
+.lang_tw .cn {
+  display: none !important;
+}
 
 .lang_en .tw {
   display: none !important;
 }
 .lang_en .jp {
+  display: none !important;
+}
+.lang_en .cn {
   display: none !important;
 }
 
@@ -112,6 +118,18 @@ img {
 }
 .lang_jp .en {
   display: none !important;
+}
+.lang_jp .cn {
+  display: none !important;
+}
+
+.lang_cn .tw,
+.lang_cn .en,
+.lang_cn .jp {
+  display: none !important;
+}
+.lang_cn .cn {
+  display: initial !important;
 }
 
 #Wapper {

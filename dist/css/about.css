@@ -1391,6 +1391,8 @@
   gap: 32px;
   grid-template-columns: 1fr;
   width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
 }
 .about .management-team .member {
   background-color: #fff;
@@ -1465,28 +1467,123 @@
 
 @media all and (min-width: 768px) {
   .about .management-team .team-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
 @media all and (min-width: 1024px) {
+  .about .management-team .team-grid {
+    gap: 32px;
+  }
   .about .management-team .member {
     flex-direction: row;
-    align-items: flex-start;
-    gap: 24px;
+    align-items: stretch;
+    gap: 32px;
+    padding: 32px 36px;
   }
   .about .management-team .member-photo {
-    width: 180px;
+    width: 210px;
     margin-bottom: 0;
     flex-shrink: 0;
   }
   .about .management-team .member-info {
     flex: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 0.55fr) minmax(0, 0.45fr);
+    column-gap: 28px;
+    row-gap: 16px;
+    position: relative;
+    align-content: start;
   }
-}
-
-@media all and (min-width: 1200px) {
-  .about .management-team .team-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .about .management-team .member-info::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(40% + 1px);
+    width: 1px;
+    background: linear-gradient(180deg, rgba(95, 111, 191, 0.4), rgba(95, 111, 191, 0));
+  }
+  .about .management-team .member-name,
+  .about .management-team .member-role {
+    grid-column: 1;
+  }
+  .about .management-team .member-role {
+    margin-bottom: 40px;
+  }
+  .about .management-team .member-exp {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 28px;
+    row-gap: 12px;
+    padding-left: 0;
+    margin-top: -16px;
+    list-style: none;
+    align-items: start;
+    align-content: start;
+  }
+  .about .management-team .member-exp::before,
+  .about .management-team .member-exp::after {
+    display: block;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color: #253464;
+    margin-bottom: 12px;
+    align-self: start;
+  }
+  .about .management-team .member-exp::before {
+    content: none;
+  }
+  .about .management-team .member-exp::after {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0;
+    transform: translateY(-100px);
+  }
+  .about .management-team .member-exp.tw::after {
+    content: "經歷";
+  }
+  .about .management-team .member-exp.en::after {
+    content: "Experience";
+  }
+  .about .management-team .member-exp.jp::after {
+    content: "経歴";
+  }
+  .about .management-team .member-exp li {
+    padding-left: 18px;
+    position: relative;
+    margin: 0;
+  }
+  .about .management-team .member-exp li::before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #5f6fbf;
+    left: 0;
+    top: 0.6em;
+  }
+  .about .management-team .member-exp li:first-child {
+    grid-column: 1;
+    grid-row: 2;
+    transform: translateY(-40px);
+  }
+  .about .management-team .member-exp li:nth-child(2) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .about .management-team .member-exp li:nth-child(n + 3) {
+    grid-column: 2;
+    grid-row: auto;
+  }
+  .about .management-team .member-exp li:nth-child(n + 2) {
+    transform: translateY(-100px);
+  }
+  .about .management-team .member-exp.member-exp--stacked li span + span {
+    margin-top: 4px;
   }
 }
