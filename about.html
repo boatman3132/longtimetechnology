@@ -389,89 +389,129 @@
                 <h2 class="title en">MILESTONE</h2>
                 <h2 class="title jp">沿革</h2>
                 <div class="line"></div>
+                <!-- 新增：里程碑左右按鈕（顯示於標題下方） -->
+                <div class="title-arrows">
+                    <a href="javascript:;" id="milestonePrev" class="arrow"><img src="dist/svg/arrowL.svg" class="svg" alt="往左"></a>
+                    <a href="javascript:;" id="milestoneNext" class="arrow"><img src="dist/svg/arrowR.svg" class="svg" alt="往右"></a>
+                </div>
             </div>
             <div class="history">
                 <div class="top-menu-history" id="topmenu2">
-                    <div class="row col flex-direction-nav arrow-group">
-                        <a href="javascript:;" class="ltbn arrow"><img src="dist/svg/arrowL.svg" class="svg"></a>
-                        <a href="javascript:;" class="rtbn arrow"><img src="dist/svg/arrowR.svg" class="svg"></a>
-                    </div>
+                    <!-- 內部箭頭已移至標題下方（避免重複顯示） -->
                     <div class="item_menu">
                         <div class="item_menu_Box">
                             <ul class="item_menu_list slides yearlist">
                                 <li class="active"></li>
-                                                                    <li>
-                                            <div class="ytime">2009</div>
-                                            <div class="dots"><i></i></div>
-                                            <div class="txt">
-                                                <span class="tw">「榮炭科技股份有限公司」正式成立</span>
-                                                <span class="cn">“荣炭科技股份有限公司”正式成立</span>
-                                                <span class="en">Long Time Technology Co., Ltd. was officially established.</span>
-                                                <span class="jp">「栄炭科技株式会社」が正式に設立された</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="ytime">2010</div>
-                                            <div class="dots"><i></i></div>
-                                            <div class="txt">
-                                                <span class="tw">台灣研發中心成立<br>廣東省設立「江門市榮炭電子材料有限公司」</span>
-                                                <span class="cn">台湾研发中心成立<br>广东省设立“江门市荣炭电子材料有限公司”</span>
-                                                <span class="en">Established an R&amp;D center in Taiwan and founded “Jiangmen Long Time Electronic Materials Co., Ltd.” in Guangdong Province.</span>
-                                                <span class="jp">台湾で研究開発センターを設立し、広東省に「江門市栄炭電子材料有限公司」を設立</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="ytime">2011</div>
-                                            <div class="dots"><i></i></div>
-                                            <div class="txt">
-                                                <span class="tw">廣東省江門廠正式投產</span>
-                                                <span class="cn">广东省江门厂正式投产</span>
-                                                <span class="en">The Jiangmen plant in Guangdong Province officially started production.</span>
-                                                <span class="jp">広東省江門工場が正式に生産を開始</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="ytime">2013</div>
-                                            <div class="dots"><i></i></div>
-                                            <div class="txt">
-                                                <span class="tw">與日本大阪瓦斯化學(OGC)簽定代工合約</span>
-                                                <span class="cn">与日本大阪瓦斯化学（OGC）签订代工合约</span>
-                                                <span class="en">Signed an OEM contract with Osaka Gas Chemicals (OGC), Japan.</span>
-                                                <span class="jp">日本の大阪ガス化学（OGC）とOEM契約を締結</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="ytime">2015</div>
-                                            <div class="dots"><i></i></div>
-                                            <div class="txt">
-                                                <span class="tw">首次公開發行 (股票代號：6555)</span>
-                                                <span class="cn">首次公开发行（股票代码：6555）</span>
-                                                <span class="en">Initial public offering (Stock Code: 6555).</span>
-                                                <span class="jp">株式を公開（銘柄コード：6555）</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="ytime">2018</div>
-                                            <div class="dots"><i></i></div>
-                                            <div class="txt">
-                                                <span class="tw">江西省上高廠生產開始<br>完成鴻海、富邦及碩禾電子 三大集團企業私募</span>
-                                                <span class="cn">江西省上高厂启动生产<br>完成对鸿海、富邦及硕禾电子三大集团的私募增资</span>
-                                                <span class="en">Started production at the Shanggao plant in Jiangxi Province. Completed a private placement of 75 million common shares with three major groups: Hon Hai Group, Fubon Financial Holdings, and SAS.</span>
-                                                <span class="jp">江西省上高工場で生産を開始。鴻海グループ、富邦金控グループ、碩禾電子材料株式会社の三大グループに対し、普通株式7,500万株の私募を完了</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="ytime">2021</div>
-                                            <div class="dots"><i></i></div>
-                                            <div class="txt">
-                                                <span class="tw">雲南省騰衝市保山廠進行石墨化試產</span>
-                                                <span class="cn">云南省腾冲市保山厂进行石墨化试产</span>
-                                                <span class="en">Conducted trial production of graphitization at the Baoshan plant in Tengchong City, Yunnan Province.</span>
-                                                <span class="jp">雲南省騰衝市の保山工場で黒鉛化の試験生産を実施</span>
-                                            </div>
-                                        </li>
-
-                                                                    
+                                <li>
+                                    <div class="ytime">2009</div>
+                                    <div class="dots"><i></i></div>
+                                    <div class="txt">
+                                        <span class="tw">2009 榮炭科技股份有限公司成立</span>
+                                        <span class="cn">2009 荣炭科技股份有限公司成立</span>
+                                        <span class="en">2009 Long Time Technology Co., Ltd. was established.</span>
+                                        <span class="jp">2009 年 榮炭科技股份有限公司 設立</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ytime">2010</div>
+                                    <div class="dots"><i></i></div>
+                                    <div class="txt">
+                                        <span class="tw">2010 台灣研發中心成立<br>2010 廣東省江門市榮炭電子材料有限公司成立</span>
+                                        <span class="cn">2010 台湾研发中心成立<br>2010 广东省江门市荣炭电子材料有限公司成立</span>
+                                        <span class="en">2010 Established an R&D center in Taiwan<br>2010 Established Jiangmen Long Time Electronic Materials Co., Ltd. in Guangdong Province.</span>
+                                        <span class="jp">2010 年 台湾研究開発センター設立<br>2010 年 広東省江門市榮炭電子材料有限公司 設立</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ytime">2011</div>
+                                    <div class="dots"><i></i></div>
+                                    <div class="txt">
+                                        <span class="tw">2011 廣東江門廠正式投產</span>
+                                        <span class="cn">2011 广东江门厂正式投产</span>
+                                        <span class="en">2011 The Jiangmen plant in Guangdong Province officially commenced production.</span>
+                                        <span class="jp">2011 年 広東 江門工場 正式稼働</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ytime">2013</div>
+                                    <div class="dots"><i></i></div>
+                                    <div class="txt">
+                                        <span class="tw">2013 與日本大阪瓦斯(OGC)簽訂代工合約</span>
+                                        <span class="cn">2013 与日本大阪瓦斯(OGC)签订代工合约</span>
+                                        <span class="en">2013 Signed an OEM contract with Osaka Gas (OGC), Japan.</span>
+                                        <span class="jp">2013 年 日本 大阪瓦斯(OGC)とOEM契約を締結</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ytime">2015</div>
+                                    <div class="dots"><i></i></div>
+                                    <div class="txt">
+                                        <span class="tw">2015 登錄興櫃公開發行(股票代號:6555.TW)</span>
+                                        <span class="cn">2015 登录兴柜公开发行（股票代码：6555.TW）</span>
+                                        <span class="en">2015 Listed on the OTC public offering (Stock Code: 6555.TW).</span>
+                                        <span class="jp">2015 年 興櫃で公開発行（銘柄コード：6555.TW）</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ytime">2017</div>
+                                    <div class="dots"><i></i></div>
+                                    <div class="txt">
+                                        <span class="tw">2017 碩禾(3691.TW)參與私募</span>
+                                        <span class="cn">2017 硕禾(3691.TW)参与私募</span>
+                                        <span class="en">2017 SAS (3691.TW) participated in a private placement.</span>
+                                        <span class="jp">2017 年 碩禾(3691.TW)が私募に参加</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ytime">2018</div>
+                                    <div class="dots"><i></i></div>
+                                    <div class="txt">
+                                        <span class="tw">2018 鴻海(2317.TW)、富邦(2881.TW)及碩禾(3691.TW)三大集團參與私募<br>2018 江西上高廠正式投產</span>
+                                        <span class="cn">2018 鴻海(2317.TW)、富邦(2881.TW)及碩禾(3691.TW)三大集团参与私募<br>2018 江西上高厂正式投产</span>
+                                        <span class="en">2018 Hon Hai (2317.TW), Fubon (2881.TW) and SAS (3691.TW) participated in a private placement.<br>2018 The Shanggao plant in Jiangxi officially commenced production.</span>
+                                        <span class="jp">2018 鴻海(2317.TW)、富邦(2881.TW)、碩禾(3691.TW)の三大グループが私募に参加<br>2018 年 江西上高工場が正式稼働</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ytime">2021</div>
+                                    <div class="dots"><i></i></div>
+                                    <div class="txt">
+                                        <span class="tw">2021 榮炭、中碳與碩禾簽署電池材料開發備忘錄<br>2021 雲南保山廠正式投產</span>
+                                        <span class="cn">2021 荣炭、中碳与硕禾签署电池材料开发备忘录<br>2021 云南保山厂正式投产</span>
+                                        <span class="en">2021 Long Time, Zhongtan and SAS signed a memorandum of understanding for battery materials development.<br>2021 The Baoshan plant in Yunnan officially commenced production.</span>
+                                        <span class="jp">2021 年 榮炭・中碳・碩禾が電池材料開発に関する覚書を署名<br>2021 年 雲南 保山工場が正式稼働</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ytime">2022</div>
+                                    <div class="dots"><i></i></div>
+                                    <div class="txt">
+                                        <span class="tw">2022 與印度Graphite India Ltd.簽署供應鏈合作備忘錄</span>
+                                        <span class="cn">2022 与印度 Graphite India Ltd. 签署供应链合作备忘录</span>
+                                        <span class="en">2022 Signed a supply chain cooperation memorandum with Graphite India Ltd., India.</span>
+                                        <span class="jp">2022 年 インドの Graphite India Ltd. とサプライチェーン協力に関する覚書を締結</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ytime">2024</div>
+                                    <div class="dots"><i></i></div>
+                                    <div class="txt">
+                                        <span class="tw">2024 江西上高廠二期擴廠</span>
+                                        <span class="cn">2024 江西上高厂二期扩建</span>
+                                        <span class="en">2024 Phase II expansion of the Shanggao plant in Jiangxi.</span>
+                                        <span class="jp">2024 年 江西上高工場 第2期拡張</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ytime">2025</div>
+                                    <div class="dots"><i></i></div>
+                                    <div class="txt">
+                                        <span class="tw">2025 鈉電池正極產品試產線投產<br>2025 設立廣東新會辦公室<br>2025 單月出貨量&gt;1,000噸達成</span>
+                                        <span class="cn">2025 钠电池正极产品试产线投产<br>2025 设立广东新会办公室<br>2025 单月出货量&gt;1,000吨达成</span>
+                                        <span class="en">2025 Pilot production line for sodium battery cathode products commissioned.<br>2025 Established Guangdong Xinhui office.<br>2025 Achieved single-month shipment > 1,000 tonnes.</span>
+                                        <span class="jp">2025 年 ナトリウム電池正極製品の試作ライン稼働<br>2025 年 広東省新会事務所を設立<br>2025 年 単月出荷量&gt;1,000トンを達成</span>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
             </div>

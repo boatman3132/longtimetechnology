@@ -560,6 +560,37 @@
   border: none;
   border-top: 1px solid #4f4e4e;
 }
+/* 里程碑標題下方左右按鈕樣式 */
+.title-arrows{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:16px}
+
+.title-arrows .arrow{display:inline-block;position:relative;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid rgba(0,0,0,0.08);color:#222;text-decoration:none;font-weight:600;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,0.04)}
+.title-arrows .arrow:hover{background:#f5f5f5}
+.title-arrows .arrow img.svg{display:none;}
+
+/* 使用絕對定位將 < 和 > 置中於圓形按鈕內 */
+#milestonePrev::after,#milestoneNext::after{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:20px;
+  line-height:1;
+  color:inherit;
+  pointer-events:none;
+}
+#milestonePrev::after{content:"<"}
+#milestoneNext::after{content:">"}
+
+/* 小螢幕調整 */
+@media all and (max-width:575px){
+  .title-arrows .arrow{width:36px;height:36px;font-size:18px}
+  #milestonePrev::after,#milestoneNext::after{font-size:18px}
+}
+
+/* 手機模式隱藏里程碑左右按鈕 */
+@media all and (max-width:575px){
+  .title-arrows{display:none !important}
+}
 @media all and (max-width: 990px) {
   .editor_box {
     line-height: 1.7;
@@ -1339,10 +1370,11 @@
           transform: translate(-100%, -50%);
 }
 .history .top-menu-history .txt {
-  max-width: 10.8em;
-  white-space: initial;
+  /* 增加最大寬度以減少換行 */
+  max-width: 32em;
+  white-space: normal;
   text-align: left;
-  line-height: 1.625;
+  line-height: 1.6;
   display: inline-block;
 }
 @media all and (max-width: 768px) {
@@ -1357,8 +1389,14 @@
             transform: translate(-50%, -50%) scale(0.6);
   }
   .history .top-menu-history li {
-    padding: 0 1em;
-    width: 8.8em;
+    padding: 0 2em;
+    /* 手機上不強制固定寬度，讓文字區塊可撐滿可用空間 */
+    width: auto;
+  }
+  .history .top-menu-history .txt {
+    /* 手機上允許文字佔滿容器減少過早斷行 */
+    max-width: 100%;
+    display: block;
   }
   .history .top-menu-history li.active {
     display: none;

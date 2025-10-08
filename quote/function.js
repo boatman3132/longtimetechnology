@@ -242,3 +242,33 @@ $(function () {
     var target = $('ul.mmenu a[href="' + page + '"]');
     target.parent('li').addClass('active');
 });
+
+// 里程碑左右滾動控制
+$(function(){
+	var $box = $('#topmenu2 .item_menu_Box');
+	var scrollAmount = function(){ return Math.floor($box.width() * 0.8); };
+
+	function scrollBox(delta){
+		if (!$box.length) return;
+		var cur = $box.scrollLeft();
+		var max = $box.get(0).scrollWidth - $box.innerWidth();
+		var target = Math.max(0, Math.min(max, cur + delta));
+		$box.animate({scrollLeft: target}, 400);
+	}
+
+	$('#milestonePrev').on('click', function(e){
+		e.preventDefault();
+		scrollBox(-scrollAmount());
+	});
+	$('#milestoneNext').on('click', function(e){
+		e.preventDefault();
+		scrollBox(scrollAmount());
+	});
+
+	// 鍵盤左右鍵也可以控制（選擇性）
+	$(document).on('keydown', function(e){
+		if (!$box.length) return;
+		if (e.key === 'ArrowLeft') scrollBox(-scrollAmount());
+		if (e.key === 'ArrowRight') scrollBox(scrollAmount());
+	});
+});
