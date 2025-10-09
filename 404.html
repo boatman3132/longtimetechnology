@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="榮炭科技,鋰電池石墨負極製造,鋰電池,負極材料,石墨化,底盤">
+    <meta name="description" content="榮炭質量優良的產品，持續導入新技術、更新硬體設備、 優化機台最大效益。 19年豐富加工經驗、瞭解客戶的需求與產業的趨勢， 提供全面性的解決方案。">
+    <meta name="author" content="榮炭科技股份有限公司">
+    <meta name="copyright" content="榮炭科技股份有限公司">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="shortcut icon" href="dist/images/16x16.ico" type="image/x-icon" />
+    <meta property="og:image" content="dist/images/ogimg.jpg" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&amp;family=Noto+Sans+TC:wght@400;500;700&amp;display=swap');
+    </style>
+    <title>找不到頁面 | 榮炭科技股份有限公司</title>
+    <link rel="stylesheet" href="dist/css/main.css">
+    <link rel="stylesheet" href="dist/css/error.css">
+    <link rel="stylesheet" href="dist/css/style.css">
+
+    <style>
+        .tw, .cn, .en, .jp { display: none; }
+        body.lang_tw .tw,
+        body.lang_cn .cn,
+        body.lang_en .en,
+        body.lang_jp .jp { display: initial; }
+
+        .countdown-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: 0 0.25rem;
+            border-radius: 999px;
+            background-color: rgba(230, 0, 54, 0.12);
+            color: #e60036;
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 1;
+            animation: countdownPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes countdownPulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.12); opacity: 0.85; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 480px) {
+            .countdown-number {
+                width: 2rem;
+                height: 2rem;
+                font-size: 1.25rem;
+                margin: 0 0.15rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="lang_tw" data-page="error">
+<div data-include="header"></div>
+    
+    <div id="Wapper" class="error-page">
+        <section class="error-section asj fade">
+            <div class="row">
+                <div class="error-inner">
+                    <div class="error-code">404</div>
+                    <div class="error-headline tw">抱歉，我們找不到您要的頁面。</div>
+                    <div class="error-headline cn">抱歉，我们找不到您要的页面。</div>
+                    <div class="error-headline en">We can’t seem to find the page you’re looking for.</div>
+                    <div class="error-headline jp">申し訳ございません。お探しのページが見つかりません。</div>
+
+                    <div class="error-description tw">
+                        <br>可能是連結錯誤或內容已更新。請回首頁或使用導覽列繼續探索榮炭科技的服務與最新資訊。<br><span class="countdown-number">12</span>秒後將自動帶您返回首頁。
+                    </div>
+                    <div class="error-description cn">
+                        <br>可能是链接错误或内容已更新。请返回首页或通过导航栏继续了解荣炭科技的服务与最新资讯。<br><span class="countdown-number">12</span>秒后将自动带您回到首页。
+                    </div>
+                    <div class="error-description en">
+                        <br>The link you followed may be broken or the content has moved. Please return to the homepage or browse through the menu to continue exploring Long Time Technology.<br>You will be redirected to the homepage in <span class="countdown-number">12</span> seconds.
+                    </div>
+                    <div class="error-description jp">
+                        <br>リンクに誤りがあるか、ページが移動した可能性があります。トップページに戻るか、ナビゲーションから栄炭科技のサービスや最新情報をご覧ください。<br><span class="countdown-number">12</span>秒後に自動的にトップページへ移動します。
+                    </div>
+
+                    
+                </div>
+            </div>
+        </section>
+    </div>
+<div data-include="footer"></div>
+    <script src="dist/js/main.js"></script>
+    <script src="quote/function.js"></script>
+    <script>
+    (function () {
+        function getTargetUrl() {
+            var target = 'index.html';
+            try {
+                var current = new URL(window.location.href);
+                var lang = current.searchParams.get('lang');
+                if (lang) {
+                    target += '?lang=' + lang;
+                }
+            } catch (error) {
+                console.warn('404 redirect: unable to parse URL.', error);
+            }
+            return target;
+        }
+
+        var redirectDelay = 12; // seconds
+        var countdownElements = document.querySelectorAll('.countdown-number');
+        var targetUrl = getTargetUrl();
+
+        function updateCountdown(value) {
+            if (!countdownElements.length) {
+                return;
+            }
+            countdownElements.forEach(function (element) {
+                element.textContent = value;
+            });
+        }
+
+        updateCountdown(redirectDelay);
+
+        var remaining = redirectDelay;
+        var countdownTimer = window.setInterval(function () {
+            remaining -= 1;
+
+            if (remaining <= 0) {
+                updateCountdown(0);
+                window.clearInterval(countdownTimer);
+                window.location.href = targetUrl;
+                return;
+            }
+
+            updateCountdown(remaining);
+        }, 1000);
+    })();
+    </script>
+    <script src="dist/js/layout-loader.js"></script>
+    <script src="dist/js/language-switcher.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+.error-page {
+  background: #f5f6f8;
+  padding: 120px 0 140px;
+}
+
+.error-page .error-inner {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+  margin: 0 auto;
+  max-width: 880px;
+  padding: 64px 56px;
+  text-align: center;
+}
+
+.error-page .error-code {
+  color: #e60036;
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+}
+
+.error-page .error-headline {
+  color: #111111;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.error-page .error-description {
+  color: #404040;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  line-height: 1.7;
+  margin: 0 auto 36px;
+  max-width: 640px;
+}
+
+.error-page .error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+.error-page .error-suggest {
+  color: #808080;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.error-page .error-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 32px;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.error-page .error-links a {
+  align-items: center;
+  color: #222222;
+  display: inline-flex;
+  font-size: 1rem;
+  font-weight: 600;
+  gap: 10px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.error-page .error-links a:hover {
+  color: #e60036;
+}
+
+.error-page .error-links img {
+  transition: transform 0.3s ease;
+  width: 24px;
+}
+
+.error-page .error-links a:hover img {
+  transform: translateX(6px);
+}
+
+@media all and (max-width: 991px) {
+  .error-page {
+    padding: 96px 20px 120px;
+  }
+
+  .error-page .error-inner {
+    padding: 48px 32px;
+  }
+}
+
+@media all and (max-width: 575px) {
+  .error-page {
+    padding: 72px 16px 96px;
+  }
+
+  .error-page .error-inner {
+    border-radius: 10px;
+    padding: 40px 24px;
+  }
+
+  .error-page .error-actions .btn1 {
+    width: 100%;
+  }
+}

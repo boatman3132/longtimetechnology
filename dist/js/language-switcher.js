@@ -69,6 +69,12 @@ const pageTitleTranslations = {
         en: 'Contact Us | Long Time Technology Co., Ltd.',
         jp: 'お問合せ | 栄炭科技株式会社',
     },
+    error: {
+        tw: '找不到頁面 | 榮炭科技股份有限公司',
+        cn: '找不到页面 | 荣炭科技股份有限公司',
+        en: 'Page Not Found | Long Time Technology Co., Ltd.',
+        jp: 'ページが見つかりません | 栄炭科技株式会社',
+    },
     index: {
         tw: '榮炭科技股份有限公司',
         cn: '荣炭科技股份有限公司',
