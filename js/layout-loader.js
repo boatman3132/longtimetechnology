@@ -89,13 +89,14 @@
                 return;
             }
 
+            var isLanguageButton = $link.hasClass('langbtn');
             var href = ($link.attr('href') || '').trim().toLowerCase();
             var isJavascriptLink = !href || href === '#' || href.indexOf('javascript:') === 0;
-            if (isJavascriptLink) {
+            if (isJavascriptLink && !isLanguageButton) {
                 return;
             }
 
-            var delay = $link.closest('.subBox').length ? 120 : 0;
+            var delay = isLanguageButton ? 0 : ($link.closest('.subBox').length ? 120 : 0);
             window.setTimeout(function () {
                 closeMenu($header, $navBox);
             }, delay);
