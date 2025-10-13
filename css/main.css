@@ -163,7 +163,7 @@ img {
     content: "";
     width: 100%;
     height: 100%;
-    background: no-repeat url(../images/bg_top.png) left top;
+    background: no-repeat url(../dist/share/bg_top.png) left top;
     position: absolute;
     top: 0;
     left: 0;
@@ -173,7 +173,7 @@ img {
     content: "";
     width: 100%;
     height: 100%;
-    background: no-repeat url(../images/bg_btm.png) right bottom;
+    background: no-repeat url(../dist/share/bg_btm.png) right bottom;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -276,7 +276,7 @@ img {
   transition: none;
   position: fixed;
   bottom: 0px;
-  background: no-repeat url(../svg/arrowU.svg) center/50%;
+  background: no-repeat url(../dist/share/arrowU.svg) center/50%;
   width: 45px;
   height: 45px;
   border-radius: 100%;
@@ -592,7 +592,7 @@ header.navdown {
   background-color: #ffffff;
 }
 header.navdown .logo {
-  background-image: url(../images/logo.png);
+  background-image: url(../dist/header/logo.png);
 }
 @media all and (max-width: 990px) {
   header.navdown .menuicon .bar, header.navdown .menuicon .bar:after, header.navdown .menuicon .bar:before {
@@ -651,7 +651,7 @@ header .navBox {
     display: none;
     height: 100vh;
     width: 80%;
-    background: no-repeat url(../images/mb_menu_bg.png) 105% bottom/87%;
+    background: no-repeat url(../dist/header/mb_menu_bg.png) 105% bottom/87%;
     background-color: rgba(196, 0, 46, 0.9);
     position: fixed;
     top: 0;
@@ -662,7 +662,7 @@ header .navBox {
 }
 header .logo {
   z-index: 12;
-  background: no-repeat url(../images/logo.png) center/contain;
+  background: no-repeat url(../dist/header/logo.png) center/contain;
 }
 @media all and (max-width: 990px) {
   header .logo {
@@ -793,7 +793,7 @@ header ul.mmenu > li > a {
     background-color: white;
   }
   header ul.mmenu > li a.hasmenu {
-    background: no-repeat url(../images/mb_drop.png) calc(100% - 40px) 50%/0.8em;
+    background: no-repeat url(../dist/header/mb_drop.png) calc(100% - 40px) 50%/0.8em;
   }
 }
 @media all and (min-width: 991px) {

@@ -728,7 +728,7 @@
     margin-bottom: 290px;
   }
   .p1 .bggray {
-    background: no-repeat #f5f5f5 url(../images/index/c_bg.png) right center/317px;
+    background: no-repeat #f5f5f5 url(../dist/index/c_bg.png) right center/317px;
   }
   .p1 .bgcover {
     position: absolute;
@@ -769,7 +769,7 @@
 }
 @media all and (min-width: 991px) {
   .p2 .bggray {
-    background: no-repeat #f5f5f5 url(../images/index/d_bg.png) left bottom/307px;
+    background: no-repeat #f5f5f5 url(../dist/index/d_bg.png) left bottom/307px;
   }
   .p2 .bgcover {
     position: absolute;
@@ -780,7 +780,7 @@
 
 .p3 {
   position: relative;
-  background: no-repeat url(../images/index/e_bg_cut.jpg) center/cover;
+  background: no-repeat url(../dist/index/e_bg_cut.jpg) center/cover;
   color: white;
 }
 .p3 .txt {
@@ -859,7 +859,7 @@
 }
 @media all and (max-width: 768px) {
   .p3 {
-    background-image: url(../images/index/mb_e_bg.jpg);
+    background-image: url(../dist/index/mb_e_bg.jpg);
   }
   .p3 .value-bx {
     -webkit-box-pack: justify;
