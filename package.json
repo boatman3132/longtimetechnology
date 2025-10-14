@@ -1,0 +1,12 @@
+{
+  "name": "longtimetechnology-site",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build:news": "node scripts/build-news-index.js"
+  },
+  "dependencies": {
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3"
+  }
+}

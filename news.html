@@ -68,15 +68,8 @@
             </div>
         </section>
         <section class="row col">
-                            <div class="news-list asj fade">
-                    <a href="news-detail9b05.html?id=134" class="langUrl">
-                        <div class="mdate">9999.00.00</div>
-                        <div class="mtag">企業參訪</div>
-                        <div class="mtitle">頁面建設中</div>
-                        <img src="dist/share/arrow.svg" class="svg">
-                    </a>
-                </div>
-                    </section>
+            <div id="news-list" class="news-list asj fade"></div>
+        </section>
                             <dl class="page asj fade-up" data-delay="300">
                 <!-- 若沒有上一則或下一則請使用 nopage -->
                 <dt class="ltbn arrow nopage">
@@ -97,6 +90,109 @@
     <script src="js/function.js"></script>
     <script src="js/layout-loader.js"></script>
     <script src="js/language-switcher.js"></script>
+    <script>
+        (function () {
+            var newsList = document.getElementById('news-list');
+            if (!newsList) return;
+
+            function formatDate(value) {
+                if (typeof value !== 'string') return '';
+                var parts = value.split('-');
+                if (parts.length !== 3) return value;
+                return [parts[0], parts[1], parts[2]].join('.');
+            }
+
+            function renderError(message) {
+                newsList.innerHTML = '';
+                var error = document.createElement('div');
+                error.className = 'news-empty';
+                error.textContent = message;
+                newsList.appendChild(error);
+            }
+
+            function renderNews(items) {
+                if (!Array.isArray(items) || !items.length) {
+                    renderError('目前無法載入最新消息');
+                    return;
+                }
+                newsList.innerHTML = '';
+                var fragment = document.createDocumentFragment();
+                items.forEach(function (item) {
+                    if (!item || !item.permalink) return;
+                    var link = document.createElement('a');
+                    link.className = 'langUrl';
+                    link.href = item.permalink;
+                    link.setAttribute('data-slug', item.slug || '');
+
+                    if (item.image) {
+                        var thumb = document.createElement('div');
+                        thumb.className = 'news-thumb';
+                        var thumbImg = document.createElement('img');
+                        thumbImg.src = item.image;
+                        thumbImg.alt = item.title || '';
+                        thumb.appendChild(thumbImg);
+                        link.appendChild(thumb);
+                    }
+
+                    var date = document.createElement('div');
+                    date.className = 'mdate';
+                    date.textContent = formatDate(item.date || '');
+                    link.appendChild(date);
+
+                    var tag = document.createElement('div');
+                    tag.className = 'mtag';
+                    var tags = Array.isArray(item.tags) ? item.tags.slice() : [];
+                    tag.textContent = tags.length ? tags.join('、') : '';
+                    link.appendChild(tag);
+
+                    var content = document.createElement('div');
+                    content.className = 'news-content';
+
+                    var title = document.createElement('div');
+                    title.className = 'mtitle';
+                    title.textContent = item.title || '';
+                    content.appendChild(title);
+
+                    if (item.excerpt) {
+                        var excerpt = document.createElement('p');
+                        excerpt.className = 'mexcerpt';
+                        excerpt.textContent = item.excerpt;
+                        content.appendChild(excerpt);
+                    }
+
+                    link.appendChild(content);
+
+                    var arrow = document.createElement('img');
+                    arrow.src = 'dist/share/arrow.svg';
+                    arrow.className = 'svg';
+                    arrow.alt = '';
+                    link.appendChild(arrow);
+
+                    fragment.appendChild(link);
+                });
+                if (!fragment.childNodes.length) {
+                    renderError('目前無法載入最新消息');
+                    return;
+                }
+                newsList.appendChild(fragment);
+            }
+
+            fetch('dist/news-index.json', { cache: 'no-store' })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Failed to load news index: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    renderNews(data);
+                })
+                .catch(function (error) {
+                    console.error(error);
+                    renderError('目前無法載入最新消息');
+                });
+        })();
+    </script>
     <script>
         window.setTimeout(function() {
             slider_ul_list("topmenu1");
