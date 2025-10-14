@@ -45,25 +45,25 @@
     "titles": {
       "tw": "榮炭科技舉辦電影日活動，員工共賞《一戰再戰》共享歡樂時光",
       "cn": "荣炭科技举办电影日活动，员工共赏《一战再战》共享欢乐时光",
-      "en": "Long Time Technology Holds Movie Day: Employees Enjoy ‘Fighting Once More’ Together",
-      "jp": "栄炭科技が映画デーを開催、社員が『一戦再戦』を鑑賞し楽しい時間を共有"
+      "en": "Long Time Technology Holds Movie Day: Employees Enjoy ‘One Battle After Another’ Together",
+      "jp": "栄炭科技が映画デーを開催、社員が『ワン・バトル・アフター・アナザー』を鑑賞し楽しい時間を共有"
     },
     "date": "2025-10-08",
     "tags": [
-      "公司消息"
+      "員工活動"
     ],
     "tagsByLang": {
       "tw": [
-        "公司消息"
+        "員工活動"
       ],
       "cn": [
-        "公司消息"
+        "员工活动"
       ],
       "en": [
-        "Company News"
+        "Employee Events"
       ],
       "jp": [
-        "会社ニュース"
+        "社員イベント"
       ]
     },
     "image": "news/photo/2025-10-08電影日1.jpg",
@@ -90,7 +90,7 @@
       "en": "Rongtan Technology Reports Record-High September Revenue; Strong Growth Momentum Continues",
       "jp": "栄炭科技、9月の売上高が過去最高を更新　強い成長モメンタムを維持"
     },
-    "date": "2025-10-07",
+    "date": "2025-09-30",
     "tags": [
       "公司消息"
     ],
@@ -112,9 +112,9 @@
     "images": [
       "news/photo/2025-10-07公司營運成長示意圖.jpg"
     ],
-    "slug": "2025-10-07公司九月營收",
-    "url": "news/2025-10-07公司九月營收.md",
-    "permalink": "news-detail.html?slug=2025-10-07%E5%85%AC%E5%8F%B8%E4%B9%9D%E6%9C%88%E7%87%9F%E6%94%B6",
+    "slug": "2025-09-30公司九月營收",
+    "url": "news/2025-09-30公司九月營收.md",
+    "permalink": "news-detail.html?slug=2025-09-30%E5%85%AC%E5%8F%B8%E4%B9%9D%E6%9C%88%E7%87%9F%E6%94%B6",
     "excerpt": "榮炭科技公告 2025 年 9 月營收為 1.27 億元，年增 299.13%，續創歷史新高。累計 2025 年 1–9 月營收達 8.53 億元，年增 314.84%，展現公司在市場持續變動環境下仍能保持穩健成長的強勁動能。 營收的大幅成長主要受惠於公司產品具高度競爭力，以及各業務與研發團隊的卓越執行力。榮炭科技持續…",
     "excerpts": {
       "tw": "榮炭科技公告 2025 年 9 月營收為 1.27 億元，年增 299.13%，續創歷史新高。累計 2025 年 1–9 月營收達 8.53 億元，年增 314.84%，展現公司在市場持續變動環境下仍能保持穩健成長的強勁動能。 營收的大幅成長主要受惠於公司產品具高度競爭力，以及各業務與研發團隊的卓越執行力。榮炭科技持續…",

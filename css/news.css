@@ -412,7 +412,7 @@
 
 .mtag {
   min-width: 4em;
-  background-color: #e60036;
+  background-color: #898687;
   text-align: center;
   line-height: 1.5em;
   padding: 5px 20px 6px;
@@ -497,6 +497,9 @@
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     padding: 2em 0;
+    -webkit-box-align: flex-start;
+        -ms-flex-align: start;
+            align-items: flex-start;
   }
   .news-list .news-thumb {
     margin: 0 0 1em;
@@ -508,11 +511,25 @@
   .news-list .news-thumb img {
     height: auto;
   }
+  .news-list .mdate {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+  }
   .news-list .mtag {
-    margin-left: 1em;
+    margin-left: 0.75em;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+  }
+  .news-list .news-content {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+    margin-top: 1.25em;
   }
   .news-list .mtitle {
-    margin-top: 1em;
+    margin-top: 0;
     margin-bottom: 0.2em;
     line-height: 1.5;
     -webkit-box-flex: 0;
