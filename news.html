@@ -23,15 +23,27 @@
     <link rel="stylesheet" href="css/news.css">
     <link rel="stylesheet" href="css/style.css">
 
+    <style>
+        .tw, .cn, .en, .jp { display: none; }
+        body.lang_tw .tw,
+        body.lang_cn .cn,
+        body.lang_en .en,
+        body.lang_jp .jp { display: initial; }
+    </style>
 </head>
 
-<body class="lang_tw">
+<body class="lang_tw" data-page="news">
 <div data-include="header"></div>
     <div class="pgkv">
         <div class="bgcolor"></div>
         <div class="txt_pos">
             <h1 class="mtitle">NEWS</h1>
-            <div>最新消息</div>
+            <div>
+                <span class="tw">最新消息</span>
+                <span class="cn">最新资讯</span>
+                <span class="en">NEWS</span>
+                <span class="jp">お知らせ</span>
+            </div>
         </div>
         <div class="mimg">
             <div class="bgcover pc_use" style="background-image:url(dist/news/news.png)"></div>
@@ -42,25 +54,39 @@
         <section class="row col top-menu-ul asj fade" id="topmenu1">
             <div class="item_menu_Box">
                 <ul class="item_menu_list slides">
-                    <li class="active">
-                        <a href="news.html" class="langUrl">
-                            <h4 class="tw">全部消息</h4>
+                    <li class="active" data-filter-key="all">
+                        <a href="javascript:;" class="langUrl filter-link" role="button">
+                            <h4 class="tw">全部</h4>
+                            <h4 class="cn">全部</h4>
                             <h4 class="en">ALL</h4>
                             <h4 class="jp">すべて</h4>
                         </a>
                     </li>
-                                            <li >
-                            <a href="news7346.html?nid=6" class="langUrl">
-                                <h4>企業參訪</h4>
-                            </a>
-                        
-                        </li>
-                                            <li >
-                            <a href="newsa277.html?nid=3" class="langUrl">
-                                <h4>新聞報導</h4>
-                            </a>
-                        </li>
-                                    </ul>
+                    <li data-filter-key="industry" data-filter-tag-tw="行業新聞" data-filter-tag-cn="行业新闻" data-filter-tag-en="Industry News" data-filter-tag-jp="業界ニュース">
+                        <a href="javascript:;" class="langUrl filter-link" role="button">
+                            <h4 class="tw">行業新聞</h4>
+                            <h4 class="cn">行业新闻</h4>
+                            <h4 class="en">Industry News</h4>
+                            <h4 class="jp">業界ニュース</h4>
+                        </a>
+                    </li>
+                    <li data-filter-key="company" data-filter-tag-tw="公司消息" data-filter-tag-cn="公司消息" data-filter-tag-en="Company News" data-filter-tag-jp="会社ニュース">
+                        <a href="javascript:;" class="langUrl filter-link" role="button">
+                            <h4 class="tw">公司消息</h4>
+                            <h4 class="cn">公司消息</h4>
+                            <h4 class="en">Company News</h4>
+                            <h4 class="jp">会社ニュース</h4>
+                        </a>
+                    </li>
+                    <li data-filter-key="knowledge" data-filter-tag-tw="專業知識" data-filter-tag-cn="专业知识" data-filter-tag-en="Professional Knowledge" data-filter-tag-jp="専門知識">
+                        <a href="javascript:;" class="langUrl filter-link" role="button">
+                            <h4 class="tw">專業知識</h4>
+                            <h4 class="cn">专业知识</h4>
+                            <h4 class="en">Professional Knowledge</h4>
+                            <h4 class="jp">専門知識</h4>
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="flex-direction-nav">
                 <a href="javascript:;" class="ltbn arrow"><img src="dist/share/arrowL.svg" class="svg"></a>
@@ -97,6 +123,17 @@
 
             var newsData = [];
             var currentLang = detectCurrentLang();
+            var filterList = document.querySelector('.item_menu_list');
+            var filterItems = [];
+            var activeFilterItem = null;
+            var activeFilterTags = null;
+
+            var EMPTY_MESSAGES = {
+                tw: '目前沒有符合條件的消息',
+                cn: '目前没有符合条件的消息',
+                en: 'No news items match the selected filter right now.',
+                jp: '現在、条件に合致するお知らせはありません。'
+            };
 
             function detectCurrentLang() {
                 var bodyClass = document.body.className || '';
@@ -152,9 +189,17 @@
                 newsList.appendChild(error);
             }
 
+            function renderEmptyState(messageMap, fallback) {
+                var message = pickLocalizedText(messageMap, fallback || '');
+                if (!message) {
+                    message = '目前無法載入最新消息';
+                }
+                renderError(message);
+            }
+
             function renderNews(items) {
                 if (!Array.isArray(items) || !items.length) {
-                    renderError('目前無法載入最新消息');
+                    renderEmptyState(EMPTY_MESSAGES, '目前無法載入最新消息');
                     return;
                 }
                 newsList.innerHTML = '';
@@ -206,15 +251,45 @@
                     fragment.appendChild(link);
                 });
                 if (!fragment.childNodes.length) {
-                    renderError('目前無法載入最新消息');
+                    renderEmptyState(EMPTY_MESSAGES, '目前無法載入最新消息');
                     return;
                 }
                 newsList.appendChild(fragment);
             }
 
+            function getDatasetFilterTags(item) {
+                if (!item || !item.dataset) return null;
+                return {
+                    tw: item.dataset.filterTagTw || '',
+                    cn: item.dataset.filterTagCn || '',
+                    en: item.dataset.filterTagEn || '',
+                    jp: item.dataset.filterTagJp || ''
+                };
+            }
+
+            function getActiveFilterTag() {
+                if (!activeFilterTags) return '';
+                var tag = activeFilterTags[currentLang] || activeFilterTags.tw || activeFilterTags.cn || activeFilterTags.en || activeFilterTags.jp || '';
+                return (tag || '').trim().toLowerCase();
+            }
+
+            function filterNewsByActiveTag() {
+                var normalizedTag = getActiveFilterTag();
+                if (!normalizedTag) {
+                    return newsData.slice();
+                }
+                return newsData.filter(function (item) {
+                    var tags = pickLocalizedArray(item.tagsByLang, item.tags).map(function (tag) {
+                        return (tag || '').trim().toLowerCase();
+                    });
+                    return tags.indexOf(normalizedTag) !== -1;
+                });
+            }
+
             function rerender() {
                 if (!newsData.length) return;
-                renderNews(newsData);
+                var items = filterNewsByActiveTag();
+                renderNews(items);
             }
 
             function hookLanguageSwitcher() {
@@ -228,6 +303,47 @@
                 };
                 window.__newsLangWrapped = true;
             }
+
+            function clearActiveFilter() {
+                filterItems.forEach(function (item) {
+                    item.classList.remove('active');
+                });
+            }
+
+            function updateActiveFilter(item) {
+                if (!item) return;
+                clearActiveFilter();
+                item.classList.add('active');
+                activeFilterItem = item;
+                activeFilterTags = getDatasetFilterTags(item);
+                rerender();
+            }
+
+            function initializeFilters() {
+                if (!filterList) return;
+                filterItems = Array.prototype.slice.call(filterList.querySelectorAll('li'));
+                if (!filterItems.length) return;
+                var defaultActive = filterItems.find(function (item) {
+                    return item.classList.contains('active');
+                }) || filterItems[0];
+                activeFilterItem = defaultActive;
+                activeFilterTags = getDatasetFilterTags(defaultActive);
+                filterList.addEventListener('click', function (event) {
+                    var target = event.target;
+                    while (target && target !== filterList && target.tagName !== 'LI') {
+                        target = target.parentElement;
+                    }
+                    if (!target || target === filterList) return;
+                    var link = target.querySelector('a');
+                    if (link) {
+                        event.preventDefault();
+                    }
+                    if (target === activeFilterItem) return;
+                    updateActiveFilter(target);
+                });
+            }
+
+            initializeFilters();
 
             fetch('dist/news-index.json', { cache: 'no-store' })
                 .then(function (response) {
