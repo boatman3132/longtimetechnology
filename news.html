@@ -18,7 +18,7 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&amp;family=Noto+Sans+TC:wght@400;500;700&amp;display=swap');    </style>
-    <title>最新消息 | 榮炭科技股份有限公司</title>
+    <title>最新消息｜榮炭科技</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/news.css">
     <link rel="stylesheet" href="css/style.css">
@@ -62,10 +62,10 @@
                             <h4 class="jp">すべて</h4>
                         </a>
                     </li>
-                    <li data-filter-key="industry" data-filter-tag-tw="行業新聞" data-filter-tag-cn="行业新闻" data-filter-tag-en="Industry News" data-filter-tag-jp="業界ニュース">
+                    <li data-filter-key="industry" data-filter-tag-tw="產業動態" data-filter-tag-cn="产业动态" data-filter-tag-en="Industry News" data-filter-tag-jp="業界ニュース">
                         <a href="javascript:;" class="langUrl filter-link" role="button">
-                            <h4 class="tw">行業新聞</h4>
-                            <h4 class="cn">行业新闻</h4>
+                            <h4 class="tw">產業動態</h4>
+                            <h4 class="cn">产业动态</h4>
                             <h4 class="en">Industry News</h4>
                             <h4 class="jp">業界ニュース</h4>
                         </a>
@@ -112,7 +112,8 @@
             var filterList = document.querySelector('.item_menu_list');
             var filterItems = [];
             var activeFilterItem = null;
-            var activeFilterTags = null;
+            var activeFilterKey = 'all';
+            var filterTagLookup = Object.create(null);
 
             var EMPTY_MESSAGES = {
                 tw: '目前沒有符合條件的消息',
@@ -243,32 +244,67 @@
                 newsList.appendChild(fragment);
             }
 
-            function getDatasetFilterTags(item) {
-                if (!item || !item.dataset) return null;
-                return {
-                    tw: item.dataset.filterTagTw || '',
-                    cn: item.dataset.filterTagCn || '',
-                    en: item.dataset.filterTagEn || '',
-                    jp: item.dataset.filterTagJp || ''
-                };
+            function buildFilterTagLookup(items) {
+                var lookup = Object.create(null);
+                if (!Array.isArray(items)) {
+                    return lookup;
+                }
+                items.forEach(function (item) {
+                    if (!item || !item.dataset) return;
+                    var key = (item.dataset.filterKey || '').trim().toLowerCase();
+                    if (!key || key === 'all') return;
+                    ['filterTagTw', 'filterTagCn', 'filterTagEn', 'filterTagJp'].forEach(function (attr) {
+                        var value = item.dataset[attr];
+                        if (!value) return;
+                        lookup[value.trim().toLowerCase()] = key;
+                    });
+                });
+                return lookup;
             }
 
-            function getActiveFilterTag() {
-                if (!activeFilterTags) return '';
-                var tag = activeFilterTags[currentLang] || activeFilterTags.tw || activeFilterTags.cn || activeFilterTags.en || activeFilterTags.jp || '';
-                return (tag || '').trim().toLowerCase();
+            function getItemFilterKeys(item) {
+                if (!item) return [];
+                if (Array.isArray(item._filterKeys)) {
+                    return item._filterKeys;
+                }
+                var tags = [];
+                if (Array.isArray(item.tags)) {
+                    tags = tags.concat(item.tags);
+                }
+                if (item.tagsByLang && typeof item.tagsByLang === 'object') {
+                    Object.keys(item.tagsByLang).forEach(function (lang) {
+                        var list = item.tagsByLang[lang];
+                        if (Array.isArray(list)) {
+                            tags = tags.concat(list);
+                        }
+                    });
+                }
+                if (!tags.length) {
+                    item._filterKeys = [];
+                    return item._filterKeys;
+                }
+                var keys = [];
+                var seen = Object.create(null);
+                tags.forEach(function (tag) {
+                    if (!tag) return;
+                    var normalized = tag.trim().toLowerCase();
+                    var key = filterTagLookup[normalized];
+                    if (!key || seen[key]) return;
+                    seen[key] = true;
+                    keys.push(key);
+                });
+                item._filterKeys = keys;
+                return keys;
             }
 
             function filterNewsByActiveTag() {
-                var normalizedTag = getActiveFilterTag();
-                if (!normalizedTag) {
+                var key = (activeFilterKey || '').trim().toLowerCase();
+                if (!key || key === 'all') {
                     return newsData.slice();
                 }
                 return newsData.filter(function (item) {
-                    var tags = pickLocalizedArray(item.tagsByLang, item.tags).map(function (tag) {
-                        return (tag || '').trim().toLowerCase();
-                    });
-                    return tags.indexOf(normalizedTag) !== -1;
+                    var keys = getItemFilterKeys(item);
+                    return keys.indexOf(key) !== -1;
                 });
             }
 
@@ -301,7 +337,7 @@
                 clearActiveFilter();
                 item.classList.add('active');
                 activeFilterItem = item;
-                activeFilterTags = getDatasetFilterTags(item);
+                activeFilterKey = (item.dataset.filterKey || '').trim().toLowerCase() || 'all';
                 rerender();
             }
 
@@ -309,11 +345,12 @@
                 if (!filterList) return;
                 filterItems = Array.prototype.slice.call(filterList.querySelectorAll('li'));
                 if (!filterItems.length) return;
+                filterTagLookup = buildFilterTagLookup(filterItems) || Object.create(null);
                 var defaultActive = filterItems.find(function (item) {
                     return item.classList.contains('active');
                 }) || filterItems[0];
                 activeFilterItem = defaultActive;
-                activeFilterTags = getDatasetFilterTags(defaultActive);
+                activeFilterKey = (defaultActive.dataset.filterKey || '').trim().toLowerCase() || 'all';
                 filterList.addEventListener('click', function (event) {
                     var target = event.target;
                     while (target && target !== filterList && target.tagName !== 'LI') {

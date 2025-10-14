@@ -16,12 +16,12 @@
     <meta property="og:image" content="dist/Website_Metadata_Images/ogimg.jpg" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&amp;family=Noto+Sans+TC:wght@400;500;700&amp;display=swap');    </style>
-    <title>消息內容 | 榮炭科技股份有限公司</title>
+    <title>最新消息內容｜榮炭科技</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/news.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="lang_tw">
+<body class="lang_tw" data-page="news-detail">
 <div data-include="header"></div>
     <div class="pgkv">
         <div class="bgcolor"></div>
@@ -361,7 +361,14 @@
                 var titleText = pickLocalizedText(meta.titles, lang, meta.title);
                 titleEl.textContent = titleText;
                 if (titleText) {
-                    document.title = titleText + ' | 最新消息 | 榮炭科技股份有限公司';
+                    var detailBaseTitle = (typeof pageTitleTranslations !== 'undefined' && pageTitleTranslations['news-detail'])
+                        ? (pageTitleTranslations['news-detail'][lang] || '')
+                        : '';
+                    if (detailBaseTitle) {
+                        document.title = titleText + '|' + detailBaseTitle;
+                    } else {
+                        document.title = titleText;
+                    }
                 }
                 dateEl.textContent = formatDate(meta.date || '');
                 var tags = pickLocalizedArray(meta.tagsByLang, lang, meta.tags);

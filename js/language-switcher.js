@@ -21,65 +21,77 @@ const headerTranslations = {
 
 // 2. 建立頁籤（document.title）的翻譯字典
 const pageTitleTranslations = {
-    about: {
-        tw: '榮炭介紹 | 榮炭科技股份有限公司',
-        cn: '荣炭介绍 | 荣炭科技股份有限公司',
-        en: 'About Us | Long Time Technology Co., Ltd.',
-        jp: '会社概要 | 栄炭科技株式会社',
-    },
-    service: {
-        tw: '服務內容 | 榮炭科技股份有限公司',
-        cn: '服务内容 | 荣炭科技股份有限公司',
-        en: 'Service | Long Time Technology Co., Ltd.',
-        jp: 'サービス内容 | 栄炭科技株式会社',
-    },
-    products: {
-        tw: '產品介紹 | 榮炭科技股份有限公司',
-        cn: '产品介绍 | 荣炭科技股份有限公司',
-        en: 'Products | Long Time Technology Co., Ltd.',
-        jp: '産品内容 | 栄炭科技株式会社',
-    },
-    quality: {
-        tw: '品質與環境 | 榮炭科技股份有限公司',
-        cn: '质量与环境 | 荣炭科技股份有限公司',
-        en: 'Quality | Long Time Technology Co., Ltd.',
-        jp: '品質・環境 | 栄炭科技株式会社',
-    },
-    news: {
-        tw: '最新消息 | 榮炭科技股份有限公司',
-        cn: '最新资讯 | 荣炭科技股份有限公司',
-        en: 'News | Long Time Technology Co., Ltd.',
-        jp: 'お知らせ | 栄炭科技株式会社',
-    },
-    investors: {
-        tw: '投資人專區 | 榮炭科技股份有限公司',
-        cn: '投资者专区 | 荣炭科技股份有限公司',
-        en: 'Investor Relations | Long Time Technology Co., Ltd.',
-        jp: '投資家向け情報 | 栄炭科技株式会社',
-    },
-    recruit: {
-        tw: '徵才情報 | 榮炭科技股份有限公司',
-        cn: '招聘信息 | 荣炭科技股份有限公司',
-        en: 'Careers | Long Time Technology Co., Ltd.',
-        jp: '採用情報 | 栄炭科技株式会社',
-    },
-    contact: {
-        tw: '聯絡我們 | 榮炭科技股份有限公司',
-        cn: '联系我们 | 荣炭科技股份有限公司',
-        en: 'Contact Us | Long Time Technology Co., Ltd.',
-        jp: 'お問合せ | 栄炭科技株式会社',
-    },
-    error: {
-        tw: '找不到頁面 | 榮炭科技股份有限公司',
-        cn: '找不到页面 | 荣炭科技股份有限公司',
-        en: 'Page Not Found | Long Time Technology Co., Ltd.',
-        jp: 'ページが見つかりません | 栄炭科技株式会社',
-    },
     index: {
         tw: '榮炭科技股份有限公司',
         cn: '荣炭科技股份有限公司',
         en: 'Long Time Technology Co., Ltd.',
         jp: '栄炭科技株式会社',
+    },
+    about: {
+        tw: '關於榮炭｜榮炭科技',
+        cn: '关于荣炭｜荣炭科技',
+        en: 'About Us｜Long Time Technology',
+        jp: '会社概要｜栄炭科技',
+    },
+    products: {
+        tw: '產品介紹｜榮炭科技',
+        cn: '产品介绍｜荣炭科技',
+        en: 'Products｜Long Time Technology',
+        jp: '製品紹介｜栄炭科技',
+    },
+    service: {
+        tw: '服務內容｜榮炭科技',
+        cn: '服务内容｜荣炭科技',
+        en: 'Service｜Long Time Technology',
+        jp: 'サービス内容｜栄炭科技',
+    },
+    quality: {
+        tw: '品質與環境｜榮炭科技',
+        cn: '质量与环境｜荣炭科技',
+        en: 'Quality｜Long Time Technology',
+        jp: '品質・環境｜栄炭科技',
+    },
+    news: {
+        tw: '最新消息｜榮炭科技',
+        cn: '最新资讯｜荣炭科技',
+        en: 'News｜Long Time Technology',
+        jp: 'お知らせ｜栄炭科技',
+    },
+    'news-detail': {
+        tw: '最新消息內容｜榮炭科技',
+        cn: '最新资讯内容｜荣炭科技',
+        en: 'News Detail｜Long Time Technology',
+        jp: 'お知らせ詳細｜栄炭科技',
+    },
+    esg: {
+        tw: 'ESG永續｜榮炭科技',
+        cn: 'ESG永续｜荣炭科技',
+        en: 'ESG｜Long Time Technology',
+        jp: 'ESG｜栄炭科技',
+    },
+    investors: {
+        tw: '投資人專區｜榮炭科技',
+        cn: '投资者专区｜荣炭科技',
+        en: 'Investor Relations｜Long Time Technology',
+        jp: '投資家向け情報｜栄炭科技',
+    },
+    recruit: {
+        tw: '徵才情報｜榮炭科技',
+        cn: '招聘信息｜荣炭科技',
+        en: 'Careers｜Long Time Technology',
+        jp: '採用情報｜栄炭科技',
+    },
+    contact: {
+        tw: '聯絡我們｜榮炭科技',
+        cn: '联系我们｜荣炭科技',
+        en: 'Contact Us｜Long Time Technology',
+        jp: 'お問合せ｜栄炭科技',
+    },
+    error: {
+        tw: '找不到頁面｜榮炭科技',
+        cn: '找不到页面｜荣炭科技',
+        en: 'Page Not Found｜Long Time Technology',
+        jp: 'ページが見つかりません｜栄炭科技',
     },
 };
 
