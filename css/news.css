@@ -637,6 +637,11 @@
   display: block;
   border-radius: 8px;
 }
+.news-detail .news-cover.single-image img {
+  max-width: 480px;
+  width: 100%;
+  margin: 0;
+}
 .news-detail .news-cover.has-multiple {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -656,6 +661,9 @@
   min-width: 220px;
 }
 @media all and (max-width: 575px) {
+  .news-detail .news-cover.single-image img {
+    max-width: 100%;
+  }
   .news-detail .news-cover.has-multiple img {
     -webkit-box-flex: 1;
         -ms-flex: 1 1 100%;

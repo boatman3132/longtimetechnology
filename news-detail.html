@@ -371,11 +371,8 @@
                 if (!coverImages.length && meta.image) {
                     coverImages.push(meta.image);
                 }
-                if (coverImages.length > 1) {
-                    coverEl.classList.add('has-multiple');
-                } else {
-                    coverEl.classList.remove('has-multiple');
-                }
+                coverEl.classList.toggle('has-multiple', coverImages.length > 1);
+                coverEl.classList.toggle('single-image', coverImages.length === 1);
                 coverImages.forEach(function (src) {
                     var img = document.createElement('img');
                     img.src = src;
