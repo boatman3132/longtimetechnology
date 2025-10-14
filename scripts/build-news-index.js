@@ -215,6 +215,55 @@ function extractLanguageSections(content) {
   return sections;
 }
 
+function resolveImagePath(rawValue, sourceFile) {
+  if (!rawValue || typeof rawValue !== 'string') {
+    return '';
+  }
+  const trimmed = rawValue.trim();
+  if (!trimmed) {
+    return '';
+  }
+  const normalized = trimmed.replace(/\\/g, '/');
+  if (/^(?:https?:)?\/\//i.test(normalized)) {
+    return normalized;
+  }
+  let candidate = normalized;
+  if (candidate.startsWith('/')) {
+    candidate = candidate.replace(/^\/+/, '');
+  }
+  if (!candidate.startsWith('news/photo/')) {
+    candidate = path.posix.join('news/photo', candidate.replace(/^\.?\//, ''));
+  }
+  const diskPath = path.join(ROOT_DIR, candidate);
+  if (!fs.existsSync(diskPath)) {
+    warn(`Referenced image "${candidate}" in "${sourceFile}" not found. Ensure images are stored under /news/photo/.`);
+  }
+  return candidate;
+}
+
+function normalizeImageList(rawValue, sourceFile) {
+  const list = [];
+
+  function append(value) {
+    const resolved = resolveImagePath(value, sourceFile);
+    if (resolved && !list.includes(resolved)) {
+      list.push(resolved);
+    }
+  }
+
+  if (Array.isArray(rawValue)) {
+    rawValue.forEach((entry) => {
+      if (typeof entry === 'string' && entry.trim()) {
+        append(entry);
+      }
+    });
+  } else if (typeof rawValue === 'string' && rawValue.trim()) {
+    append(rawValue);
+  }
+
+  return list;
+}
+
 async function collectNewsEntries() {
   const patterns = ['**/*.md', '*.md'];
   const files = await fg(patterns, {
@@ -257,7 +306,15 @@ async function collectNewsEntries() {
     });
     const titles = normalizeLocalizedStrings(parsed.data.titles || parsed.data.title, titleFallback);
     const tagsByLang = normalizeLocalizedTags(parsed.data.tags);
-    const image = typeof parsed.data.image === 'string' ? parsed.data.image.trim() : '';
+    const images = normalizeImageList(parsed.data.images, relativePath);
+    if (typeof parsed.data.image === 'string' && parsed.data.image.trim()) {
+      const singleImage = resolveImagePath(parsed.data.image, relativePath);
+      if (singleImage && !images.includes(singleImage)) {
+        images.unshift(singleImage);
+      }
+    }
+    const filteredImages = images.filter(Boolean);
+    const image = filteredImages[0] || '';
     const contentByLang = extractLanguageSections(parsed.content);
     const excerpts = {};
     LANG_CODES.forEach((lang) => {
@@ -275,6 +332,7 @@ async function collectNewsEntries() {
       tags: tagsByLang.tw,
       tagsByLang,
       image,
+      images: filteredImages,
       slug: meta.slug,
       url: path.posix.join('news', `${meta.slug}.md`),
       permalink: `news-detail.html?slug=${encodeURIComponent(meta.slug)}`,

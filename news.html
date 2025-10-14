@@ -195,14 +195,6 @@
                     title.textContent = pickLocalizedText(item.titles, item.title);
                     content.appendChild(title);
 
-                    var excerptText = pickLocalizedText(item.excerpts, item.excerpt);
-                    if (excerptText) {
-                        var excerpt = document.createElement('p');
-                        excerpt.className = 'mexcerpt';
-                        excerpt.textContent = excerptText;
-                        content.appendChild(excerpt);
-                    }
-
                     link.appendChild(content);
 
                     var arrow = document.createElement('img');

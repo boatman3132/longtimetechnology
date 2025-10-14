@@ -25,7 +25,11 @@
         "企業訪問"
       ]
     },
-    "image": "dist/news/news_details/1757575500267.jpeg",
+    "image": "news/photo/2025-09-09NDK來訪1.jpeg",
+    "images": [
+      "news/photo/2025-09-09NDK來訪1.jpeg",
+      "news/photo/2025-09-09NDK來訪2.jpeg"
+    ],
     "slug": "2025-09-09NDK來訪",
     "url": "news/2025-09-09NDK來訪.md",
     "permalink": "news-detail.html?slug=2025-09-09NDK%E4%BE%86%E8%A8%AA",

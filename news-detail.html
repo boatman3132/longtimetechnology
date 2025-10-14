@@ -142,6 +142,7 @@
                     tagsByLang: tagsByLang,
                     tags: tagsByLang.tw.slice(),
                     image: '',
+                    images: [],
                     excerpts: {}
                 };
             }
@@ -366,12 +367,21 @@
                 var tags = pickLocalizedArray(meta.tagsByLang, lang, meta.tags);
                 tagsEl.textContent = tags.length ? tags.join('、') : '';
                 coverEl.innerHTML = '';
-                if (meta.image) {
+                var coverImages = Array.isArray(meta.images) ? meta.images.slice() : [];
+                if (!coverImages.length && meta.image) {
+                    coverImages.push(meta.image);
+                }
+                if (coverImages.length > 1) {
+                    coverEl.classList.add('has-multiple');
+                } else {
+                    coverEl.classList.remove('has-multiple');
+                }
+                coverImages.forEach(function (src) {
                     var img = document.createElement('img');
-                    img.src = meta.image;
+                    img.src = src;
                     img.alt = titleText;
                     coverEl.appendChild(img);
-                }
+                });
             }
 
             function getContentForLang(lang) {
@@ -444,10 +454,23 @@
                     tagsByLang: cloneTagMap(base.tagsByLang),
                     tags: base.tags.slice(),
                     image: base.image,
+                    images: Array.isArray(base.images) ? base.images.slice() : [],
                     excerpts: Object.assign({}, base.excerpts || {})
                 };
 
+                function appendImage(list, value) {
+                    if (!value) return;
+                    if (list.indexOf(value) === -1) {
+                        list.push(value);
+                    }
+                }
+
                 if (!extra) {
+                    if (result.image) {
+                        appendImage(result.images, result.image);
+                    } else if (result.images.length) {
+                        result.image = result.images[0];
+                    }
                     return result;
                 }
 
@@ -456,6 +479,14 @@
                 }
                 if (extra.image) {
                     result.image = extra.image;
+                    appendImage(result.images, extra.image);
+                }
+                if (Array.isArray(extra.images)) {
+                    extra.images.forEach(function (value) {
+                        if (typeof value === 'string' && value.trim()) {
+                            appendImage(result.images, value.trim());
+                        }
+                    });
                 }
 
                 if (extra.titles && typeof extra.titles === 'object') {
@@ -507,6 +538,12 @@
 
                 result.title = result.titles.tw || result.title || base.title;
                 result.tags = Array.isArray(result.tagsByLang.tw) ? result.tagsByLang.tw.slice() : [];
+                if (result.image) {
+                    appendImage(result.images, result.image);
+                }
+                if (!result.image && result.images.length) {
+                    result.image = result.images[0];
+                }
                 return result;
             }
 
