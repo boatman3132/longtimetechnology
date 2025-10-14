@@ -95,11 +95,53 @@
             var newsList = document.getElementById('news-list');
             if (!newsList) return;
 
+            var newsData = [];
+            var currentLang = detectCurrentLang();
+
+            function detectCurrentLang() {
+                var bodyClass = document.body.className || '';
+                var match = bodyClass.match(/lang_(tw|cn|en|jp)/);
+                if (match) {
+                    return match[1];
+                }
+                return 'tw';
+            }
+
             function formatDate(value) {
                 if (typeof value !== 'string') return '';
                 var parts = value.split('-');
                 if (parts.length !== 3) return value;
                 return [parts[0], parts[1], parts[2]].join('.');
+            }
+
+            function pickLocalizedText(map, fallback) {
+                if (!map || typeof map !== 'object') {
+                    return fallback || '';
+                }
+                return map[currentLang] || map.tw || map.cn || map.en || map.jp || fallback || '';
+            }
+
+            function pickLocalizedArray(map, fallback) {
+                var list = [];
+                if (map && typeof map === 'object') {
+                    list = Array.isArray(map[currentLang]) ? map[currentLang] : [];
+                    if (!list.length) {
+                        list = Array.isArray(map.tw) ? map.tw : list;
+                    }
+                    if (!list.length) {
+                        list = Array.isArray(map.cn) ? map.cn : list;
+                    }
+                    if (!list.length) {
+                        list = Array.isArray(map.en) ? map.en : list;
+                    }
+                    if (!list.length) {
+                        list = Array.isArray(map.jp) ? map.jp : list;
+                    }
+                }
+                if ((!list || !list.length) && Array.isArray(fallback)) {
+                    list = fallback;
+                }
+                return list.slice();
             }
 
             function renderError(message) {
@@ -129,7 +171,7 @@
                         thumb.className = 'news-thumb';
                         var thumbImg = document.createElement('img');
                         thumbImg.src = item.image;
-                        thumbImg.alt = item.title || '';
+                        thumbImg.alt = pickLocalizedText(item.titles, item.title);
                         thumb.appendChild(thumbImg);
                         link.appendChild(thumb);
                     }
@@ -141,7 +183,7 @@
 
                     var tag = document.createElement('div');
                     tag.className = 'mtag';
-                    var tags = Array.isArray(item.tags) ? item.tags.slice() : [];
+                    var tags = pickLocalizedArray(item.tagsByLang, item.tags);
                     tag.textContent = tags.length ? tags.join('、') : '';
                     link.appendChild(tag);
 
@@ -150,13 +192,14 @@
 
                     var title = document.createElement('div');
                     title.className = 'mtitle';
-                    title.textContent = item.title || '';
+                    title.textContent = pickLocalizedText(item.titles, item.title);
                     content.appendChild(title);
 
-                    if (item.excerpt) {
+                    var excerptText = pickLocalizedText(item.excerpts, item.excerpt);
+                    if (excerptText) {
                         var excerpt = document.createElement('p');
                         excerpt.className = 'mexcerpt';
-                        excerpt.textContent = item.excerpt;
+                        excerpt.textContent = excerptText;
                         content.appendChild(excerpt);
                     }
 
@@ -177,6 +220,23 @@
                 newsList.appendChild(fragment);
             }
 
+            function rerender() {
+                if (!newsData.length) return;
+                renderNews(newsData);
+            }
+
+            function hookLanguageSwitcher() {
+                if (typeof window.lang_set !== 'function') return;
+                if (window.__newsLangWrapped) return;
+                var originalLangSet = window.lang_set;
+                window.lang_set = function (lang) {
+                    originalLangSet(lang);
+                    currentLang = lang;
+                    rerender();
+                };
+                window.__newsLangWrapped = true;
+            }
+
             fetch('dist/news-index.json', { cache: 'no-store' })
                 .then(function (response) {
                     if (!response.ok) {
@@ -185,12 +245,19 @@
                     return response.json();
                 })
                 .then(function (data) {
-                    renderNews(data);
+                    if (!Array.isArray(data)) {
+                        throw new Error('Invalid news index format');
+                    }
+                    newsData = data;
+                    rerender();
+                    hookLanguageSwitcher();
                 })
                 .catch(function (error) {
                     console.error(error);
                     renderError('目前無法載入最新消息');
                 });
+
+            hookLanguageSwitcher();
         })();
     </script>
     <script>

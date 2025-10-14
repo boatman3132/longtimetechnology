@@ -1,0 +1,58 @@
+name: Build & Deploy Pages
+
+on:
+  push:
+    branches: [ main ]   # 你的預設分支
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Generate news index
+        run: npm run build:news
+
+      # 如果你還有其它打包流程，放在這裡
+      # - name: Build site
+      #   run: npm run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # 將整個專案根目錄（含 dist/news-index.json、news/*.md、news.html 等）上傳為靜態網站
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

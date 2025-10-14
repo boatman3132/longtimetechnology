@@ -55,7 +55,14 @@
     <script src="js/language-switcher.js"></script>
     <script>
         (function () {
-            var DEFAULT_TAGS = ['行業新聞'];
+            var LANG_CODES = ['tw', 'cn', 'en', 'jp'];
+            var DEFAULT_TAGS = {
+                tw: ['行業新聞'],
+                cn: ['行业新闻'],
+                en: ['Industry News'],
+                jp: ['業界ニュース']
+            };
+
             var titleEl = document.getElementById('news-title');
             var dateEl = document.getElementById('news-date');
             var tagsEl = document.getElementById('news-tags');
@@ -65,12 +72,47 @@
             var slug = params.get('slug') || '';
             var escapeHelper = document.createElement('textarea');
 
+            var state = {
+                meta: null,
+                contentByLang: {},
+                parser: null,
+                fallbackMeta: null,
+                slug: '',
+                contentReady: false
+            };
+
+            var currentLang = detectCurrentLang();
+
+            function detectCurrentLang() {
+                var bodyClass = document.body.className || '';
+                var match = bodyClass.match(/lang_(tw|cn|en|jp)/);
+                return match ? match[1] : 'tw';
+            }
+
+            function cloneDefaultTags() {
+                var result = {};
+                LANG_CODES.forEach(function (lang) {
+                    var defaults = DEFAULT_TAGS[lang] || [];
+                    result[lang] = defaults.slice();
+                });
+                return result;
+            }
+
+            function cloneTagMap(source) {
+                var clone = {};
+                LANG_CODES.forEach(function (lang) {
+                    var list = source && source[lang];
+                    clone[lang] = Array.isArray(list) ? list.slice() : [];
+                });
+                return clone;
+            }
+
             function showError(message) {
                 titleEl.textContent = '消息內容載入失敗';
                 dateEl.textContent = '';
                 tagsEl.textContent = '';
                 coverEl.innerHTML = '';
-                contentEl.innerHTML = '<p class="news-error">' + message + '</p>';
+                contentEl.innerHTML = '<p class="news-error">' + escapeHtml(message) + '</p>';
             }
 
             function sanitizeSlug(value) {
@@ -86,62 +128,78 @@
                 var datePart = safeSlug.slice(0, 10);
                 var titlePart = safeSlug.slice(10).replace(/^[\s-_]+/, '');
                 var dateValid = /^\d{4}-\d{2}-\d{2}$/.test(datePart);
+                var fallbackTitle = titlePart || safeSlug;
+                var titles = {};
+                LANG_CODES.forEach(function (lang) {
+                    titles[lang] = fallbackTitle;
+                });
+                var tagsByLang = cloneDefaultTags();
                 return {
                     slug: safeSlug,
                     date: dateValid ? datePart : '',
-                    title: titlePart || safeSlug,
-                    tags: DEFAULT_TAGS.slice(),
-                    image: ''
+                    title: fallbackTitle,
+                    titles: titles,
+                    tagsByLang: tagsByLang,
+                    tags: tagsByLang.tw.slice(),
+                    image: '',
+                    excerpts: {}
                 };
             }
 
-            function parseFrontMatter(source) {
+            function stripFrontMatter(source) {
                 if (!source || source.indexOf('---') !== 0) {
-                    return { data: {}, content: source || '' };
+                    return { content: source || '' };
                 }
-                var lines = source.split(/\r?\n/);
-                var dataLines = [];
-                var endIndex = -1;
-                for (var i = 1; i < lines.length; i++) {
-                    if (lines[i].trim() === '---') {
-                        endIndex = i;
-                        break;
-                    }
-                    dataLines.push(lines[i]);
+                var match = source.match(/^---[\r\n]+([\s\S]*?)[\r\n]+---[\r\n]*/);
+                if (!match) {
+                    return { content: source };
                 }
-                if (endIndex === -1) {
-                    return { data: {}, content: source };
-                }
-                var content = lines.slice(endIndex + 1).join('\n');
-                content = content.replace(/^\s*\r?\n/, '');
-                var rawData = dataLines.join('\n');
-                var data = {};
-                rawData.split(/\r?\n/).forEach(function (line) {
-                    var trimmed = line.trim();
-                    if (!trimmed) return;
-                    var colon = trimmed.indexOf(':');
-                    if (colon === -1) return;
-                    var key = trimmed.slice(0, colon).trim();
-                    var value = trimmed.slice(colon + 1).trim();
-                    if (key === 'tags') {
-                        try {
-                            var normalized = value.replace(/'/g, '"');
-                            data.tags = JSON.parse(normalized);
-                        } catch (err) {
-                            console.warn('Failed to parse tags from frontmatter:', err);
-                        }
-                    } else if (key === 'image') {
-                        data.image = value.replace(/^["']|["']$/g, '');
-                    }
-                });
-                return { data: data, content: content };
+                var content = source.slice(match[0].length);
+                return { content: content };
             }
 
-            function formatDate(value) {
-                if (!value) return '';
-                var parts = value.split('-');
-                if (parts.length !== 3) return value;
-                return [parts[0], parts[1], parts[2]].join('.');
+            function extractLanguageSections(content) {
+                var sections = {};
+                if (!content) {
+                    sections.tw = '';
+                    return sections;
+                }
+                var pattern = /<!--\s*lang:([a-z]{2})\s*-->/gi;
+                var match;
+                var current = null;
+                var lastIndex = 0;
+                while ((match = pattern.exec(content)) !== null) {
+                    var candidate = match[1].toLowerCase();
+                    var segment = content.slice(lastIndex, match.index);
+                    if (current) {
+                        sections[current] = (sections[current] || '') + segment;
+                    } else if (segment.trim()) {
+                        sections.tw = (sections.tw || '') + segment;
+                    }
+                    current = LANG_CODES.indexOf(candidate) !== -1 ? candidate : null;
+                    lastIndex = pattern.lastIndex;
+                }
+                var remainder = content.slice(lastIndex);
+                if (current) {
+                    sections[current] = (sections[current] || '') + remainder;
+                } else if (remainder.trim()) {
+                    sections.tw = (sections.tw || '') + remainder;
+                }
+                if (!Object.keys(sections).length) {
+                    sections.tw = content;
+                }
+                Object.keys(sections).forEach(function (lang) {
+                    if (LANG_CODES.indexOf(lang) === -1) {
+                        delete sections[lang];
+                        return;
+                    }
+                    sections[lang] = sections[lang].trim();
+                });
+                if (!sections.tw) {
+                    var firstLang = Object.keys(sections)[0];
+                    sections.tw = firstLang ? sections[firstLang] : '';
+                }
+                return sections;
             }
 
             function escapeHtml(value) {
@@ -231,6 +289,7 @@
 
             function ensureMarked() {
                 if (window.marked && typeof window.marked.parse === 'function') {
+                    state.parser = window.marked;
                     return Promise.resolve(window.marked);
                 }
 
@@ -254,41 +313,102 @@
                 }
 
                 return loadScript('https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js')
+                    .then(function (parser) {
+                        state.parser = parser;
+                        return parser;
+                    })
                     .catch(function (error) {
                         console.warn(error);
                         window.marked = {
                             parse: fallbackParse
                         };
+                        state.parser = window.marked;
                         return window.marked;
                     });
             }
 
-            function applyMeta(meta) {
-                titleEl.textContent = meta.title || '';
-                if (meta.title) {
-                    document.title = meta.title + ' | 最新消息 | 榮炭科技股份有限公司';
+            function formatDate(value) {
+                if (!value) return '';
+                var parts = value.split('-');
+                if (parts.length !== 3) return value;
+                return [parts[0], parts[1], parts[2]].join('.');
+            }
+
+            function pickLocalizedText(map, lang, fallback) {
+                if (!map || typeof map !== 'object') {
+                    return fallback || '';
+                }
+                return map[lang] || map.tw || map.cn || map.en || map.jp || fallback || '';
+            }
+
+            function pickLocalizedArray(map, lang, fallback) {
+                var list = [];
+                if (map && typeof map === 'object') {
+                    list = Array.isArray(map[lang]) ? map[lang] : [];
+                    if (!list.length) list = Array.isArray(map.tw) ? map.tw : list;
+                    if (!list.length) list = Array.isArray(map.cn) ? map.cn : list;
+                    if (!list.length) list = Array.isArray(map.en) ? map.en : list;
+                    if (!list.length) list = Array.isArray(map.jp) ? map.jp : list;
+                }
+                if ((!list || !list.length) && Array.isArray(fallback)) {
+                    list = fallback;
+                }
+                return list.slice();
+            }
+
+            function applyMeta(meta, lang) {
+                var titleText = pickLocalizedText(meta.titles, lang, meta.title);
+                titleEl.textContent = titleText;
+                if (titleText) {
+                    document.title = titleText + ' | 最新消息 | 榮炭科技股份有限公司';
                 }
                 dateEl.textContent = formatDate(meta.date || '');
-                tagsEl.textContent = (Array.isArray(meta.tags) && meta.tags.length) ? meta.tags.join('、') : '';
+                var tags = pickLocalizedArray(meta.tagsByLang, lang, meta.tags);
+                tagsEl.textContent = tags.length ? tags.join('、') : '';
                 coverEl.innerHTML = '';
                 if (meta.image) {
                     var img = document.createElement('img');
                     img.src = meta.image;
-                    img.alt = meta.title || '';
+                    img.alt = titleText;
                     coverEl.appendChild(img);
                 }
             }
 
+            function getContentForLang(lang) {
+                var content = state.contentByLang[lang];
+                if (content && content.trim()) {
+                    return content;
+                }
+                if (lang !== 'tw') {
+                    return state.contentByLang.tw || '';
+                }
+                return '';
+            }
+
             function renderContent(markdown) {
-                var parser = window.marked;
-                if (!parser || typeof parser.parse !== 'function') {
-                    showError('Markdown 解析器未載入。');
+                if (!state.parser || typeof state.parser.parse !== 'function') {
+                    contentEl.innerHTML = '<p class="news-error">內容載入中…</p>';
                     return;
                 }
-                if (typeof parser.setOptions === 'function') {
-                    parser.setOptions({ mangle: false, headerIds: false });
+                if (!state.contentReady) {
+                    contentEl.innerHTML = '<p class="news-error">內容載入中…</p>';
+                    return;
                 }
-                contentEl.innerHTML = parser.parse(markdown || '');
+                if (typeof state.parser.setOptions === 'function') {
+                    state.parser.setOptions({ mangle: false, headerIds: false });
+                }
+                if (!markdown) {
+                    contentEl.innerHTML = '<p class="news-error">此語言尚無內容。</p>';
+                    return;
+                }
+                contentEl.innerHTML = state.parser.parse(markdown || '');
+            }
+
+            function renderArticle(lang) {
+                if (!state.meta) return;
+                applyMeta(state.meta, lang);
+                var markdown = getContentForLang(lang);
+                renderContent(markdown);
             }
 
             function loadIndex() {
@@ -316,14 +436,94 @@
             }
 
             function mergeMeta(base, extra) {
-                var result = Object.assign({}, base);
-                if (extra) {
-                    if (extra.title) result.title = extra.title;
-                    if (extra.date) result.date = extra.date;
-                    if (Array.isArray(extra.tags) && extra.tags.length) result.tags = extra.tags;
-                    if (extra.image) result.image = extra.image;
+                var result = {
+                    slug: base.slug,
+                    date: base.date,
+                    title: base.title,
+                    titles: Object.assign({}, base.titles),
+                    tagsByLang: cloneTagMap(base.tagsByLang),
+                    tags: base.tags.slice(),
+                    image: base.image,
+                    excerpts: Object.assign({}, base.excerpts || {})
+                };
+
+                if (!extra) {
+                    return result;
                 }
+
+                if (extra.date) {
+                    result.date = extra.date;
+                }
+                if (extra.image) {
+                    result.image = extra.image;
+                }
+
+                if (extra.titles && typeof extra.titles === 'object') {
+                    Object.keys(extra.titles).forEach(function (key) {
+                        var lang = key.toLowerCase();
+                        if (LANG_CODES.indexOf(lang) === -1) return;
+                        var value = extra.titles[key];
+                        if (typeof value === 'string' && value.trim()) {
+                            result.titles[lang] = value.trim();
+                        }
+                    });
+                } else if (extra.title && typeof extra.title === 'string') {
+                    var trimmed = extra.title.trim();
+                    if (trimmed) {
+                        LANG_CODES.forEach(function (lang) {
+                            if (!result.titles[lang]) {
+                                result.titles[lang] = trimmed;
+                            }
+                        });
+                        result.title = trimmed;
+                    }
+                }
+
+                if (extra.tagsByLang && typeof extra.tagsByLang === 'object') {
+                    LANG_CODES.forEach(function (lang) {
+                        var tags = extra.tagsByLang[lang];
+                        if (Array.isArray(tags) && tags.length) {
+                            result.tagsByLang[lang] = tags.slice();
+                        }
+                    });
+                } else if (Array.isArray(extra.tags) && extra.tags.length) {
+                    LANG_CODES.forEach(function (lang) {
+                        result.tagsByLang[lang] = extra.tags.slice();
+                    });
+                }
+
+                if (extra.excerpts && typeof extra.excerpts === 'object') {
+                    Object.keys(extra.excerpts).forEach(function (key) {
+                        var lang = key.toLowerCase();
+                        if (LANG_CODES.indexOf(lang) === -1) return;
+                        var value = extra.excerpts[key];
+                        if (typeof value === 'string' && value.trim()) {
+                            result.excerpts[lang] = value.trim();
+                        }
+                    });
+                } else if (extra.excerpt && typeof extra.excerpt === 'string') {
+                    result.excerpts.tw = extra.excerpt;
+                }
+
+                result.title = result.titles.tw || result.title || base.title;
+                result.tags = Array.isArray(result.tagsByLang.tw) ? result.tagsByLang.tw.slice() : [];
                 return result;
+            }
+
+            function hookLanguageSwitcher() {
+                if (typeof window.lang_set !== 'function') {
+                    return;
+                }
+                if (window.__newsDetailLangWrapped) {
+                    return;
+                }
+                var originalLangSet = window.lang_set;
+                window.lang_set = function (lang) {
+                    originalLangSet(lang);
+                    currentLang = lang;
+                    renderArticle(currentLang);
+                };
+                window.__newsDetailLangWrapped = true;
             }
 
             function init() {
@@ -332,44 +532,37 @@
                     showError('指定的消息網址有誤。');
                     return;
                 }
-                var fallbackMeta = deriveMeta(safeSlug);
-                applyMeta(fallbackMeta);
+                state.slug = safeSlug;
+                state.fallbackMeta = deriveMeta(safeSlug);
+                state.meta = state.fallbackMeta;
+                state.meta = state.fallbackMeta;
+                applyMeta(state.meta, currentLang);
+                contentEl.innerHTML = '<p class="news-error">內容載入中…</p>';
 
                 var encodedSlug = encodeURIComponent(safeSlug);
                 var markdownPath = 'news/' + encodedSlug + '.md';
 
-                ensureMarked()
-                    .then(function () {
-                        return Promise.all([loadIndex(), loadMarkdown(markdownPath)]);
-                    })
+                hookLanguageSwitcher();
+
+                Promise.all([
+                    ensureMarked(),
+                    loadIndex(),
+                    loadMarkdown(markdownPath)
+                ])
                     .then(function (results) {
-                        var indexData = results[0];
-                        var markdownRaw = results[1];
+                        var indexData = results[1];
+                        var markdownRaw = results[2];
                         var metaFromIndex = null;
                         if (Array.isArray(indexData)) {
                             metaFromIndex = indexData.find(function (item) {
                                 return item && item.slug === safeSlug;
                             }) || null;
                         }
-                        var parsed = parseFrontMatter(markdownRaw);
-                        var frontData = {};
-                        if (parsed.data) {
-                            if (parsed.data.tags) {
-                                if (Array.isArray(parsed.data.tags)) {
-                                    frontData.tags = parsed.data.tags.filter(function (tag) {
-                                        return typeof tag === 'string' && tag.trim();
-                                    }).map(function (tag) { return tag.trim(); });
-                                } else if (typeof parsed.data.tags === 'string') {
-                                    frontData.tags = parsed.data.tags.split(',').map(function (tag) { return tag.trim(); }).filter(Boolean);
-                                }
-                            }
-                            if (typeof parsed.data.image === 'string') {
-                                frontData.image = parsed.data.image.trim();
-                            }
-                        }
-                        var mergedMeta = mergeMeta(fallbackMeta, metaFromIndex || frontData);
-                        applyMeta(mergedMeta);
-                        renderContent(parsed.content);
+                        var stripped = stripFrontMatter(markdownRaw);
+                        state.contentByLang = extractLanguageSections(stripped.content);
+                        state.contentReady = true;
+                        state.meta = mergeMeta(state.fallbackMeta, metaFromIndex);
+                        renderArticle(currentLang);
                     })
                     .catch(function (error) {
                         console.error(error);

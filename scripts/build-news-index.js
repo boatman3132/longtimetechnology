@@ -8,7 +8,13 @@ const ROOT_DIR = path.resolve(__dirname, '..');
 const NEWS_DIR = path.join(ROOT_DIR, 'news');
 const DIST_DIR = path.join(ROOT_DIR, 'dist');
 const OUTPUT_FILE = path.join(DIST_DIR, 'news-index.json');
-const DEFAULT_TAGS = ['行業新聞'];
+const LANG_CODES = ['tw', 'cn', 'en', 'jp'];
+const DEFAULT_TAGS = {
+  tw: ['行業新聞'],
+  cn: ['行业新闻'],
+  en: ['Industry News'],
+  jp: ['業界ニュース'],
+};
 const MIN_EXCERPT_LENGTH = 120;
 const MAX_EXCERPT_LENGTH = 160;
 
@@ -69,18 +75,144 @@ function buildExcerpt(content) {
   return `${excerpt.trim()}…`;
 }
 
-function normalizeTags(value) {
-  if (!value) return DEFAULT_TAGS.slice();
-  if (Array.isArray(value)) {
-    const filtered = value
+function cloneDefaultTags() {
+  const result = {};
+  LANG_CODES.forEach((lang) => {
+    const defaults = DEFAULT_TAGS[lang] || [];
+    result[lang] = defaults.slice();
+  });
+  return result;
+}
+
+function normalizeLocalizedStrings(raw, fallbackMap) {
+  const result = {};
+  LANG_CODES.forEach((lang) => {
+    result[lang] = (fallbackMap && fallbackMap[lang]) || '';
+  });
+  if (!raw) {
+    return result;
+  }
+  if (typeof raw === 'string') {
+    const trimmed = raw.trim();
+    LANG_CODES.forEach((lang) => {
+      if (trimmed) {
+        result[lang] = trimmed;
+      }
+    });
+    return result;
+  }
+  if (typeof raw === 'object') {
+    Object.keys(raw).forEach((key) => {
+      const lang = key.toLowerCase();
+      if (!LANG_CODES.includes(lang)) return;
+      const value = raw[key];
+      if (typeof value === 'string' && value.trim()) {
+        result[lang] = value.trim();
+      }
+    });
+    return result;
+  }
+  return result;
+}
+
+function normalizeLocalizedTags(value) {
+  const result = cloneDefaultTags();
+  if (!value) {
+    return result;
+  }
+
+  function sanitizeTagArray(input) {
+    if (!Array.isArray(input)) return [];
+    return input
       .map((tag) => (typeof tag === 'string' ? tag.trim() : ''))
       .filter(Boolean);
-    return filtered.length ? filtered : DEFAULT_TAGS.slice();
   }
+
+  if (Array.isArray(value)) {
+    const tags = sanitizeTagArray(value);
+    if (!tags.length) return result;
+    LANG_CODES.forEach((lang) => {
+      result[lang] = tags.slice();
+    });
+    return result;
+  }
+
   if (typeof value === 'string' && value.trim()) {
-    return [value.trim()];
+    const rawTags = value.split(/[,、，]/g).map((tag) => tag.trim()).filter(Boolean);
+    if (!rawTags.length) return result;
+    LANG_CODES.forEach((lang) => {
+      result[lang] = rawTags.slice();
+    });
+    return result;
   }
-  return DEFAULT_TAGS.slice();
+
+  if (typeof value === 'object') {
+    Object.keys(value).forEach((key) => {
+      const lang = key.toLowerCase();
+      if (!LANG_CODES.includes(lang)) return;
+      const entry = value[key];
+      if (Array.isArray(entry)) {
+        const tags = sanitizeTagArray(entry);
+        if (tags.length) {
+          result[lang] = tags.slice();
+        }
+      } else if (typeof entry === 'string' && entry.trim()) {
+        const tags = entry.split(/[,、，]/g).map((tag) => tag.trim()).filter(Boolean);
+        if (tags.length) {
+          result[lang] = tags.slice();
+        }
+      }
+    });
+    return result;
+  }
+
+  return result;
+}
+
+function pickLocalized(map, lang) {
+  if (!map || typeof map !== 'object') return '';
+  return map[lang] || map.tw || map.cn || map.en || map.jp || '';
+}
+
+function extractLanguageSections(content) {
+  const sections = {};
+  if (!content) {
+    sections.tw = '';
+    return sections;
+  }
+
+  const pattern = /<!--\s*lang:([a-z]{2})\s*-->/gi;
+  let match;
+  let currentLang = null;
+  let lastIndex = 0;
+  while ((match = pattern.exec(content)) !== null) {
+    const langCandidate = match[1].toLowerCase();
+    const segment = content.slice(lastIndex, match.index);
+    if (currentLang) {
+      sections[currentLang] = (sections[currentLang] || '') + segment;
+    } else if (segment.trim()) {
+      sections.tw = (sections.tw || '') + segment;
+    }
+    currentLang = LANG_CODES.includes(langCandidate) ? langCandidate : null;
+    lastIndex = pattern.lastIndex;
+  }
+
+  const remainder = content.slice(lastIndex);
+  if (currentLang) {
+    sections[currentLang] = (sections[currentLang] || '') + remainder;
+  } else if (remainder.trim()) {
+    sections.tw = (sections.tw || '') + remainder;
+  }
+
+  if (!Object.keys(sections).length) {
+    sections.tw = content;
+  }
+
+  Object.keys(sections).forEach((lang) => {
+    sections[lang] = sections[lang].trim();
+  });
+
+  return sections;
 }
 
 async function collectNewsEntries() {
@@ -119,21 +251,35 @@ async function collectNewsEntries() {
       warn(`Failed to parse frontmatter in "${relativePath}". Skipping.`, err);
       continue;
     }
-    const tags = normalizeTags(parsed.data.tags);
+    const titleFallback = {};
+    LANG_CODES.forEach((lang) => {
+      titleFallback[lang] = meta.title;
+    });
+    const titles = normalizeLocalizedStrings(parsed.data.titles || parsed.data.title, titleFallback);
+    const tagsByLang = normalizeLocalizedTags(parsed.data.tags);
     const image = typeof parsed.data.image === 'string' ? parsed.data.image.trim() : '';
-    const excerpt = buildExcerpt(parsed.content);
-    if (!excerpt) {
-      warn(`Excerpt for "${relativePath}" is empty. Consider adding content.`);
-    }
+    const contentByLang = extractLanguageSections(parsed.content);
+    const excerpts = {};
+    LANG_CODES.forEach((lang) => {
+      const source = contentByLang[lang] || contentByLang.tw || '';
+      const excerpt = buildExcerpt(source);
+      if (!excerpt && lang === 'tw') {
+        warn(`Excerpt for "${relativePath}" is empty. Consider adding content.`);
+      }
+      excerpts[lang] = excerpt;
+    });
     results.push({
-      title: meta.title,
+      title: titles.tw,
+      titles,
       date: meta.date,
-      tags,
+      tags: tagsByLang.tw,
+      tagsByLang,
       image,
       slug: meta.slug,
       url: path.posix.join('news', `${meta.slug}.md`),
       permalink: `news-detail.html?slug=${encodeURIComponent(meta.slug)}`,
-      excerpt,
+      excerpt: excerpts.tw,
+      excerpts,
     });
   }
   return results;

@@ -1,14 +1,40 @@
 [
   {
-    "title": "AI 新創融資",
-    "date": "2025-10-13",
+    "title": "榮炭科技迎接日本NDK與三菱商事來訪，深化合作並共建海外供應鏈韌性",
+    "titles": {
+      "tw": "榮炭科技迎接日本NDK與三菱商事來訪，深化合作並共建海外供應鏈韌性",
+      "cn": "荣炭科技迎接日本NDK与三菱商事来访，深化合作并共建海外供应链韧性",
+      "en": "Long Time Technology Welcomes NDK and Mitsubishi Corporation to Deepen Collaboration and Strengthen Overseas Supply Chain Resilience",
+      "jp": "栄炭科技が日本NDKおよび三菱商事を迎え、協力を深化し海外サプライチェーンの強靭化を推進"
+    },
+    "date": "2025-09-09",
     "tags": [
-      "行業新聞"
+      "企業參訪"
     ],
-    "image": "dist/news/covers/ai-news.jpg",
-    "slug": "2025-10-13AI 新創融資",
-    "url": "news/2025-10-13AI 新創融資.md",
-    "permalink": "news-detail.html?slug=2025-10-13AI%20%E6%96%B0%E5%89%B5%E8%9E%8D%E8%B3%87",
-    "excerpt": "這裡是內文的 Markdown………"
+    "tagsByLang": {
+      "tw": [
+        "企業參訪"
+      ],
+      "cn": [
+        "企业参访"
+      ],
+      "en": [
+        "Corporate Visit"
+      ],
+      "jp": [
+        "企業訪問"
+      ]
+    },
+    "image": "dist/news/news_details/1757575500267.jpeg",
+    "slug": "2025-09-09NDK來訪",
+    "url": "news/2025-09-09NDK來訪.md",
+    "permalink": "news-detail.html?slug=2025-09-09NDK%E4%BE%86%E8%A8%AA",
+    "excerpt": "榮炭科技股份有限公司於 2025 年 9 月 9 日迎來重要訪客，日本 NDK 的衫中社長與三菱商事代表蒞臨參訪。作為多年來榮炭的重要合作夥伴，雙方針對石墨負極供應鏈未來的發展展開深入交流，並達成一系列的共識。 會中討論重點包括： 1. 連續式製程開發：透過製程優化，提升良率與產品一致性。 2. 擴大海外供應能力：因應…",
+    "excerpts": {
+      "tw": "榮炭科技股份有限公司於 2025 年 9 月 9 日迎來重要訪客，日本 NDK 的衫中社長與三菱商事代表蒞臨參訪。作為多年來榮炭的重要合作夥伴，雙方針對石墨負極供應鏈未來的發展展開深入交流，並達成一系列的共識。 會中討論重點包括： 1. 連續式製程開發：透過製程優化，提升良率與產品一致性。 2. 擴大海外供應能力：因應…",
+      "cn": "荣炭科技股份有限公司于 2025 年 9 月 9 日迎来重要访客，日本 NDK 的衫中社长与三菱商事代表莅临参访。作为多年来荣炭的重要合作伙伴，双方就石墨负极供应链的未来发展展开深入交流，并达成一系列共识。 会议讨论重点包括： 1. 连续式制程开发：通过制程优化，提升良率与产品一致性。 2. 扩大海外供应能力：因应国际…",
+      "en": "On September 9, 2025, Long Time Technology Co., Ltd. had the honor of hosting distinguished guests: Mr. Suginaka, President of NDK, along with representatives f…",
+      "jp": "2025 年 9 月 9 日、栄炭科技株式会社は日本 NDK の杉中社長および三菱商事の代表団を本社に迎えました。長年にわたり戦略的パートナー関係を築いてきた両社は、黒鉛負極材サプライチェーンの将来発展について意見を交わし、一連の重要な合意に達しました。 主な討議内容は以下の通りです。 1. 連続プロセス開発：プロセス…"
+    }
   }
 ]
