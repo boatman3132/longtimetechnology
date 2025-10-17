@@ -1425,203 +1425,153 @@
   margin-bottom: 32px;
 }
 .about .management-team .team-grid {
-  display: grid;
-  gap: 32px;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
   width: 100%;
-  max-width: 960px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .about .management-team .member {
-  background-color: #fff;
-  border-radius: 16px;
-  -webkit-box-shadow: 0 16px 40px rgba(15, 31, 64, 0.08);
-          box-shadow: 0 16px 40px rgba(15, 31, 64, 0.08);
-  padding: 24px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 18px 50px rgba(15, 31, 64, 0.08);
+  overflow: hidden;
 }
 .about .management-team .member-photo {
-  width: 100%;
-  margin-bottom: 20px;
+  position: relative;
+  flex: 0 0 auto;
 }
 .about .management-team .member-photo img {
   width: 100%;
-  height: auto;
-  border-radius: 12px;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
+.about .management-team .member-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px 24px 32px;
+  flex: 1;
+}
+.about .management-team .member-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .about .management-team .member-name {
-  font-size: 1.5rem;
+  margin: 0;
+  font-size: 1.75rem;
   font-weight: 700;
-  margin: 0;
+  line-height: 1.2;
 }
-.about .management-team .member-role {
-  margin: 8px 0 16px;
+.about .management-team .member-name .member-role {
+  display: inline-block;
+  margin-left: 0.5em;
+  font-size: 1.1rem;
   font-weight: 500;
-  color: #5f6fbf;
+  color: #2f3b67;
 }
-.about .management-team .member-role .en,
-.about .management-team .member-role .jp {
-  color: inherit;
+.about .management-team .member-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
-.about .management-team .member-exp {
-  padding-left: 20px;
+.about .management-team .member-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.about .management-team .member-section--education {
+  gap: 6px;
+}
+.about .management-team .member-section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #1e1e1e;
+}
+.about .management-team .member-section-title span {
+  display: inline-block;
+}
+.about .management-team .member-section-list {
   margin: 0;
-  line-height: 1.75;
+  padding-left: 1.2em;
+  list-style: disc;
+  line-height: 1.35;
+  overflow-wrap: break-word;
 }
-.about .management-team .member-exp li {
-  margin-bottom: 6px;
+.about .management-team .member-section--education .member-section-title {
+  display: none;
 }
-.about .management-team .member-exp.member-exp--stacked li {
-  margin-bottom: 16px;
+.about .management-team .member-section--education .member-section-list {
+  list-style: none;
+  padding-left: 0;
 }
-.about .management-team .member-exp.member-exp--stacked li span {
-  display: block;
+.about .management-team .member-section--education .member-section-list li {
+  margin: 0;
 }
-.about .management-team .member-exp.member-exp--stacked li span + span {
-  margin-top: 6px;
+.about .management-team .member-section--education .member-section-list li + li {
+  margin-top: 0.15em;
 }
-@media all and (max-width: 768px) {
-  .about .management-team .member {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  .about .management-team .member-photo {
-    width: 116px;
-    margin-right: 16px;
-    margin-bottom: 0;
-    flex-shrink: 0;
-  }
-  .about .management-team .member-info {
-    flex: 1;
-  }
-  .about .management-team .member-name {
-    font-size: 1.25rem;
-  }
+.about .management-team .member-section-list li + li {
+  margin-top: 0.3em;
 }
-
-@media all and (min-width: 768px) {
-  .about .management-team .team-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media all and (min-width: 1024px) {
-  .about .management-team .team-grid {
-    gap: 32px;
-  }
+@media (min-width: 768px) {
   .about .management-team .member {
     flex-direction: row;
     align-items: stretch;
-    gap: 32px;
-    padding: 32px 36px;
   }
   .about .management-team .member-photo {
-    width: 210px;
-    margin-bottom: 0;
-    flex-shrink: 0;
+    flex: 0 0 22%;
+    max-width: 220px;
+    min-width: 180px;
   }
-  .about .management-team .member-info {
+  .about .management-team .member-content {
+    padding: 36px 40px;
+    gap: 18px;
+  }
+  .about .management-team .member-name {
+    font-size: 2rem;
+  }
+  .about .management-team .member-name .member-role {
+    font-size: 1.2rem;
+  }
+  .about .management-team .member-section {
+    flex-direction: row;
+    gap: 32px;
+  }
+  .about .management-team .member-section-title {
+    flex: 0 0 88px;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    padding-top: 4px;
+  }
+  .about .management-team .member-section-list {
     flex: 1;
-    display: grid;
-    grid-template-columns: minmax(0, 0.55fr) minmax(0, 0.45fr);
-    column-gap: 28px;
-    row-gap: 16px;
-    position: relative;
-    align-content: start;
+    padding-left: 1.3em;
   }
-  .about .management-team .member-info::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: calc(40% + 1px);
-    width: 1px;
-    background: linear-gradient(180deg, rgba(95, 111, 191, 0.4), rgba(95, 111, 191, 0));
+}
+
+@media (max-width: 767px) {
+  .about .management-team .member {
+    gap: 0;
   }
-  .about .management-team .member-name,
-  .about .management-team .member-role {
-    grid-column: 1;
+  .about .management-team .member-photo {
+    width: 65%;
+    margin: 0 auto;
+    aspect-ratio: 3 / 4;
   }
-  .about .management-team .member-role {
-    margin-bottom: 40px;
+  .about .management-team .member-content {
+    padding: 20px 20px 28px;
   }
-  .about .management-team .member-exp {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-rows: auto auto;
-    column-gap: 28px;
-    row-gap: 12px;
-    padding-left: 0;
-    margin-top: -16px;
-    list-style: none;
-    align-items: start;
-    align-content: start;
+  .about .management-team .member-name {
+    font-size: 1.5rem;
   }
-  .about .management-team .member-exp::before,
-  .about .management-team .member-exp::after {
-    display: block;
-    font-weight: 600;
+  .about .management-team .member-name .member-role {
     font-size: 1rem;
-    letter-spacing: 0.05em;
-    color: #253464;
-    margin-bottom: 12px;
-    align-self: start;
-  }
-  .about .management-team .member-exp::before {
-    content: none;
-  }
-  .about .management-team .member-exp::after {
-    grid-column: 2;
-    grid-row: 1;
-    margin-top: 0;
-    transform: translateY(-100px);
-  }
-  .about .management-team .member-exp.tw::after {
-    content: "經歷";
-  }
-  .about .management-team .member-exp.en::after {
-    content: "Experience";
-  }
-  .about .management-team .member-exp.jp::after {
-    content: "経歴";
-  }
-  .about .management-team .member-exp li {
-    padding-left: 18px;
-    position: relative;
-    margin: 0;
-  }
-  .about .management-team .member-exp li::before {
-    content: "";
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #5f6fbf;
-    left: 0;
-    top: 0.6em;
-  }
-  .about .management-team .member-exp li:first-child {
-    grid-column: 1;
-    grid-row: 2;
-    transform: translateY(-40px);
-  }
-  .about .management-team .member-exp li:nth-child(2) {
-    grid-column: 2;
-    grid-row: 2;
-  }
-  .about .management-team .member-exp li:nth-child(n + 3) {
-    grid-column: 2;
-    grid-row: auto;
-  }
-  .about .management-team .member-exp li:nth-child(n + 2) {
-    transform: translateY(-100px);
-  }
-  .about .management-team .member-exp.member-exp--stacked li span + span {
-    margin-top: 4px;
   }
 }
