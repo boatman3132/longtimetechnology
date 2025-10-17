@@ -1449,12 +1449,15 @@
 .about .management-team .member-photo {
   position: relative;
   flex: 0 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
 }
 .about .management-team .member-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: inherit;
 }
 .about .management-team .member-content {
   display: flex;
