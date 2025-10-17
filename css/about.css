@@ -1294,6 +1294,11 @@
   position: relative;
   display: inline-block;
   padding: 0 2em;
+  min-width: 17em;
+}
+.history .top-menu-history li.active {
+  min-width: 0;
+  padding: 0;
 }
 .history .top-menu-history .ytime {
   color: #333;
@@ -1389,9 +1394,10 @@
             transform: translate(-50%, -50%) scale(0.6);
   }
   .history .top-menu-history li {
-    padding: 0 2em;
-    /* 手機上不強制固定寬度，讓文字區塊可撐滿可用空間 */
+    padding: 0 1.25em;
+    /* 手機版給予較寬的文字容器，減少換行 */
     width: auto;
+    min-width: 51vw;
   }
   .history .top-menu-history .txt {
     /* 手機上允許文字佔滿容器減少過早斷行 */
@@ -1404,7 +1410,7 @@
 }
 @media all and (min-width: 769px) {
   .history li.active {
-    width: calc((100vw - 1296px) / 2 + 4em);
+    width: 0;
   }
   .history .open_flexslider .flex-direction-nav {
     display: block;
