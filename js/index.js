@@ -81,49 +81,91 @@ function scrollNum() {
 }
 
 function initPartnersMarquee() {
-    document.querySelectorAll(".partners-marquee__track").forEach(function (track) {
-        if (track.dataset.marqueeBuilt) {
-            return;
-        }
+    var tracks = Array.from(document.querySelectorAll(".partners-marquee__track"));
+    if (!tracks.length) {
+        return;
+    }
 
-        var items = Array.from(track.children);
-        if (!items.length) {
-            return;
-        }
-
-        var spacer = document.createElement("li");
-        spacer.className = "partners-marquee__spacer";
-        spacer.setAttribute("aria-hidden", "true");
-
-        var pattern = items.slice();
-        pattern.push(spacer);
-
-        var clones = pattern.map(function (node) {
-            var clone = node.cloneNode(true);
-            clone.setAttribute("aria-hidden", "true");
-            return clone;
+    function updateMarqueeDistance(track) {
+        window.requestAnimationFrame(function () {
+            var distance = track.scrollWidth / 2;
+            if (distance) {
+                track.style.setProperty("--marquee-distance", distance + "px");
+            }
         });
+    }
 
-        track.innerHTML = "";
+    tracks.forEach(function (track) {
+        if (!track.dataset.marqueeBuilt) {
+            var items = Array.from(track.children);
+            if (!items.length) {
+                return;
+            }
 
-        if (track.classList.contains("partners-marquee__track--right")) {
-            clones.forEach(function (node) {
-                track.appendChild(node);
+            var spacer = document.createElement("li");
+            spacer.className = "partners-marquee__spacer";
+            spacer.setAttribute("aria-hidden", "true");
+
+            var pattern = items.slice();
+            pattern.push(spacer);
+
+            var clones = pattern.map(function (node) {
+                var clone = node.cloneNode(true);
+                clone.setAttribute("aria-hidden", "true");
+                return clone;
             });
-            pattern.forEach(function (node) {
-                track.appendChild(node);
-            });
-        } else {
-            pattern.forEach(function (node) {
-                track.appendChild(node);
-            });
-            clones.forEach(function (node) {
-                track.appendChild(node);
-            });
+
+            track.innerHTML = "";
+
+            if (track.classList.contains("partners-marquee__track--right")) {
+                clones.forEach(function (node) {
+                    track.appendChild(node);
+                });
+                pattern.forEach(function (node) {
+                    track.appendChild(node);
+                });
+            } else {
+                pattern.forEach(function (node) {
+                    track.appendChild(node);
+                });
+                clones.forEach(function (node) {
+                    track.appendChild(node);
+                });
+            }
+
+            track.dataset.marqueeBuilt = "true";
         }
 
-        track.style.setProperty("--marquee-distance", "100%");
-        track.dataset.marqueeBuilt = "true";
+        updateMarqueeDistance(track);
+
+        track.querySelectorAll("img").forEach(function (img) {
+            if (img.dataset.marqueeWatcherAttached) {
+                return;
+            }
+            img.dataset.marqueeWatcherAttached = "true";
+
+            if (!img.complete) {
+                img.addEventListener("load", function () {
+                    updateMarqueeDistance(track);
+                });
+                img.addEventListener("error", function () {
+                    updateMarqueeDistance(track);
+                });
+            }
+        });
+    });
+
+    var resizeTimer;
+    function handleResize() {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(function () {
+            tracks.forEach(updateMarqueeDistance);
+        }, 150);
+    }
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("load", function () {
+        tracks.forEach(updateMarqueeDistance);
     });
 }
 
