@@ -1099,7 +1099,7 @@ footer .bgred .btn1 {
 }
 footer .bgred .btn1 span {
   display: block;
-  padding-left: 3em;
+  padding-left: 2.8em;
 }
 @media all and (max-width: 575px) {
   footer .bgred .btn1 {
