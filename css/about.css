@@ -919,6 +919,20 @@
 .intro .p1 .txt b {
   color: #178562;
 }
+.intro .p2 {
+  font-size: 1.1rem;
+  line-height: 1.9;
+}
+@media all and (max-width: 575px) {
+  .intro .p2 {
+    font-size: 1.05rem;
+  }
+}
+@media all and (min-width: 992px) {
+  .intro .p2 {
+    font-size: 1.2rem;
+  }
+}
 .intro .p2 li {
   padding: 1.3em 0em 1.3em 0.5em;
   display: -webkit-box;
@@ -978,7 +992,7 @@
   display: grid;
   gap: 32px;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 }
 .intro .production-bases .site {
   background: #fff;
