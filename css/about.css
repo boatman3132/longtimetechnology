@@ -1572,7 +1572,7 @@
   .about .management-team .member-photo {
     width: 65%;
     margin: 0 auto;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: auto;
   }
   .about .management-team .member-content {
     padding: 20px 20px 28px;
@@ -1582,5 +1582,9 @@
   }
   .about .management-team .member-name .member-role {
     font-size: 1rem;
+  }
+  .about .management-team .member-photo img {
+    height: auto;
+    object-fit: contain;
   }
 }
