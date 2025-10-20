@@ -4,7 +4,6 @@
 const headerTranslations = {
     'menu_about':    { tw: '關於榮炭', cn: '关于荣炭', en: 'ABOUT US', jp: '会社概要' },
     'submenu_about_intro': { tw: '榮炭介紹', cn: '荣炭介绍', en: 'About Atrans', jp: '会社紹介' },
-    'submenu_about_cmp':   { tw: '勤美集團', cn: '勤美集团', en: 'CMP Group', jp: '勤美グループ' },
     'esg':   { tw: 'ESG永續', cn: 'ESG永续', en: 'ESG', jp: 'ESG' },
     'menu_products':     { tw: '產品介紹', cn: '产品介绍', en: 'Products', jp: '産品内容' },
 
