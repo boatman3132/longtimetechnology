@@ -1021,6 +1021,20 @@
 .intro .production-bases .site-details p + p {
   margin-top: 0.35rem;
 }
+.intro .production-bases .site-details .contact-line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5em;
+}
+.intro .production-bases .site-details .contact-line img {
+  width: 20px;
+  height: auto;
+  display: block;
+}
 .intro .production-bases .production-map {
   margin-top: 3.5rem;
   width: 100%;
