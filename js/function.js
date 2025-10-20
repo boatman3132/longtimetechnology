@@ -234,13 +234,34 @@ function rand() {
 }
 
 $(function () {
-    var path = window.location.pathname;
-    var page = path.split("/").pop();
-    if (page === '') {
-        page = 'index.html';
+    var pathname = window.location.pathname || '/';
+    var ensureTrailingSlash = function (value) {
+        if (!value) return '/';
+        return value.endsWith('/') ? value : value + '/';
+    };
+    var findNavItem = function (targetPath) {
+        targetPath = ensureTrailingSlash(targetPath);
+        return $('ul.mmenu a').filter(function () {
+            var href = $(this).attr('href') || '';
+            if (!href || href.indexOf('javascript:') === 0 || /^https?:\/\//i.test(href)) {
+                return false;
+            }
+            var linkPath = ensureTrailingSlash(href);
+            return linkPath === targetPath;
+        }).first();
+    };
+    var currentPath = ensureTrailingSlash(pathname);
+    var target = findNavItem(currentPath);
+    if (!target.length && currentPath !== '/') {
+        var parentPath = currentPath.replace(/[^/]+\/$/, '');
+        if (!parentPath) {
+            parentPath = '/';
+        }
+        target = findNavItem(parentPath);
     }
-    var target = $('ul.mmenu a[href="' + page + '"]');
-    target.parent('li').addClass('active');
+    if (target.length) {
+        target.parent('li').addClass('active');
+    }
 });
 
 // 里程碑左右滾動控制

@@ -50,6 +50,12 @@ const pageTitleTranslations = {
         en: 'Quality｜Long Time Technology',
         jp: '品質・環境｜栄炭科技',
     },
+    equipment: {
+        tw: '設備介紹｜榮炭科技',
+        cn: '设备介绍｜荣炭科技',
+        en: 'Equipment｜Long Time Technology',
+        jp: '設備紹介｜栄炭科技',
+    },
     news: {
         tw: '最新消息｜榮炭科技',
         cn: '最新资讯｜荣炭科技',

@@ -335,7 +335,7 @@ async function collectNewsEntries() {
       images: filteredImages,
       slug: meta.slug,
       url: path.posix.join('news', `${meta.slug}.md`),
-      permalink: `news-detail.html?slug=${encodeURIComponent(meta.slug)}`,
+      permalink: `news/detail/?slug=${encodeURIComponent(meta.slug)}`,
       excerpt: excerpts.tw,
       excerpts,
     });
