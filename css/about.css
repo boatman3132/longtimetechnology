@@ -1033,6 +1033,9 @@
   padding: 32px;
   overflow: auto;
 }
+.intro .production-bases .map-frame picture {
+  display: block;
+}
 .intro .production-bases .map-frame img {
   display: block;
   margin: 0 auto;

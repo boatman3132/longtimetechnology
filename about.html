@@ -413,10 +413,22 @@
                 <figure class="production-map">
                     <div class="map-frame">
                         <!-- language-specific maps: only the img matching the body.lang_* class will be shown -->
-                        <img class="tw" src="dist/about/east_asia_offices_zhTW.gif" alt="生產據點地圖：廣東、江西、雲南及台灣總部（繁體中文）">
-                        <img class="cn" src="dist/about/east_asia_offices_zhCN.gif" alt="生产据点地图：广东、江西、云南及台湾总部（简体中文）">
-                        <img class="en" src="dist/about/east_asia_offices_en.gif" alt="Manufacturing sites map showing Guangdong, Jiangxi, Yunnan plants and Taiwan headquarters (English)">
-                        <img class="jp" src="dist/about/east_asia_offices_ja.gif" alt="生産拠点地図：広東、江西、雲南および台湾本社（日本語）">
+                        <picture class="tw">
+                            <source srcset="dist/about/east_asia_offices_zhTW_mo.gif" media="(max-width: 768px)">
+                            <img src="dist/about/east_asia_offices_zhTW.gif" alt="生產據點地圖：廣東、江西、雲南及台灣總部（繁體中文）">
+                        </picture>
+                        <picture class="cn">
+                            <source srcset="dist/about/east_asia_offices_zhCN_mo.gif" media="(max-width: 768px)">
+                            <img src="dist/about/east_asia_offices_zhCN.gif" alt="生产据点地图：广东、江西、云南及台湾总部（简体中文）">
+                        </picture>
+                        <picture class="en">
+                            <source srcset="dist/about/east_asia_offices_en_mo.gif" media="(max-width: 768px)">
+                            <img src="dist/about/east_asia_offices_en.gif" alt="Manufacturing sites map showing Guangdong, Jiangxi, Yunnan plants and Taiwan headquarters (English)">
+                        </picture>
+                        <picture class="jp">
+                            <source srcset="dist/about/east_asia_offices_ja_mo.gif" media="(max-width: 768px)">
+                            <img src="dist/about/east_asia_offices_ja.gif" alt="生産拠点地図：広東、江西、雲南および台湾本社（日本語）">
+                        </picture>
                     </div>
 
                 </figure>
