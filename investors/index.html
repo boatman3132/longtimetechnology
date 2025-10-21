@@ -78,7 +78,9 @@
                 </button>
             </div>
             <div class="revenue-chart-wrapper">
-                <canvas id="revenuePerformanceChart" aria-label="Revenue and share price trends chart" role="img"></canvas>
+                <div class="revenue-chart-scroll">
+                    <canvas id="revenuePerformanceChart" aria-label="Revenue and share price trends chart" role="img"></canvas>
+                </div>
                 <div class="revenue-chart-placeholder" role="status" aria-live="polite">
                     <span class="tw">資料載入中…</span>
                     <span class="cn">资料载入中…</span>
@@ -557,6 +559,7 @@
             const rangeButtons = Array.from(document.querySelectorAll('.chart-range-btn'));
             const placeholder = document.querySelector('.revenue-chart-placeholder');
             const chartWrapper = document.querySelector('.revenue-chart-wrapper');
+            const chartScroll = document.querySelector('.revenue-chart-scroll');
             const csvPath = 'investors/revenue.csv';
             const localeCopy = {
                 tw: {
@@ -600,6 +603,7 @@
             let fullData = [];
             let currentLocale = resolveLocale();
             let tooltipElement = null;
+            let resizeTimeout = null;
 
             const lineOnTopPlugin = {
                 id: 'lineOnTopPlugin',
@@ -677,6 +681,16 @@
             });
 
             bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+            window.addEventListener('resize', () => {
+                if (!chartInstance) {
+                    return;
+                }
+                window.clearTimeout(resizeTimeout);
+                resizeTimeout = window.setTimeout(() => {
+                    updateChart(getActiveMonths());
+                }, 200);
+            });
 
             function resolveLocale() {
                 const langClass = Array.from(document.body.classList).find(cls => cls.startsWith('lang_')) || 'lang_tw';
@@ -854,6 +868,18 @@
                 const labels = data.map(item => item.label);
                 const revenueValues = data.map(item => item.revenue);
                 const priceValues = data.map(item => item.price);
+                const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+                if (chartScroll) {
+                    if (isMobile) {
+                        const wrapperWidth = chartWrapper ? chartWrapper.clientWidth : 0;
+                        const mobileMinWidth = 720;
+                        const targetWidth = Math.max(wrapperWidth, mobileMinWidth);
+                        chartScroll.style.minWidth = `${Math.ceil(targetWidth)}px`;
+                    } else {
+                        chartScroll.style.minWidth = '';
+                    }
+                }
 
                 if (!chartInstance) {
                     const context = chartCanvas.getContext('2d');
@@ -997,6 +1023,7 @@
                     chartInstance.data.labels = labels;
                     chartInstance.data.datasets[0].data = revenueValues;
                     chartInstance.data.datasets[1].data = priceValues;
+                    chartInstance.resize();
                     chartInstance.update();
                 }
                 if (tooltipElement) {

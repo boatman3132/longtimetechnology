@@ -79,6 +79,10 @@
   min-height: 360px;
 }
 
+.investors .revenue-chart-scroll {
+  min-width: 100%;
+}
+
 .investors .revenue-chart-wrapper canvas {
   width: 100%;
   height: 100%;
@@ -239,8 +243,15 @@
   }
 
   .investors .revenue-chart-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
     padding: 1.5rem 1.25rem;
     min-height: 320px;
+  }
+
+  .investors .revenue-chart-scroll {
+    min-width: 720px;
   }
 
   .investors .revenue-chart-wrapper canvas {
