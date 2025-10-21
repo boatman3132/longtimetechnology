@@ -13,7 +13,7 @@ const headerTranslations = {
     'submenu_quality_equipment': { tw: '設備介紹', cn: '设备介绍', en: 'Equipment', jp: '設備紹介' },
     'menu_news':     { tw: '最新消息', cn: '最新资讯', en: 'NEWS', jp: 'お知らせ' },
     'menu_investors':{ tw: '投資人專區', cn: '投资者专区', en: 'INVESTORS', jp: '投資家向け情報' },
-    'menu_recruit':  { tw: '徵才情報', cn: '招聘信息', en: 'CAREERS', jp: '採用情報' },
+    'menu_recruit':  { tw: '人才招募', cn: '招聘信息', en: 'CAREERS', jp: '採用情報' },
     'menu_contact':  { tw: '聯絡我們', cn: '联系我们', en: 'CONTACT', jp: 'お問合せ' },
     'menu_language': { tw: 'Language', cn: 'Language', en: 'Language', jp: 'Language' },
 };
@@ -81,7 +81,7 @@ const pageTitleTranslations = {
         jp: '投資家向け情報｜栄炭科技',
     },
     recruit: {
-        tw: '徵才情報｜榮炭科技',
+        tw: '人才招募｜榮炭科技',
         cn: '招聘信息｜荣炭科技',
         en: 'Careers｜Long Time Technology',
         jp: '採用情報｜栄炭科技',
