@@ -46,6 +46,11 @@
                 <span class="line"></span>
                 <div class="news-cover" id="news-cover"></div>
                 <div class="editor_box" id="news-content"></div>
+                <div class="news-detail-actions">
+                    <a class="news-back-button" id="news-back-button" href="/news/" onclick="if (window.history.length > 1) { history.back(); return false; }">
+                        回新聞列表
+                    </a>
+                </div>
             </div>
         </section>
     </div>
@@ -63,12 +68,19 @@
                 en: ['Industry News'],
                 jp: ['業界ニュース']
             };
+            var BACK_BUTTON_TEXT = {
+                tw: '上一頁',
+                cn: '返回上一页',
+                en: 'Back',
+                jp: '戻る'
+            };
 
             var titleEl = document.getElementById('news-title');
             var dateEl = document.getElementById('news-date');
             var tagsEl = document.getElementById('news-tags');
             var coverEl = document.getElementById('news-cover');
             var contentEl = document.getElementById('news-content');
+            var backButtonEl = document.getElementById('news-back-button');
             var params = new URLSearchParams(window.location.search);
             var slug = params.get('slug') || '';
             var escapeHelper = document.createElement('textarea');
@@ -424,6 +436,13 @@
                 applyMeta(state.meta, lang);
                 var markdown = getContentForLang(lang);
                 renderContent(markdown);
+                updateBackButton(lang);
+            }
+
+            function updateBackButton(lang) {
+                if (!backButtonEl) return;
+                var label = BACK_BUTTON_TEXT[lang] || BACK_BUTTON_TEXT.tw || backButtonEl.textContent;
+                backButtonEl.textContent = label;
             }
 
             function loadIndex() {
@@ -579,6 +598,7 @@
                 state.meta = state.fallbackMeta;
                 state.meta = state.fallbackMeta;
                 applyMeta(state.meta, currentLang);
+                updateBackButton(currentLang);
                 contentEl.innerHTML = '<p class="news-error">內容載入中…</p>';
 
                 var encodedSlug = encodeURIComponent(safeSlug);
