@@ -3,18 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <base href="/">
-    <meta name="keywords" content="榮炭科技,鋰電池石墨負極製造,鋰電池,負極材料,石墨化">
-    <meta name="description" content="榮炭質量優良的產品，持續導入新技術、更新硬體設備、 優化機台最大效益。 19年豐富加工經驗、瞭解客戶的需求與產業的趨勢， 提供全面性的解決方案。">
+    <meta name="keywords" content="榮炭科技,新聞稿,企業動態,儲能材料,鋰電池負極">
+    <meta name="description" content="閱讀榮炭科技最新消息內容，掌握鋰電池負極材料技術、產業趨勢與公司重要公告。">
     <meta name="author" content="榮炭科技股份有限公司">
     <meta name="copyright" content="榮炭科技股份有限公司">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="expires" content="0">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
     <link rel="shortcut icon" href="dist/Website_Metadata_Images/16x16.ico" type="image/x-icon" />
-    <meta property="og:image" content="dist/Website_Metadata_Images/ogimg.jpg" />
+    <link rel="canonical" id="news-canonical" href="https://www.lttech.com.tw/news/detail/">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="最新消息內容｜榮炭科技">
+    <meta property="og:description" content="閱讀榮炭科技最新消息內容，掌握鋰電池負極材料技術、產業趨勢與公司重要公告。">
+    <meta property="og:url" content="https://www.lttech.com.tw/news/detail/">
+    <meta property="og:site_name" content="榮炭科技股份有限公司">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:image" id="news-og-image" content="https://www.lttech.com.tw/dist/Website_Metadata_Images/ogimg.jpg" />
+    <meta property="og:image:alt" id="news-og-image-alt" content="榮炭科技最新消息代表圖">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="news-twitter-title" content="最新消息內容｜榮炭科技">
+    <meta name="twitter:description" id="news-twitter-description" content="閱讀榮炭科技最新消息內容，掌握鋰電池負極材料技術、產業趨勢與公司重要公告。">
+    <meta name="twitter:image" id="news-twitter-image" content="https://www.lttech.com.tw/dist/Website_Metadata_Images/ogimg.jpg">
+    <meta name="twitter:url" id="news-twitter-url" content="https://www.lttech.com.tw/news/detail/">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&amp;family=Noto+Sans+TC:wght@400;500;700&amp;display=swap');    </style>
     <title>最新消息內容｜榮炭科技</title>
@@ -84,6 +97,18 @@
             var params = new URLSearchParams(window.location.search);
             var slug = params.get('slug') || '';
             var escapeHelper = document.createElement('textarea');
+            var SITE_ORIGIN = 'https://www.lttech.com.tw';
+            var canonicalEl = document.getElementById('news-canonical');
+            var descriptionEl = document.querySelector('meta[name="description"]');
+            var ogTitleEl = document.querySelector('meta[property="og:title"]');
+            var ogDescriptionEl = document.querySelector('meta[property="og:description"]');
+            var ogUrlEl = document.querySelector('meta[property="og:url"]');
+            var ogImageEl = document.getElementById('news-og-image');
+            var ogImageAltEl = document.getElementById('news-og-image-alt');
+            var twitterTitleEl = document.getElementById('news-twitter-title');
+            var twitterDescriptionEl = document.getElementById('news-twitter-description');
+            var twitterImageEl = document.getElementById('news-twitter-image');
+            var twitterUrlEl = document.getElementById('news-twitter-url');
 
             var state = {
                 meta: null,
@@ -134,6 +159,28 @@
                     return '';
                 }
                 return value;
+            }
+
+            function toAbsoluteUrl(path) {
+                if (!path) return '';
+                if (/^https?:\/\//i.test(path)) {
+                    return path;
+                }
+                if (path.indexOf('//') === 0) {
+                    return 'https:' + path;
+                }
+                if (path.indexOf('/') === 0) {
+                    return SITE_ORIGIN + path;
+                }
+                return SITE_ORIGIN + '/' + path.replace(/^\.?\//, '');
+            }
+
+            function buildArticleUrl(articleSlug) {
+                var safeSlug = sanitizeSlug(articleSlug) || '';
+                if (!safeSlug) {
+                    return SITE_ORIGIN + '/news/detail/';
+                }
+                return SITE_ORIGIN + '/news/detail/?slug=' + encodeURIComponent(safeSlug);
             }
 
             function deriveMeta(value) {
@@ -386,6 +433,75 @@
                 dateEl.textContent = formatDate(meta.date || '');
                 var tags = pickLocalizedArray(meta.tagsByLang, lang, meta.tags);
                 tagsEl.textContent = tags.length ? tags.join('、') : '';
+
+                var descriptionText = pickLocalizedText(meta.excerpts, lang, meta.excerpts ? meta.excerpts.tw : '');
+                if (!descriptionText) {
+                    var rawContent = state.contentByLang[lang] || state.contentByLang.tw || '';
+                    if (rawContent) {
+                        var sanitized = rawContent
+                            .replace(/<!--[\s\S]*?-->/g, '')
+                            .replace(/\[(.*?)\]\((.*?)\)/g, '$1')
+                            .replace(/[#>*_`]/g, '')
+                            .replace(/\r?\n+/g, ' ');
+                        sanitized = sanitized.replace(/\s+/g, ' ').trim();
+                        if (sanitized.length > 160) {
+                            descriptionText = sanitized.slice(0, 157) + '…';
+                        } else {
+                            descriptionText = sanitized;
+                        }
+                    }
+                }
+                if (!descriptionText) {
+                    descriptionText = titleText || '榮炭科技最新消息';
+                }
+
+                if (descriptionEl) {
+                    descriptionEl.setAttribute('content', descriptionText);
+                }
+
+                var articleUrl = buildArticleUrl(meta.slug);
+                if (canonicalEl) {
+                    canonicalEl.setAttribute('href', articleUrl);
+                }
+                if (ogUrlEl) {
+                    ogUrlEl.setAttribute('content', articleUrl);
+                }
+                if (twitterUrlEl) {
+                    twitterUrlEl.setAttribute('content', articleUrl);
+                }
+
+                if (ogTitleEl && titleText) {
+                    ogTitleEl.setAttribute('content', titleText);
+                }
+                if (ogDescriptionEl) {
+                    ogDescriptionEl.setAttribute('content', descriptionText);
+                }
+
+                var primaryImage = meta.image || '';
+                if (!primaryImage && Array.isArray(meta.images) && meta.images.length) {
+                    primaryImage = meta.images[0];
+                }
+                if (!primaryImage) {
+                    primaryImage = 'dist/Website_Metadata_Images/ogimg.jpg';
+                }
+                var absoluteImage = toAbsoluteUrl(primaryImage);
+
+                if (ogImageEl) {
+                    ogImageEl.setAttribute('content', absoluteImage);
+                }
+                if (ogImageAltEl) {
+                    ogImageAltEl.setAttribute('content', titleText || '榮炭科技最新消息');
+                }
+                if (twitterTitleEl && titleText) {
+                    twitterTitleEl.setAttribute('content', titleText);
+                }
+                if (twitterDescriptionEl) {
+                    twitterDescriptionEl.setAttribute('content', descriptionText);
+                }
+                if (twitterImageEl) {
+                    twitterImageEl.setAttribute('content', absoluteImage);
+                }
+
                 coverEl.innerHTML = '';
                 var coverImages = Array.isArray(meta.images) ? meta.images.slice() : [];
                 if (!coverImages.length && meta.image) {
