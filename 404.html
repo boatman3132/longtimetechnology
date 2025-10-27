@@ -42,6 +42,36 @@
         @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&amp;family=Noto+Sans+TC:wght@400;500;700&amp;display=swap');
     </style>
     <title>找不到頁面｜榮炭科技</title>
+    <script>
+        (function () {
+            var supportedLanguages = ['tw', 'cn', 'en', 'jp'];
+            var pathname = window.location.pathname || '/';
+            var segments = pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
+            if (!segments.length) {
+                return;
+            }
+
+            var maybeLang = segments[0].toLowerCase();
+            if (!supportedLanguages.includes(maybeLang)) {
+                return;
+            }
+
+            segments.shift();
+            var remainder = segments.join('/');
+            var basePath = '/' + remainder;
+            if (!remainder.length) {
+                basePath = '/';
+            }
+
+            var searchParams = new URLSearchParams(window.location.search);
+            searchParams.set('lang', maybeLang);
+            var queryString = searchParams.toString();
+            var hash = window.location.hash || '';
+            var nextUrl = basePath + (queryString ? '?' + queryString : '') + hash;
+
+            window.location.replace(nextUrl);
+        })();
+    </script>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/error.css">
     <link rel="stylesheet" href="css/style.css">
