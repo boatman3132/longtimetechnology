@@ -159,6 +159,43 @@ function syncLanguageAttributes(lang) {
 }
 
 /**
+ * 更新站內主要導覽與頁尾連結的語言參數
+ * @param {string} lang - 目標語言 ('tw', 'cn', 'en', 'jp')
+ */
+function updateLanguageLinks(lang) {
+    if (typeof document === 'undefined') {
+        return;
+    }
+
+    const selectors = [
+        'a.langUrl',
+        'nav .mmenu a:not(.hasmenu)',
+        'footer .sitemap a'
+    ];
+    const links = document.querySelectorAll(selectors.join(', '));
+    if (!links.length) {
+        return;
+    }
+
+    links.forEach(link => {
+        const href = (link.getAttribute('href') || '').trim();
+        if (!href || href.startsWith('javascript:') || href.startsWith('#') || href.startsWith('tel:') || href.startsWith('mailto:')) {
+            return;
+        }
+
+        try {
+            const isAbsolute = /^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(href);
+            const url = isAbsolute ? new URL(href) : new URL(href, window.location.origin);
+            url.searchParams.set('lang', lang);
+            const nextHref = isAbsolute ? url.toString() : `${url.pathname}${url.search}${url.hash}`;
+            link.setAttribute('href', nextHref);
+        } catch (error) {
+            console.warn('language-switcher: unable to update link URL', href, error);
+        }
+    });
+}
+
+/**
  * 根據目前頁面與語言更新瀏覽器標籤標題
  * @param {string} lang - 目標語言 ('tw', 'cn', 'en', 'jp')
  */
@@ -209,6 +246,13 @@ function lang_set(lang) {
     
     // 將選擇的語言存儲起來
     localStorage.setItem('preferredLanguage', lang);
+
+    if (typeof window !== 'undefined') {
+        window.lang = lang;
+        if (typeof updateLanguageLinks === 'function') {
+            updateLanguageLinks(lang);
+        }
+    }
 }
 
 // 當頁面加載時，自動應用已保存的語言設定
@@ -236,9 +280,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const applyLanguage = function () {
         lang_set(currentLang);
     };
+    applyLanguage();
     if (typeof window.onLayoutReady === 'function') {
         window.onLayoutReady(applyLanguage);
-    } else {
-        applyLanguage();
     }
 });

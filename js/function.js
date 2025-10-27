@@ -103,31 +103,27 @@ $(function () {
 	var url = new URL(getUrlString);
 	lang = url.searchParams.get('lang');
 	if (!lang) lang = "tw";
-	$('a.langUrl,nav .mmenu a:not(.hasmenu),footer .sitemap a').each(function () {
-		let olink = $(this).attr('href');
-		if (olink.indexOf('?') != -1) {
-			$(this).attr("href", olink + '&lang=' + lang);
-
-		} else {
-			$(this).attr("href", olink + '?lang=' + lang);
-		}
-	})
-});
-function lang_set(ver) {
-	// setCookie("lang", ver, 1);
-	let url = location.href;
-	let newURL = url.split("lang");
-	if (url.indexOf('lang') != -1) {
-		window.location = newURL[0] + "lang=" + ver
+	if (typeof updateLanguageLinks === 'function') {
+		updateLanguageLinks(lang);
 	} else {
-		if (url.indexOf('?') != -1) {
-			window.location = newURL[0] + "&lang=" + ver
-		} else {
-			window.location = newURL[0] + "?lang=" + ver
-		}
+		$('a.langUrl,nav .mmenu a:not(.hasmenu),footer .sitemap a').each(function () {
+			var $link = $(this);
+			var href = ($link.attr('href') || '').trim();
+			if (!href || href.indexOf('javascript:') === 0) {
+				return;
+			}
+			try {
+				var isAbsolute = /^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(href);
+				var urlObj = isAbsolute ? new URL(href) : new URL(href, window.location.origin);
+				urlObj.searchParams.set('lang', lang);
+				var nextHref = isAbsolute ? urlObj.toString() : urlObj.pathname + urlObj.search + urlObj.hash;
+				$link.attr('href', nextHref);
+			} catch (error) {
+				console.warn('function.js: unable to update link URL', href, error);
+			}
+		});
 	}
-
-};
+});
 //訂閱電子報
 function edm(email) {
 	var error_msg = [
