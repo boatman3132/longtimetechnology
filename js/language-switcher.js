@@ -213,8 +213,26 @@ function lang_set(lang) {
 
 // 當頁面加載時，自動應用已保存的語言設定
 document.addEventListener('DOMContentLoaded', function() {
-    const savedLang = localStorage.getItem('preferredLanguage');
-    const currentLang = savedLang || 'tw';
+    const supportedLanguages = ['tw', 'cn', 'en', 'jp'];
+    const savedLang = (localStorage.getItem('preferredLanguage') || '').toLowerCase();
+    const queryLang = new URLSearchParams(window.location.search).get('lang');
+    const normalizedQueryLang = queryLang ? queryLang.toLowerCase() : '';
+    const pathLang = window.location.pathname
+        .toLowerCase()
+        .split('/')
+        .filter(Boolean)[0];
+
+    let currentLang = 'tw';
+
+    if (normalizedQueryLang && supportedLanguages.includes(normalizedQueryLang)) {
+        currentLang = normalizedQueryLang;
+    } else if (pathLang && supportedLanguages.includes(pathLang)) {
+        // Allow URLs like /en or /en/about to force the initial language.
+        currentLang = pathLang;
+    } else if (savedLang && supportedLanguages.includes(savedLang)) {
+        currentLang = savedLang;
+    }
+
     const applyLanguage = function () {
         lang_set(currentLang);
     };
