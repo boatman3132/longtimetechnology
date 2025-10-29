@@ -46,6 +46,18 @@
         (function () {
             var supportedLanguages = ['tw', 'cn', 'en', 'jp'];
             var pathname = window.location.pathname || '/';
+            var normalizedPath = pathname.toLowerCase().replace(/\/+$/, '') || '/';
+            var redirectMap = {
+                '/about_us': '/about/',
+                '/about_us.html': '/about/'
+            };
+
+            if (Object.prototype.hasOwnProperty.call(redirectMap, normalizedPath)) {
+                // Redirect legacy URLs to their current locations
+                window.location.replace(redirectMap[normalizedPath]);
+                return;
+            }
+
             var segments = pathname.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
             if (!segments.length) {
                 return;
