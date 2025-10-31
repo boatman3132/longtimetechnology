@@ -47,6 +47,28 @@
             var supportedLanguages = ['tw', 'cn', 'en', 'jp'];
             var pathname = window.location.pathname || '/';
             var normalizedPath = pathname.toLowerCase().replace(/\/+$/, '') || '/';
+            var langParam = null;
+            try {
+                langParam = new URL(window.location.href).searchParams.get('lang');
+            } catch (error) {
+                console.warn('404 redirect: unable to parse URL for lang.', error);
+            }
+
+            var redirectPrefixes = [
+                { pattern: /^\/wp-content(\/|$)/, target: '/products/' },
+                { pattern: /^\/product-category(\/|$)/, target: '/products/' }
+            ];
+
+            for (var i = 0; i < redirectPrefixes.length; i++) {
+                if (redirectPrefixes[i].pattern.test(normalizedPath)) {
+                    var destination = redirectPrefixes[i].target;
+                    if (langParam) {
+                        destination += '?lang=' + encodeURIComponent(langParam);
+                    }
+                    window.location.replace(destination);
+                    return;
+                }
+            }
             var redirectMap = {
                 '/about_us': '/about/',
                 '/about_us.html': '/about/'
