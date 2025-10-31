@@ -217,6 +217,33 @@
             }).join('');
         }
 
+        var SERIES_SUFFIX_LABELS = {
+            tw: ' 系列',
+            cn: ' 系列',
+            en: ' Series',
+            jp: ' シリーズ'
+        };
+
+        function buildLocalizedSeriesTitle(rawTitle) {
+            if (rawTitle === undefined || rawTitle === null) {
+                return '';
+            }
+            var trimmed = String(rawTitle).trim();
+            if (!trimmed) {
+                return '';
+            }
+            var baseTitle = trimmed.replace(/\s*(系列|Series|シリーズ)$/i, '').trim();
+            if (!baseTitle) {
+                baseTitle = trimmed;
+            }
+            var labels = {};
+            Object.keys(SERIES_SUFFIX_LABELS).forEach(function (lang) {
+                var suffix = SERIES_SUFFIX_LABELS[lang] || '';
+                labels[lang] = baseTitle + suffix;
+            });
+            return buildLocalizedSpanSet(labels);
+        }
+
         function setStatusMessage(labels) {
             listContainer.innerHTML = '<p class="product-catalog__status">' + buildLocalizedSpanSet(labels) + '</p>';
         }
@@ -434,10 +461,12 @@
                 var title = document.createElement('h3');
                 title.className = 'product-card__title';
                 var majorTitle = group.major || '';
-                if (majorTitle && majorTitle.indexOf('系列') === -1) {
-                    majorTitle += ' 系列';
+                var localizedMajorTitle = buildLocalizedSeriesTitle(majorTitle);
+                if (localizedMajorTitle) {
+                    title.innerHTML = localizedMajorTitle;
+                } else {
+                    title.textContent = majorTitle;
                 }
-                title.textContent = majorTitle;
                 headerText.appendChild(title);
 
                 header.appendChild(headerText);
