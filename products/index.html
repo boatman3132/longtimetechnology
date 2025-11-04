@@ -353,7 +353,10 @@
                 case 'D50 (µm)':
                     return trimmed + (trimmed.includes('µm') ? '' : 'µm');
                 case '振實 (g/ml)':
-                    return trimmed + (trimmed.includes('g/ml') ? '' : 'g/ml');
+                    if (trimmed.includes('g/ml')) {
+                        trimmed = trimmed.replace(/g\/ml/g, 'g/cm³');
+                    }
+                    return trimmed + (trimmed.includes('g/cm³') ? '' : 'g/cm³');
                 case '半電容量 (mAh/g)':
                     return trimmed + (trimmed.includes('mAh/g') ? '' : 'mAh/g');
                 case '半電首效 (%)':
