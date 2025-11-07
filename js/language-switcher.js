@@ -2,19 +2,19 @@
 
 // 1. 建立 Header 的翻譯字典
 const headerTranslations = {
-    'menu_about':    { tw: '關於榮炭', cn: '关于荣炭', en: 'ABOUT US', jp: '会社概要' },
+    'menu_about':    { tw: '關於榮炭', cn: '关于荣炭', en: 'About Us', jp: '会社概要' },
     'submenu_about_intro': { tw: '榮炭介紹', cn: '荣炭介绍', en: 'About Atrans', jp: '会社紹介' },
     'esg':   { tw: 'ESG永續', cn: 'ESG永续', en: 'ESG', jp: 'ESG' },
     'menu_products':     { tw: '產品介紹', cn: '产品介绍', en: 'Products', jp: '産品内容' },
 
-    'menu_service':  { tw: '服務內容', cn: '服务内容', en: 'SERVICE', jp: 'サービス内容' },
-    'menu_quality':  { tw: '品質與環境', cn: '质量与环境', en: 'QUALITY', jp: '品質・環境' },
+    'menu_service':  { tw: '服務內容', cn: '服务内容', en: 'Service', jp: 'サービス内容' },
+    'menu_quality':  { tw: '品質與環境', cn: '质量与环境', en: 'Quality', jp: '品質・環境' },
     'submenu_quality_intro': { tw: '品質介紹', cn: '质量介绍', en: 'Quality', jp: '品質紹介' },
     'submenu_quality_equipment': { tw: '設備介紹', cn: '设备介绍', en: 'Equipment', jp: '設備紹介' },
-    'menu_news':     { tw: '最新消息', cn: '最新资讯', en: 'NEWS', jp: 'お知らせ' },
-    'menu_investors':{ tw: '投資人專區', cn: '投资者专区', en: 'INVESTORS', jp: '投資家向け情報' },
-    'menu_recruit':  { tw: '人才招募', cn: '招聘信息', en: 'CAREERS', jp: '採用情報' },
-    'menu_contact':  { tw: '聯絡我們', cn: '联系我们', en: 'CONTACT', jp: 'お問合せ' },
+    'menu_news':     { tw: '最新消息', cn: '最新资讯', en: 'News', jp: 'お知らせ' },
+    'menu_investors':{ tw: '投資人專區', cn: '投资者专区', en: 'Investor', jp: '投資家向け情報' },
+    'menu_recruit':  { tw: '人才招募', cn: '招聘信息', en: 'Careers', jp: '採用情報' },
+    'menu_contact':  { tw: '聯絡我們', cn: '联系我们', en: 'Contact', jp: 'お問合せ' },
     'menu_language': { tw: 'Language', cn: 'Language', en: 'Language', jp: 'Language' },
 };
 
