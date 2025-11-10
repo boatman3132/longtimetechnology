@@ -1,11 +1,11 @@
 <header>
     <div class="title-bar">
         <a href="/" class="logo langUrl"></a>
-        <a href="javascript:;" class="menuicon">
+        <button type="button" class="menuicon" aria-label="Toggle navigation">
             <div class="mpsrel">
                 <div class="bar"></div>
             </div>
-        </a>
+        </button>
     </div>
     <nav class="navBox">
         <ul class="mmenu">
@@ -39,19 +39,19 @@
         </ul>
         <div class="langbtngroup">
             <div class="lang-dropdown">
-                <a href="javascript:;" class="lang-label" data-lang-key="menu_language"><span>Language</span></a>
+                <button type="button" class="lang-label" data-lang-key="menu_language"><span>Language</span></button>
                 <ul class="subBox lang-submenu">
-                    <li><a href="javascript:lang_set('tw');" class="langbtn" data-lang-code="tw">繁體中文</a></li>
-                    <li><a href="javascript:lang_set('cn');" class="langbtn" data-lang-code="cn">简体中文</a></li>
-                    <li><a href="javascript:lang_set('en');" class="langbtn" data-lang-code="en">English</a></li>
-                    <li><a href="javascript:lang_set('jp');" class="langbtn" data-lang-code="jp">日本語</a></li>
+                    <li><a href="#" class="langbtn" data-lang-code="tw" role="button">繁體中文</a></li>
+                    <li><a href="#" class="langbtn" data-lang-code="cn" role="button">简体中文</a></li>
+                    <li><a href="#" class="langbtn" data-lang-code="en" role="button">English</a></li>
+                    <li><a href="#" class="langbtn" data-lang-code="jp" role="button">日本語</a></li>
                 </ul>
             </div>
             <div class="lang-inline">
-                <a href="javascript:lang_set('tw');" class="langbtn active" data-lang-code="tw">繁體中文</a>
-                <a href="javascript:lang_set('cn');" class="langbtn" data-lang-code="cn">简体中文</a>
-                <a href="javascript:lang_set('en');" class="langbtn" data-lang-code="en">English</a>
-                <a href="javascript:lang_set('jp');" class="langbtn" data-lang-code="jp">日本語</a>
+                <a href="#" class="langbtn active" data-lang-code="tw" role="button">繁體中文</a>
+                <a href="#" class="langbtn" data-lang-code="cn" role="button">简体中文</a>
+                <a href="#" class="langbtn" data-lang-code="en" role="button">English</a>
+                <a href="#" class="langbtn" data-lang-code="jp" role="button">日本語</a>
             </div>
         </div>
     </nav>

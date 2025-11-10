@@ -212,6 +212,9 @@ function updatePageTitle(lang) {
  * @param {string} lang - 要設置的語言 ('tw', 'cn', 'en', 'jp')
  */
 function lang_set(lang) {
+    if (typeof lang === 'string') {
+        lang = lang.toLowerCase();
+    }
     // 更新 <body> class 以切換頁面主要內容
     document.body.classList.remove('lang_tw', 'lang_cn', 'lang_en', 'lang_jp');
     document.body.classList.add('lang_' + lang);
@@ -238,10 +241,14 @@ function lang_set(lang) {
 
     // 更新語言按鈕的 'active' 狀態
     document.querySelectorAll('.langbtngroup .langbtn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.querySelectorAll(`.langbtngroup a[href="javascript:lang_set('${lang}');"]`).forEach(btn => {
-        btn.classList.add('active');
+        const code = (btn.dataset.langCode || '').toLowerCase();
+        const isActive = code === lang;
+        btn.classList.toggle('active', isActive);
+        if (isActive) {
+            btn.setAttribute('aria-current', 'true');
+        } else {
+            btn.removeAttribute('aria-current');
+        }
     });
     
     // 將選擇的語言存儲起來
@@ -284,4 +291,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof window.onLayoutReady === 'function') {
         window.onLayoutReady(applyLanguage);
     }
+});
+
+document.addEventListener('click', function (event) {
+    const button = event.target.closest('.langbtn');
+    if (!button) {
+        return;
+    }
+    const langCode = (button.dataset.langCode || '').toLowerCase();
+    if (!langCode) {
+        return;
+    }
+    event.preventDefault();
+    lang_set(langCode);
 });

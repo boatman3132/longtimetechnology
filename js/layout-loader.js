@@ -1,6 +1,15 @@
 (function () {
     var callbacks = [];
     var layoutReady = false;
+    var navIndexMap = {
+        about: 0,
+        products: 1,
+        news: 2,
+        'news-detail': 2,
+        investors: 3,
+        contact: 5,
+        esg: 5
+    };
 
     window.onLayoutReady = function (cb) {
         if (typeof cb !== 'function') return;
@@ -102,6 +111,8 @@
             }, delay);
         });
 
+        applyActiveNavState($header);
+
         $(window)
             .off('.layoutLoader')
             .on('resize.layoutLoader', function () {
@@ -111,6 +122,22 @@
                     $header.removeClass('menu-expanded');
                 }
             });
+    }
+
+    function applyActiveNavState($header) {
+        if (!$header || !$header.length || !document.body) {
+            return;
+        }
+        var pageKey = document.body.getAttribute('data-page');
+        var targetIndex = navIndexMap[pageKey];
+        var $items = $header.find('ul.mmenu > li');
+        if ($items.length === 0) {
+            return;
+        }
+        $items.removeClass('active');
+        if (typeof targetIndex === 'number' && targetIndex >= 0 && targetIndex < $items.length) {
+            $items.eq(targetIndex).addClass('active');
+        }
     }
 
     function waitForjQuery(attempt) {
