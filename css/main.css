@@ -692,6 +692,10 @@ header .logo {
 header .menuicon {
   position: fixed;
   right: 20px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
   z-index: 12;
 }
 header .menuicon .mpsrel {
@@ -915,6 +919,10 @@ header ul.subBox a {
   border-radius: 0;
   line-height: 1.4;
   color: #4f4e4e;
+  background-color: transparent;
+  box-shadow: none;
+  -webkit-appearance: none;
+          appearance: none;
   opacity: 1;
 }
 .lang-dropdown .lang-label:after {
