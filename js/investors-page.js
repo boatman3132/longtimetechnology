@@ -14,7 +14,7 @@
             const chartWrapper = document.querySelector('.revenue-chart-wrapper');
             const chartScroll = document.querySelector('.revenue-chart-scroll');
             const sectionElement = document.getElementById('revenue-trends');
-            const csvPath = 'investors/revenue.csv';
+            const csvPath = 'investors/榮炭營收股價成交量.csv';
             const localeCopy = {
                 tw: {
                     revenueLegend: '營收',
