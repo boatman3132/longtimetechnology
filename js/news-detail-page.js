@@ -284,15 +284,11 @@
                     return Promise.resolve(window.marked);
                 }
 
-                var markedSri = 'sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi';
-
-                function loadScript(src, integrity, crossOrigin) {
+                function loadScript(src) {
                     return new Promise(function (resolve, reject) {
                         var script = document.createElement('script');
                         script.src = src;
                         script.async = true;
-                        if (integrity) script.integrity = integrity;
-                        if (crossOrigin) script.crossOrigin = crossOrigin;
                         script.onload = function () {
                             if (window.marked && typeof window.marked.parse === 'function') {
                                 resolve(window.marked);
@@ -307,11 +303,7 @@
                     });
                 }
 
-                return loadScript('/js/vendor/marked.min.js', markedSri, 'anonymous')
-                    .catch(function (error) {
-                        console.warn(error);
-                        return loadScript('https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js', markedSri, 'anonymous');
-                    })
+                return loadScript('/js/vendor/marked.min.js')
                     .then(function (parser) {
                         state.parser = parser;
                         return parser;
