@@ -284,11 +284,15 @@
                     return Promise.resolve(window.marked);
                 }
 
-                function loadScript(src) {
+                var markedSri = 'sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi';
+
+                function loadScript(src, integrity, crossOrigin) {
                     return new Promise(function (resolve, reject) {
                         var script = document.createElement('script');
                         script.src = src;
                         script.async = true;
+                        if (integrity) script.integrity = integrity;
+                        if (crossOrigin) script.crossOrigin = crossOrigin;
                         script.onload = function () {
                             if (window.marked && typeof window.marked.parse === 'function') {
                                 resolve(window.marked);
@@ -303,7 +307,11 @@
                     });
                 }
 
-                return loadScript('https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js')
+                return loadScript('/js/vendor/marked.min.js', markedSri, 'anonymous')
+                    .catch(function (error) {
+                        console.warn(error);
+                        return loadScript('https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js', markedSri, 'anonymous');
+                    })
                     .then(function (parser) {
                         state.parser = parser;
                         return parser;
