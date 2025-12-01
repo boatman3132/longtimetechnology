@@ -539,6 +539,9 @@
   .news-list .svg {
     display: none;
   }
+  .news-list .news-thumb.is-empty {
+    display: none;
+  }
 }
 @media all and (min-width: 769px) {
   .news-list {

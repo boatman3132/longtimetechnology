@@ -98,15 +98,17 @@
                     link.href = item.permalink;
                     link.setAttribute('data-slug', item.slug || '');
 
+                    var thumb = document.createElement('div');
+                    thumb.className = 'news-thumb';
                     if (item.image) {
-                        var thumb = document.createElement('div');
-                        thumb.className = 'news-thumb';
                         var thumbImg = document.createElement('img');
                         thumbImg.src = item.image;
                         thumbImg.alt = pickLocalizedText(item.titles, item.title);
                         thumb.appendChild(thumbImg);
-                        link.appendChild(thumb);
+                    } else {
+                        thumb.classList.add('is-empty');
                     }
+                    link.appendChild(thumb);
 
                     var date = document.createElement('div');
                     date.className = 'mdate';
