@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
+
 <head>
     <meta charset="UTF-8">
     <base href="/">
@@ -15,7 +16,8 @@
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://stats.g.doubleclick.net https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://stats.g.doubleclick.net https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <link rel="shortcut icon" href="dist/Website_Metadata_Images/16x16.ico" type="image/x-icon" />
@@ -43,36 +45,87 @@
 
 
     <style>
-        .tw, .cn, .en, .jp { display: none; }
+        .tw,
+        .cn,
+        .en,
+        .jp {
+            display: none;
+        }
+
         body.lang_tw .tw,
         body.lang_cn .cn,
         body.lang_en .en,
-        body.lang_jp .jp { display: initial; }
+        body.lang_jp .jp {
+            display: initial;
+        }
     </style>
     <style>
         /* Success modal */
-        .modal-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); z-index: 9999; visibility: hidden; opacity: 0; transition: opacity .18s ease; }
-        .modal-overlay.show { visibility: visible; opacity: 1; }
-        .modal-box { background: #fff; border-radius: 8px; max-width: 420px; width: 92%; padding: 20px 22px; box-shadow: 0 8px 30px rgba(0,0,0,0.18); text-align: center; }
-        .modal-box h3 { margin: 0 0 8px; font-size: 18px; font-weight: 700; }
-        .modal-box p { margin: 0 0 16px; color: #333; }
-        .modal-box .modal-btn { display: inline-block; padding: 8px 16px; border-radius: 4px; background: #222; color: #fff; text-decoration: none; border: none; cursor: pointer; }
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .18s ease;
+        }
+
+        .modal-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-box {
+            background: #fff;
+            border-radius: 8px;
+            max-width: 420px;
+            width: 92%;
+            padding: 20px 22px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+            text-align: center;
+        }
+
+        .modal-box h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .modal-box p {
+            margin: 0 0 16px;
+            color: #333;
+        }
+
+        .modal-box .modal-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            background: #222;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body class="lang_tw" data-page="contact">
-<div data-include="header"></div>
+    <div data-include="header"></div>
     <div class="pgkv">
         <div class="bgcolor"></div>
-            <div class="txt_pos">
-                <h1 class="mtitle">CONTACT</h1>
-                <div>
-                    <span class="tw">聯絡我們</span>
-                    <span class="cn">联系我们</span>
-                    <span class="en">CONTACT US</span>
-                    <span class="jp">お問合せ</span>
-                </div>
+        <div class="txt_pos">
+            <h1 class="mtitle">CONTACT</h1>
+            <div>
+                <span class="tw">聯絡我們</span>
+                <span class="cn">联系我们</span>
+                <span class="en">CONTACT US</span>
+                <span class="jp">お問合せ</span>
             </div>
+        </div>
         <div class="mimg">
             <div class="bgcover pc_use" style="background-image:url(dist/contact/contact.png)"></div>
             <div class="bgcover mo_use" style="background-image:url(dist/contact/contact_mo.png)"></div>
@@ -109,10 +162,10 @@
                     <div>
                         <b><img src="dist/contact/icon_email.png" alt="電子郵件圖示"></b>
                         <a href="mailto:louis_hsueh@lttech.com.tw">
-                            <span class="tw">louis_hsueh@lttech.com.tw  薛孟儒 執行秘書</span>
-                            <span class="cn">louis_hsueh@lttech.com.tw  薛孟儒 执行秘书</span>
-                            <span class="en">louis_hsueh@lttech.com.tw  Louis Hsueh, Executive Secretary</span>
-                            <span class="jp">louis_hsueh@lttech.com.tw  薛孟儒 エグゼクティブ秘書</span>
+                            <span class="tw">louis_hsueh@lttech.com.tw 薛孟儒 執行秘書</span>
+                            <span class="cn">louis_hsueh@lttech.com.tw 薛孟儒 执行秘书</span>
+                            <span class="en">louis_hsueh@lttech.com.tw Louis Hsueh, Executive Secretary</span>
+                            <span class="jp">louis_hsueh@lttech.com.tw 薛孟儒 エグゼクティブ秘書</span>
                         </a>
                     </div>
                     <div>
@@ -120,7 +173,8 @@
                         <a href="https://maps.app.goo.gl/8S78YqzpGxwwBM7x5" target="_blank">
                             <span class="tw">221006 新北市汐止區大同路一段237號6樓</span>
                             <span class="cn">221006 新北市汐止区大同路一段237号6楼</span>
-                            <span class="en">6F., No.237, Sec. 1, Datong Rd., Xizhi Dist., New Taipei City 221006, Taiwan</span>
+                            <span class="en">6F., No.237, Sec. 1, Datong Rd., Xizhi Dist., New Taipei City 221006,
+                                Taiwan</span>
                             <span class="jp">221006 台湾新北市汐止区大同路一段237号6階</span>
                         </a>
                     </div>
@@ -140,9 +194,12 @@
                         </ul>
                         <ul class="en">
                             <li>TRANSPORTATION</li>
-                            <li><i>Driving</i>Take National Highway No. 3, Exit 12 (Xintai 5th Road Exit). After leaving the interchange, it takes about 5 minutes by car to arrive.</li>
-                            <li><i>By TRA</i> Get off at Xike Station or Nangang Station, then take a local bus or taxi to the destination.</li>
-                            <li><i>By HSR</i>Get off at Nangang HSR Station, then take a local bus or taxi to the destination.</li>
+                            <li><i>Driving</i>Take National Highway No. 3, Exit 12 (Xintai 5th Road Exit). After leaving
+                                the interchange, it takes about 5 minutes by car to arrive.</li>
+                            <li><i>By TRA</i> Get off at Xike Station or Nangang Station, then take a local bus or taxi
+                                to the destination.</li>
+                            <li><i>By HSR</i>Get off at Nangang HSR Station, then take a local bus or taxi to the
+                                destination.</li>
                         </ul>
                         <ul class="jp">
                             <li>交通手段</li>
@@ -155,7 +212,10 @@
             </div>
             <div class="mapbx col-6 asj fade">
                 <div class="map-embed">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d28914.22873216123!2d121.634411!3d25.058545!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x345d5351ee6c46ed%3A0x1903a20065aaaf1b!2z5qau54Kt56eR5oqA6IKh5Lu95pyJ6ZmQ5YWs5Y-4!5e0!3m2!1szh-TW!2sus!4v1759393887038!5m2!1szh-TW!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d28914.22873216123!2d121.634411!3d25.058545!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x345d5351ee6c46ed%3A0x1903a20065aaaf1b!2z5qau54Kt56eR5oqA6IKh5Lu95pyJ6ZmQ5YWs5Y-4!5e0!3m2!1szh-TW!2sus!4v1759393887038!5m2!1szh-TW!2sus"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </section>
@@ -163,7 +223,8 @@
             <div class="row form-des asj fade">
                 <div class="tw">榮炭擁有多年電池製造經驗，若您有電池相關任何疑問，歡迎與我們聯繫。</div>
                 <div class="cn">荣炭拥有多年电池制造经验，若您对电池有任何疑问，欢迎与我们联系。</div>
-                <div class="en">Long Time Technology has many years of experience in battery manufacturing. If you have any questions related to batteries, please feel free to contact us.</div>
+                <div class="en">Long Time Technology has many years of experience in battery manufacturing. If you have
+                    any questions related to batteries, please feel free to contact us.</div>
                 <div class="jp">榮炭は長年にわたり電池製造の経験を持ちます。電池に関するご不明点やご質問がございましたら、ぜひお気軽にお問い合わせください。</div>
             </div>
             <div id="contact-status" class="form-status" hidden aria-live="polite">
@@ -175,154 +236,113 @@
             <!-- 1) 表單：改成送到 Google Form 的 formResponse -->
             <form class="row asj fade" id="contact"
                 action="https://docs.google.com/forms/d/e/1FAIpQLSe1CQq1OoFfwm55xZ1GZLqGaPUzaGI2FDQej7P1p6d2zA5t6A/formResponse"
-                method="POST" target="hidden_iframe"
-                autocomplete="off" enctype="application/x-www-form-urlencoded"
+                method="POST" target="hidden_iframe" autocomplete="off" enctype="application/x-www-form-urlencoded"
                 data-sync-lang="true">
 
-            <!-- === 你原本的可見欄位（不動 name，維持既有驗證/樣式） === -->
-            <div class="form-group w50">
-                <label>
-                <span class="tw">公司/單位</span><span class="cn">公司/单位</span>
-                <span class="en">Company/Unit</span><span class="jp">会社/組織</span>
-                </label>
-                <div>
-                <input
-                    type="text"
-                    name="unit"
-                    class="checkbg"
-                    placeholder="請輸入公司/單位"
-                    data-placeholder-tw="請輸入公司/單位"
-                    data-placeholder-cn="请输入公司/单位"
-                    data-placeholder-en="Enter company or organization"
-                    data-placeholder-jp="会社名/組織名を入力してください">
+                <!-- === 你原本的可見欄位（不動 name，維持既有驗證/樣式） === -->
+                <div class="form-group w50">
+                    <label>
+                        <span class="tw">公司/單位</span><span class="cn">公司/单位</span>
+                        <span class="en">Company/Unit</span><span class="jp">会社/組織</span>
+                    </label>
+                    <div>
+                        <input type="text" name="unit" class="checkbg" placeholder="請輸入公司/單位"
+                            data-placeholder-tw="請輸入公司/單位" data-placeholder-cn="请输入公司/单位"
+                            data-placeholder-en="Enter company or organization" data-placeholder-jp="会社名/組織名を入力してください">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group w50">
-                <label>
-                <span class="tw">姓名</span><span class="cn">姓名</span>
-                <span class="en">Name</span><span class="jp">お名前</span><i>*</i>
-                </label>
-                <div class="required">
-                <input
-                    type="text"
-                    name="name"
-                    required
-                    class="checkbg"
-                    placeholder="請輸入姓名"
-                    data-placeholder-tw="請輸入姓名"
-                    data-placeholder-cn="请输入姓名"
-                    data-placeholder-en="Enter your name"
-                    data-placeholder-jp="お名前を入力してください">
-                <div class="required-txt" id="name_span"></div>
+                <div class="form-group w50">
+                    <label>
+                        <span class="tw">姓名</span><span class="cn">姓名</span>
+                        <span class="en">Name</span><span class="jp">お名前</span><i>*</i>
+                    </label>
+                    <div class="required">
+                        <input type="text" name="name" required class="checkbg" placeholder="請輸入姓名"
+                            data-placeholder-tw="請輸入姓名" data-placeholder-cn="请输入姓名"
+                            data-placeholder-en="Enter your name" data-placeholder-jp="お名前を入力してください">
+                        <div class="required-txt" id="name_span"></div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group w50">
-                <label>
-                <span class="tw">聯絡電話</span><span class="cn">联系电话</span>
-                <span class="en">Phone</span><span class="jp">電話番号</span><i>*</i>
-                </label>
-                <div class="required">
-                <input
-                    type="tel"
-                    name="tel"
-                    required
-                    class="checkbg"
-                    placeholder="請輸入聯絡電話"
-                    data-placeholder-tw="請輸入聯絡電話"
-                    data-placeholder-cn="请输入联系电话"
-                    data-placeholder-en="Enter phone number"
-                    data-placeholder-jp="電話番号を入力してください">
-                <div class="required-txt" id="tel_span"></div>
+                <div class="form-group w50">
+                    <label>
+                        <span class="tw">聯絡電話</span><span class="cn">联系电话</span>
+                        <span class="en">Phone</span><span class="jp">電話番号</span><i>*</i>
+                    </label>
+                    <div class="required">
+                        <input type="tel" name="tel" required class="checkbg" placeholder="請輸入聯絡電話"
+                            data-placeholder-tw="請輸入聯絡電話" data-placeholder-cn="请输入联系电话"
+                            data-placeholder-en="Enter phone number" data-placeholder-jp="電話番号を入力してください">
+                        <div class="required-txt" id="tel_span"></div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group w50">
-                <label>
-                <span class="tw">電子郵件</span><span class="cn">电子邮箱</span>
-                <span class="en">Email</span><span class="jp">メールアドレス</span><i>*</i>
-                </label>
-                <div class="required">
-                <input
-                    type="email"
-                    name="mail"
-                    required
-                    class="checkbg"
-                    placeholder="請輸入電子郵件"
-                    data-placeholder-tw="請輸入電子郵件"
-                    data-placeholder-cn="请输入电子邮箱"
-                    data-placeholder-en="Enter email address"
-                    data-placeholder-jp="メールアドレスを入力してください">
-                <div class="required-txt" id="mail_span"></div>
+                <div class="form-group w50">
+                    <label>
+                        <span class="tw">電子郵件</span><span class="cn">电子邮箱</span>
+                        <span class="en">Email</span><span class="jp">メールアドレス</span><i>*</i>
+                    </label>
+                    <div class="required">
+                        <input type="email" name="mail" required class="checkbg" placeholder="請輸入電子郵件"
+                            data-placeholder-tw="請輸入電子郵件" data-placeholder-cn="请输入电子邮箱"
+                            data-placeholder-en="Enter email address" data-placeholder-jp="メールアドレスを入力してください">
+                        <div class="required-txt" id="mail_span"></div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label>
-                <span class="tw">主旨</span><span class="cn">主题</span>
-                <span class="en">Subject</span><span class="jp">件名</span><i>*</i>
-                </label>
-                <div class="required">
-                <input
-                    type="text"
-                    name="title"
-                    required
-                    class="checkbg"
-                    placeholder="請輸入主旨"
-                    data-placeholder-tw="請輸入主旨"
-                    data-placeholder-cn="请输入主题"
-                    data-placeholder-en="Enter subject"
-                    data-placeholder-jp="件名を入力してください">
-                <div class="required-txt" id="title_span"></div>
+                <div class="form-group">
+                    <label>
+                        <span class="tw">主旨</span><span class="cn">主题</span>
+                        <span class="en">Subject</span><span class="jp">件名</span><i>*</i>
+                    </label>
+                    <div class="required">
+                        <input type="text" name="title" required class="checkbg" placeholder="請輸入主旨"
+                            data-placeholder-tw="請輸入主旨" data-placeholder-cn="请输入主题" data-placeholder-en="Enter subject"
+                            data-placeholder-jp="件名を入力してください">
+                        <div class="required-txt" id="title_span"></div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label>
-                <span class="tw">內容</span><span class="cn">留言内容</span>
-                <span class="en">Message</span><span class="jp">内容</span><i>*</i>
-                </label>
-                <div class="required">
-                <textarea
-                    name="text"
-                    rows="5"
-                    required
-                    class="checkbg"
-                    placeholder="請輸入內容"
-                    data-placeholder-tw="請輸入內容"
-                    data-placeholder-cn="请输入留言内容"
-                    data-placeholder-en="Enter your message"
-                    data-placeholder-jp="内容を入力してください"></textarea>
-                <div class="required-txt" id="text_span"></div>
+                <div class="form-group">
+                    <label>
+                        <span class="tw">內容</span><span class="cn">留言内容</span>
+                        <span class="en">Message</span><span class="jp">内容</span><i>*</i>
+                    </label>
+                    <div class="required">
+                        <textarea name="text" rows="5" required class="checkbg" placeholder="請輸入內容"
+                            data-placeholder-tw="請輸入內容" data-placeholder-cn="请输入留言内容"
+                            data-placeholder-en="Enter your message" data-placeholder-jp="内容を入力してください"></textarea>
+                        <div class="required-txt" id="text_span"></div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- === 2) 隱藏欄位：對應 Google Form 的 entry.xxx === -->
-            <input type="hidden" name="entry.92984438"    id="g_unit">  <!-- 公司/單位 -->
-            <input type="hidden" name="entry.1900890258"  id="g_name">  <!-- 姓名 -->
-            <input type="hidden" name="entry.1259005168"  id="g_tel">   <!-- 聯絡電話 -->
-            <input type="hidden" name="entry.1960969980"  id="g_mail">  <!-- 聯絡信箱 -->
-            <input type="hidden" name="entry.1657997038"  id="g_title"> <!-- 主旨 -->
-            <input type="hidden" name="entry.293970758"   id="g_text">  <!-- 內容 -->
+                <!-- === 2) 隱藏欄位：對應 Google Form 的 entry.xxx === -->
+                <input type="hidden" name="entry.92984438" id="g_unit"> <!-- 公司/單位 -->
+                <input type="hidden" name="entry.1900890258" id="g_name"> <!-- 姓名 -->
+                <input type="hidden" name="entry.1259005168" id="g_tel"> <!-- 聯絡電話 -->
+                <input type="hidden" name="entry.1960969980" id="g_mail"> <!-- 聯絡信箱 -->
+                <input type="hidden" name="entry.1657997038" id="g_title"> <!-- 主旨 -->
+                <input type="hidden" name="entry.293970758" id="g_text"> <!-- 內容 -->
+                <input type="hidden" name="entry.541932680" id="g_lang"> <!-- 語言 -->
 
-            <!-- Google Form 建議的固定欄位（保險起見） -->
-            <input type="hidden" name="fvv" value="1">
-            <input type="hidden" name="draftResponse" value="[]">
-            <input type="hidden" name="pageHistory" value="0">
-            <input type="hidden" name="fbzx" value="1234567890"> <!-- 可任意字串 -->
+                <!-- Google Form 建議的固定欄位（保險起見） -->
+                <input type="hidden" name="fvv" value="1">
+                <input type="hidden" name="draftResponse" value="[]">
+                <input type="hidden" name="pageHistory" value="0">
+                <input type="hidden" name="fbzx" value="1234567890"> <!-- 可任意字串 -->
 
-            <div class="form-group w30">
-                <div>
-                <a href="#" class="btn1 red" data-contact-submit role="button">
-                    <span class="tw">送出表單</span><span class="cn">提交表单</span>
-                    <span class="en">SEND</span><span class="jp">送信</span>
-                    <img src="dist/share/arrow.svg" class="svg">
-                </a>
+                <div class="form-group w30">
+                    <div>
+                        <a href="#" class="btn1 red" data-contact-submit role="button">
+                            <span class="tw">送出表單</span><span class="cn">提交表单</span>
+                            <span class="en">SEND</span><span class="jp">送信</span>
+                            <img src="dist/share/arrow.svg" class="svg">
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <input type="hidden" name="lang" value="tw">
+                <input type="hidden" name="lang" value="tw">
             </form>
 
             <!-- 3) 隱藏 iframe：攔截 Google Form 的成功頁，讓畫面留在原頁 -->
@@ -330,7 +350,7 @@
 
         </section>
     </div>
-<div data-include="footer"></div>
+    <div data-include="footer"></div>
     <!-- Success modal: 顯示送出成功訊息 -->
     <div id="successModal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
         <div class="modal-box" role="document">

@@ -14,7 +14,8 @@
             { field: 'tel', target: 'g_tel' },
             { field: 'mail', target: 'g_mail' },
             { field: 'title', target: 'g_title' },
-            { field: 'text', target: 'g_text' }
+            { field: 'text', target: 'g_text' },
+            { field: 'lang', target: 'g_lang' }
         ];
         mappings.forEach(function (mapping) {
             var source = form[mapping.field];
