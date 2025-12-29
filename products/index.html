@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
+
 <head>
     <meta charset="UTF-8">
     <base href="/">
@@ -15,7 +16,8 @@
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://stats.g.doubleclick.net https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://stats.g.doubleclick.net https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <link rel="shortcut icon" href="dist/Website_Metadata_Images/16x16.ico" type="image/x-icon" />
@@ -42,11 +44,19 @@
 
     <!-- ========== [新增] 語言切換 CSS ========== -->
     <style>
-        .tw, .cn, .en, .jp { display: none; }
+        .tw,
+        .cn,
+        .en,
+        .jp {
+            display: none;
+        }
+
         body.lang_tw .tw,
         body.lang_cn .cn,
         body.lang_en .en,
-        body.lang_jp .jp { display: initial; }
+        body.lang_jp .jp {
+            display: initial;
+        }
     </style>
     <!-- ========== [新增] 語言切換 CSS 結束 ========== -->
 
@@ -54,7 +64,7 @@
 
 <body class="lang_tw" data-page="products">
     <!-- ========== [修改後] Header HTML ========== -->
-<div data-include="header"></div>
+    <div data-include="header"></div>
     <div class="pgkv">
         <div class="bgcolor"></div>
         <div class="txt_pos">
@@ -72,11 +82,11 @@
         </div>
     </div>
     <div id="Wapper" class="style1">
-        
+
         <section class="row col asj fade">
             <div class="editor_content" id="box1">
                 <!-- Traditional Chinese Content -->
-                
+
                 <div class="product-catalog">
                     <div class="titleB text-center">
                         <h2 class="title">
@@ -105,27 +115,59 @@
                                     </button>
                                 </li>
                                 <li>
-                                    <button type="button" data-filter="long-cycle">
-                                        <span class="tw">長循環</span>
-                                        <span class="cn">长循环</span>
-                                        <span class="en">Long Cycle</span>
-                                        <span class="jp">長寿命</span>
+                                    <button type="button" data-filter="artificial-storage">
+                                        <span class="tw">人造石墨－儲能型</span>
+                                        <span class="cn">人造石墨－储能型</span>
+                                        <span class="en">Energy Storage</span>
+                                        <span class="jp">エネルギー貯蔵</span>
                                     </button>
                                 </li>
                                 <li>
-                                    <button type="button" data-filter="high-capacity">
-                                        <span class="tw">高容量</span>
-                                        <span class="cn">高容量</span>
-                                        <span class="en">High Capacity</span>
-                                        <span class="jp">高容量</span>
+                                    <button type="button" data-filter="artificial-fast">
+                                        <span class="tw">人造石墨－快充型</span>
+                                        <span class="cn">人造石墨－快充型</span>
+                                        <span class="en">Fast Charge</span>
+                                        <span class="jp">急速充電</span>
                                     </button>
                                 </li>
                                 <li>
-                                    <button type="button" data-filter="fast-charge">
-                                        <span class="tw">快充放</span>
-                                        <span class="cn">快充放</span>
-                                        <span class="en">Fast Charge/Discharge</span>
-                                        <span class="jp">急速充放電</span>
+                                    <button type="button" data-filter="artificial-energy">
+                                        <span class="tw">人造石墨－高能量型</span>
+                                        <span class="cn">人造石墨－高能量型</span>
+                                        <span class="en">High Energy</span>
+                                        <span class="jp">高エネルギー</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" data-filter="mcmb">
+                                        <span class="tw">MCMB</span>
+                                        <span class="cn">MCMB</span>
+                                        <span class="en">MCMB</span>
+                                        <span class="jp">MCMB</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" data-filter="cost-effective">
+                                        <span class="tw">高性價比</span>
+                                        <span class="cn">高性价比</span>
+                                        <span class="en">Cost Effective</span>
+                                        <span class="jp">高CP値</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" data-filter="natural">
+                                        <span class="tw">天然石墨</span>
+                                        <span class="cn">天然石墨</span>
+                                        <span class="en">Natural Graphite</span>
+                                        <span class="jp">天然黒鉛</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" data-filter="new-products">
+                                        <span class="tw">新型產品</span>
+                                        <span class="cn">新型产品</span>
+                                        <span class="en">New Products</span>
+                                        <span class="jp">新製品</span>
                                     </button>
                                 </li>
                             </ul>
@@ -138,7 +180,11 @@
                                 <span class="jp">カタログを読み込み中...</span>
                             </p>
                             <noscript>
-                                <style>.product-catalog__status{display:none;}</style>
+                                <style>
+                                    .product-catalog__status {
+                                        display: none;
+                                    }
+                                </style>
                                 <p class="product-catalog__status">
                                     <span class="tw">請啟用 JavaScript 以檢視產品型錄。</span>
                                     <span class="cn">请启用 JavaScript 以检视产品型录。</span>
@@ -150,14 +196,15 @@
                     </div>
                 </div>
             </div>
-            
+
         </section>
     </div>
-<div data-include="footer"></div>
+    <div data-include="footer"></div>
     <script src="js/main.js"></script>
     <script src="js/function.js"></script>
     <script src="js/layout-loader.js"></script>
     <script src="js/products-page.js"></script>
     <script src="js/language-switcher.js"></script>
 </body>
+
 </html>
