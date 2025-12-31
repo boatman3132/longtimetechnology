@@ -159,10 +159,35 @@
             var order = [];
             var grouped = {};
             records.forEach(function (record) {
-                var major = record['型號大項'] || record['型號'] || '';
-                if (!major) {
-                    return;
+                // If '型號大項' is present, use it. Otherwise derive from '型號'.
+                // Custom logic: if model contains hyphen (e.g. 6EQ-4), take the part before hyphen (6EQ).
+                // Exception: if model is just letters and numbers, it might be the series itself.
+                var model = record['型號'] || '';
+                var major = record['型號大項'];
+
+                if (!major && model) {
+                    if (model.startsWith('9R')) {
+                        major = '9R';
+                    } else if (model.startsWith('7P')) {
+                        major = '7P';
+                    } else if (model.startsWith('6E') && !model.startsWith('6EQ')) {
+                        major = '6E';
+                    } else if (model.startsWith('N8')) {
+                        major = 'N8';
+                    } else {
+                        var hyphenIndex = model.indexOf('-');
+                        if (hyphenIndex > 0) {
+                            major = model.substring(0, hyphenIndex);
+                        } else {
+                            major = model;
+                        }
+                    }
                 }
+
+                if (!major) {
+                    major = model || 'Unknown';
+                }
+
                 if (!grouped[major]) {
                     grouped[major] = [];
                     order.push(major);
@@ -187,13 +212,16 @@
             switch (csvKey) {
                 case 'D50 (µm)':
                     return trimmed + (trimmed.includes('µm') ? '' : 'µm');
-                case '振實 (g/ml)':
+                case '振實密度 (g/cm³)':
+                case '建議壓實密度 (g/cm³)':
                     if (trimmed.includes('g/ml')) {
                         trimmed = trimmed.replace(/g\/ml/g, 'g/cm³');
                     }
                     return trimmed + (trimmed.includes('g/cm³') ? '' : 'g/cm³');
                 case '半電容量 (mAh/g)':
                     return trimmed + (trimmed.includes('mAh/g') ? '' : 'mAh/g');
+                case '比表面積 (m²/g)':
+                    return trimmed + (trimmed.includes('m²/g') ? '' : 'm²/g');
                 case '半電首效 (%)':
                     return trimmed + (trimmed.includes('%') ? '' : '%');
                 default:
@@ -202,17 +230,33 @@
         }
 
         var CATEGORY_CONFIG = {
-            '快充型': {
-                key: 'fast-charge',
-                labels: { tw: '快充放', cn: '快充放', en: 'Fast Charge/Discharge', jp: '急速充放電' }
+            '人造石墨－儲能型': {
+                key: 'artificial-storage',
+                labels: { tw: '人造石墨－儲能型', cn: '人造石墨－储能型', en: 'Artificial Graphite - Energy Storage', jp: '人造黒鉛 - エネルギー貯蔵' }
             },
-            '長循環': {
-                key: 'long-cycle',
-                labels: { tw: '長循環', cn: '长循环', en: 'Long Cycle', jp: '長寿命' }
+            '人造石墨－快充型': {
+                key: 'artificial-fast',
+                labels: { tw: '人造石墨－快充型', cn: '人造石墨－快充型', en: 'Artificial Graphite - Fast Charge', jp: '人造黒鉛 - 急速充電' }
             },
-            '高能量': {
-                key: 'high-capacity',
-                labels: { tw: '高容量', cn: '高容量', en: 'High Capacity', jp: '高容量' }
+            '人造石墨－高能量型': {
+                key: 'artificial-energy',
+                labels: { tw: '人造石墨－高能量型', cn: '人造石墨－高能量型', en: 'Artificial Graphite - High Energy', jp: '人造黒鉛 - 高エネルギー' }
+            },
+            'MCMB': {
+                key: 'mcmb',
+                labels: { tw: 'MCMB', cn: 'MCMB', en: 'MCMB', jp: 'MCMB' }
+            },
+            '高性價比': {
+                key: 'cost-effective',
+                labels: { tw: '高性價比', cn: '高性价比', en: 'Cost Effective', jp: '高コストパフォーマンス' }
+            },
+            '天然石墨': {
+                key: 'natural',
+                labels: { tw: '天然石墨', cn: '天然石墨', en: 'Natural Graphite', jp: '天然黒鉛' }
+            },
+            '新型產品': {
+                key: 'new-products',
+                labels: { tw: '新型產品', cn: '新型产品', en: 'New Products', jp: '新製品' }
             }
         };
 
@@ -225,6 +269,27 @@
                 headerClass: 'product-card__table-header product-card__table-header--model'
             },
             {
+                csvKey: '結構',
+                headerHtml: buildLocalizedSpanSet({ tw: '結構', cn: '结构', en: 'Structure', jp: '構造' }),
+                labelHtml: buildLocalizedSpanSet({ tw: '結構', cn: '结构', en: 'Structure', jp: '構造' }),
+                cellClass: 'product-card__cell',
+                headerClass: 'product-card__table-header'
+            },
+            {
+                csvKey: '焦/原料',
+                headerHtml: buildLocalizedSpanSet({ tw: '焦/原料', cn: '焦/原料', en: 'Coke/Material', jp: 'コークス/原料' }),
+                labelHtml: buildLocalizedSpanSet({ tw: '焦/原料', cn: '焦/原料', en: 'Coke/Material', jp: 'コークス/原料' }),
+                cellClass: 'product-card__cell',
+                headerClass: 'product-card__table-header'
+            },
+            {
+                csvKey: '包覆',
+                headerHtml: buildLocalizedSpanSet({ tw: '包覆', cn: '包覆', en: 'Coating', jp: 'コーティング' }),
+                labelHtml: buildLocalizedSpanSet({ tw: '包覆', cn: '包覆', en: 'Coating', jp: 'コーティング' }),
+                cellClass: 'product-card__cell',
+                headerClass: 'product-card__table-header'
+            },
+            {
                 csvKey: 'D50 (µm)',
                 headerHtml: escapeHtml('D50'),
                 labelHtml: buildLocalizedSpanSet({ tw: 'D50', cn: 'D50', en: 'D50', jp: 'D50' }),
@@ -232,9 +297,16 @@
                 headerClass: 'product-card__table-header product-card__table-header--numeric'
             },
             {
-                csvKey: '振實 (g/ml)',
+                csvKey: '振實密度 (g/cm³)',
                 headerHtml: buildLocalizedSpanSet({ tw: '振實密度', cn: '振实密度', en: 'Tap Density', jp: '振実密度' }),
                 labelHtml: buildLocalizedSpanSet({ tw: '振實密度', cn: '振实密度', en: 'Tap Density', jp: '振実密度' }),
+                cellClass: 'product-card__cell product-card__cell--numeric',
+                headerClass: 'product-card__table-header product-card__table-header--numeric'
+            },
+            {
+                csvKey: '比表面積 (m²/g)',
+                headerHtml: buildLocalizedSpanSet({ tw: '比表面積', cn: '比表面积', en: 'Specific Surface Area', jp: '比表面積' }),
+                labelHtml: buildLocalizedSpanSet({ tw: '比表面積', cn: '比表面积', en: 'Specific Surface Area', jp: '比表面積' }),
                 cellClass: 'product-card__cell product-card__cell--numeric',
                 headerClass: 'product-card__table-header product-card__table-header--numeric'
             },
@@ -246,11 +318,18 @@
                 headerClass: 'product-card__table-header product-card__table-header--numeric'
             },
             {
-                csvKey: '半電首效 (%)',
-                headerHtml: buildLocalizedSpanSet({ tw: '半電首效', cn: '半电首效', en: 'Initial Coulombic Efficiency', jp: '初回効率' }),
-                labelHtml: buildLocalizedSpanSet({ tw: '半電首效', cn: '半电首效', en: 'Initial Coulombic Efficiency', jp: '初回効率' }),
+                csvKey: '建議壓實密度 (g/cm³)',
+                headerHtml: buildLocalizedSpanSet({ tw: '建議壓實', cn: '建议压实', en: 'Press Density', jp: '推奨プレス密度' }),
+                labelHtml: buildLocalizedSpanSet({ tw: '建議壓實', cn: '建议压实', en: 'Press Density', jp: '推奨プレス密度' }),
                 cellClass: 'product-card__cell product-card__cell--numeric',
                 headerClass: 'product-card__table-header product-card__table-header--numeric'
+            },
+            {
+                csvKey: '主要應用 / 備註',
+                headerHtml: buildLocalizedSpanSet({ tw: '主要應用 / 備註', cn: '主要应用 / 备注', en: 'Application / Note', jp: '主な用途 / 備考' }),
+                labelHtml: buildLocalizedSpanSet({ tw: '主要應用 / 備註', cn: '主要应用 / 备注', en: 'Application / Note', jp: '主な用途 / 備考' }),
+                cellClass: 'product-card__cell',
+                headerClass: 'product-card__table-header'
             }
         ];
 
@@ -278,9 +357,9 @@
 
             groups.forEach(function (group) {
                 var firstRow = group.rows[0] || {};
-                var categoryCfg = CATEGORY_CONFIG[firstRow['類型']] || null;
+                var categoryCfg = CATEGORY_CONFIG[firstRow['產品類別']] || null;
                 var categoryKey = categoryCfg ? categoryCfg.key : 'all';
-                var fallbackText = (firstRow['類型'] || '其他').trim();
+                var fallbackText = (firstRow['產品類別'] || '其他').trim();
                 var labels = categoryCfg ? categoryCfg.labels : {
                     tw: fallbackText,
                     cn: fallbackText,
