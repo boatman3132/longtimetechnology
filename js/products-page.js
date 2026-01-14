@@ -229,6 +229,43 @@
             }
         }
 
+        var RAW_MATERIAL_TRANSLATIONS = {
+            '石油焦': { tw: '石油焦', cn: '石油焦', en: 'Petroleum Coke', jp: '石油コークス' },
+            '針焦': { tw: '針焦', cn: '针焦', en: 'Needle Coke', jp: 'ニードルコークス' },
+            '石油焦+針焦': { tw: '石油焦+針焦', cn: '石油焦+针焦', en: 'Petroleum + Needle Coke', jp: '石油 + ニードルコークス' },
+            '石油焦+MCMB': { tw: '石油焦+MCMB', cn: '石油焦+MCMB', en: 'Petroleum Coke + MCMB', jp: '石油コークス + MCMB' },
+            '針生焦': { tw: '針生焦', cn: '针生焦', en: 'Green Needle Coke', jp: '生ニードルコークス' },
+            '針熟焦': { tw: '針熟焦', cn: '针熟焦', en: 'Calcined Needle Coke', jp: '焼成ニードルコークス' },
+            'MCMB': { tw: 'MCMB', cn: 'MCMB', en: 'MCMB', jp: 'MCMB' },
+            '天然': { tw: '天然', cn: '天然', en: 'Natural Graphite', jp: '天然黒鉛' },
+            '天然+人造': { tw: '天然+人造', cn: '天然+人造', en: 'Natural + Artificial', jp: '天然 + 人造' },
+            '層狀氧化物': { tw: '層狀氧化物', cn: '层状氧化物', en: 'Layered Oxide', jp: '層状酸化物' },
+            '樹脂': { tw: '樹脂', cn: '树脂', en: 'Resin', jp: '樹脂' },
+            '—': { tw: '—', cn: '—', en: '—', jp: '—' }
+        };
+
+        var APPLICATION_NOTE_TRANSLATIONS = {
+            '314 儲能': { tw: '314 儲能', cn: '314 储能', en: '314 Energy Storage', jp: '314 エネルギー貯蔵' },
+            '調頻儲能／動力 3C': { tw: '調頻儲能／動力 3C', cn: '调频储能／动力 3C', en: 'Freq. Reg. / Power 3C', jp: '周波数調整 / 動力 3C' },
+            '587 儲能': { tw: '587 儲能', cn: '587 储能', en: '587 Energy Storage', jp: '587 エネルギー貯蔵' },
+            '高溫 4000 圈': { tw: '高溫 4000 圈', cn: '高温 4000 圈', en: 'High Temp 4000 Cycles', jp: '高温 4000 サイクル' },
+            '高倍率': { tw: '高倍率', cn: '高倍率', en: 'High Rate', jp: '高レート' },
+            '快充': { tw: '快充', cn: '快充', en: 'Fast Charge', jp: '急速充電' },
+            '大倍率': { tw: '大倍率', cn: '大倍率', en: 'High Rate', jp: '高レート' },
+            '客戶端高倍率驗證': { tw: '客戶端高倍率驗證', cn: '客户端高倍率验证', en: 'Client High Rate Verification', jp: '顧客高レート検証' },
+            '高能量': { tw: '高能量', cn: '高能量', en: 'High Energy', jp: '高エネルギー' },
+            '高壓實': { tw: '高壓實', cn: '高压实', en: 'High Press Density', jp: '高プレス密度' },
+            '超高倍率': { tw: '超高倍率', cn: '超高倍率', en: 'Ultra High Rate', jp: '超高レート' },
+            '90C+': { tw: '90C+', cn: '90C+', en: '90C+', jp: '90C+' },
+            '啟停 50C': { tw: '啟停 50C', cn: '启停 50C', en: 'Start-Stop 50C', jp: 'アイドリングストップ 50C' },
+            '小動力': { tw: '小動力', cn: '小动力', en: 'Small Power', jp: '小型動力' },
+            '電子煙 15C': { tw: '電子煙 15C', cn: '电子烟 15C', en: 'E-Cigarette 15C', jp: '電子タバコ 15C' },
+            '高容量': { tw: '高容量', cn: '高容量', en: 'High Capacity', jp: '高容量' },
+            '複合型': { tw: '複合型', cn: '复合型', en: 'Composite Type', jp: '複合型' },
+            '4.2–2.0 V': { tw: '4.2–2.0 V', cn: '4.2–2.0 V', en: '4.2–2.0 V', jp: '4.2–2.0 V' },
+            '首效 90.8%': { tw: '首效 90.8%', cn: '首效 90.8%', en: 'Initial Eff. 90.8%', jp: '初回効率 90.8%' }
+        };
+
         var CATEGORY_CONFIG = {
             '人造石墨－儲能型': {
                 key: 'artificial-storage',
@@ -280,7 +317,14 @@
                 headerHtml: buildLocalizedSpanSet({ tw: '焦/原料', cn: '焦/原料', en: 'Coke/Material', jp: 'コークス/原料' }),
                 labelHtml: buildLocalizedSpanSet({ tw: '焦/原料', cn: '焦/原料', en: 'Coke/Material', jp: 'コークス/原料' }),
                 cellClass: 'product-card__cell',
-                headerClass: 'product-card__table-header'
+                headerClass: 'product-card__table-header',
+                formatter: function (value) {
+                    var match = RAW_MATERIAL_TRANSLATIONS[value];
+                    if (match) {
+                        return buildLocalizedSpanSet(match);
+                    }
+                    return escapeHtml(value);
+                }
             },
             {
                 csvKey: '包覆',
@@ -329,7 +373,14 @@
                 headerHtml: buildLocalizedSpanSet({ tw: '主要應用 / 備註', cn: '主要应用 / 备注', en: 'Application / Note', jp: '主な用途 / 備考' }),
                 labelHtml: buildLocalizedSpanSet({ tw: '主要應用 / 備註', cn: '主要应用 / 备注', en: 'Application / Note', jp: '主な用途 / 備考' }),
                 cellClass: 'product-card__cell',
-                headerClass: 'product-card__table-header'
+                headerClass: 'product-card__table-header',
+                formatter: function (value) {
+                    var match = APPLICATION_NOTE_TRANSLATIONS[value];
+                    if (match) {
+                        return buildLocalizedSpanSet(match);
+                    }
+                    return escapeHtml(value);
+                }
             }
         ];
 
@@ -406,7 +457,13 @@
                 group.rows.forEach(function (row) {
                     var tr = document.createElement('tr');
                     var rowHtml = TABLE_COLUMNS.map(function (column) {
-                        var value = escapeHtml(appendUnit(getValue(row, column.csvKey), column.csvKey));
+                        var rawValue = getValue(row, column.csvKey);
+                        var value;
+                        if (column.formatter) {
+                            value = column.formatter(rawValue);
+                        } else {
+                            value = escapeHtml(appendUnit(rawValue, column.csvKey));
+                        }
                         var cellClass = column.cellClass || 'product-card__cell';
                         return '<td class="' + cellClass + '"><span class="product-card__cell-label">' + column.labelHtml + '</span><span class="product-card__cell-value">' + value + '</span></td>';
                     }).join('');
