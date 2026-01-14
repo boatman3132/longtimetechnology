@@ -266,6 +266,13 @@
             '首效 90.8%': { tw: '首效 90.8%', cn: '首效 90.8%', en: 'Initial Eff. 90.8%', jp: '初回効率 90.8%' }
         };
 
+        var COATING_TRANSLATIONS = {
+            '✓': { tw: '✓', cn: '✓', en: '✓', jp: '✓' },
+            '×': { tw: '×', cn: '×', en: '×', jp: '×' },
+            '✓（液相）': { tw: '✓（液相）', cn: '✓（液相）', en: '✓ (Liquid Phase)', jp: '✓ (液相)' },
+            '—': { tw: '—', cn: '—', en: '—', jp: '—' }
+        };
+
         var CATEGORY_CONFIG = {
             '人造石墨－儲能型': {
                 key: 'artificial-storage',
@@ -331,7 +338,14 @@
                 headerHtml: buildLocalizedSpanSet({ tw: '包覆', cn: '包覆', en: 'Coating', jp: 'コーティング' }),
                 labelHtml: buildLocalizedSpanSet({ tw: '包覆', cn: '包覆', en: 'Coating', jp: 'コーティング' }),
                 cellClass: 'product-card__cell',
-                headerClass: 'product-card__table-header'
+                headerClass: 'product-card__table-header',
+                formatter: function (value) {
+                    var match = COATING_TRANSLATIONS[value];
+                    if (match) {
+                        return buildLocalizedSpanSet(match);
+                    }
+                    return escapeHtml(value);
+                }
             },
             {
                 csvKey: 'D50 (µm)',
