@@ -59,6 +59,21 @@
             jp: ' シリーズ'
         };
 
+        var SERIES_TITLE_TRANSLATIONS = {
+            '鈉正 3S1': {
+                tw: '鈉正 3S1',
+                cn: '钠正 3S1',
+                en: 'Sodium Cathode 3S1',
+                jp: 'ナトリウム正極 3S1'
+            },
+            '硬碳 SHC320': {
+                tw: '硬碳 SHC320',
+                cn: '硬炭 SHC320',
+                en: 'Hard Carbon SHC320',
+                jp: 'ハードカーボン SHC320'
+            }
+        };
+
         function buildLocalizedSeriesTitle(rawTitle) {
             if (rawTitle === undefined || rawTitle === null) {
                 return '';
@@ -71,11 +86,24 @@
             if (!baseTitle) {
                 baseTitle = trimmed;
             }
+
+            var customTrans = SERIES_TITLE_TRANSLATIONS[baseTitle];
             var labels = {};
-            Object.keys(SERIES_SUFFIX_LABELS).forEach(function (lang) {
-                var suffix = SERIES_SUFFIX_LABELS[lang] || '';
-                labels[lang] = baseTitle + suffix;
-            });
+            if (customTrans) {
+                Object.keys(SERIES_SUFFIX_LABELS).forEach(function (lang) {
+                    var suffix = SERIES_SUFFIX_LABELS[lang] || '';
+                    // customTrans[lang] usually includes the name, just append suffix
+                    // Or if customTrans alreayd has suffix concept? 
+                    // The plan said: labels[lang] = (customTrans[lang] || baseTitle) + suffix;
+                    // But looking at the definitions 'Sodium Cathode 3S1', usually user wants 'Sodium Cathode 3S1 Series'.
+                    labels[lang] = (customTrans[lang] || baseTitle) + suffix;
+                });
+            } else {
+                Object.keys(SERIES_SUFFIX_LABELS).forEach(function (lang) {
+                    var suffix = SERIES_SUFFIX_LABELS[lang] || '';
+                    labels[lang] = baseTitle + suffix;
+                });
+            }
             return buildLocalizedSpanSet(labels);
         }
 
