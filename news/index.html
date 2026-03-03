@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
+
 <head>
     <meta charset="UTF-8">
     <base href="/">
@@ -15,7 +16,8 @@
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://stats.g.doubleclick.net https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://stats.g.doubleclick.net https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <link rel="shortcut icon" href="dist/Website_Metadata_Images/16x16.ico" type="image/x-icon" />
@@ -42,16 +44,24 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        .tw, .cn, .en, .jp { display: none; }
+        .tw,
+        .cn,
+        .en,
+        .jp {
+            display: none;
+        }
+
         body.lang_tw .tw,
         body.lang_cn .cn,
         body.lang_en .en,
-        body.lang_jp .jp { display: initial; }
+        body.lang_jp .jp {
+            display: initial;
+        }
     </style>
 </head>
 
 <body class="lang_tw" data-page="news">
-<div data-include="header"></div>
+    <div data-include="header"></div>
     <div class="pgkv">
         <div class="bgcolor"></div>
         <div class="txt_pos">
@@ -80,7 +90,8 @@
                             <h4 class="jp">すべて</h4>
                         </a>
                     </li>
-                    <li data-filter-key="industry" data-filter-tag-tw="產業動態" data-filter-tag-cn="产业动态" data-filter-tag-en="Industry News" data-filter-tag-jp="業界ニュース">
+                    <li data-filter-key="industry" data-filter-tag-tw="產業動態" data-filter-tag-cn="产业动态"
+                        data-filter-tag-en="Industry News" data-filter-tag-jp="業界ニュース">
                         <a href="#" class="langUrl filter-link" role="button">
                             <h4 class="tw">產業動態</h4>
                             <h4 class="cn">产业动态</h4>
@@ -88,7 +99,8 @@
                             <h4 class="jp">業界ニュース</h4>
                         </a>
                     </li>
-                    <li data-filter-key="company" data-filter-tag-tw="公司消息" data-filter-tag-cn="公司消息" data-filter-tag-en="Company News" data-filter-tag-jp="会社ニュース">
+                    <li data-filter-key="company" data-filter-tag-tw="公司消息" data-filter-tag-cn="公司消息"
+                        data-filter-tag-en="Company News" data-filter-tag-jp="会社ニュース">
                         <a href="#" class="langUrl filter-link" role="button">
                             <h4 class="tw">公司消息</h4>
                             <h4 class="cn">公司消息</h4>
@@ -96,7 +108,8 @@
                             <h4 class="jp">会社ニュース</h4>
                         </a>
                     </li>
-                    <li data-filter-key="employee" data-filter-tag-tw="員工活動" data-filter-tag-cn="员工活动" data-filter-tag-en="Employee Events" data-filter-tag-jp="社員イベント">
+                    <li data-filter-key="employee" data-filter-tag-tw="員工活動" data-filter-tag-cn="员工活动"
+                        data-filter-tag-en="Employee Events" data-filter-tag-jp="社員イベント">
                         <a href="#" class="langUrl filter-link" role="button">
                             <h4 class="tw">員工活動</h4>
                             <h4 class="cn">员工活动</h4>
@@ -104,7 +117,15 @@
                             <h4 class="jp">社員イベント</h4>
                         </a>
                     </li>
-                    
+                    <li data-filter-key="revenue" data-filter-tag-tw="營收數據" data-filter-tag-cn="营收数据"
+                        data-filter-tag-en="Revenue Data" data-filter-tag-jp="売上データ">
+                        <a href="#" class="langUrl filter-link" role="button">
+                            <h4 class="tw">營收數據</h4>
+                            <h4 class="cn">营收数据</h4>
+                            <h4 class="en">Revenue Data</h4>
+                            <h4 class="jp">売上データ</h4>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="flex-direction-nav">
@@ -115,8 +136,8 @@
         <section class="row col">
             <div id="news-list" class="news-list asj fade"></div>
         </section>
-            </div>
-<div data-include="footer"></div>
+    </div>
+    <div data-include="footer"></div>
     <script src="js/main.js"></script>
     <script src="js/function.js"></script>
     <script src="js/layout-loader.js"></script>
