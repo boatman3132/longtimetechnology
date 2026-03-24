@@ -1,5 +1,88 @@
 [
   {
+    "title": "LTT將與EcoGraf合作開發無氫氟酸 (HFfree) 技術",
+    "titles": {
+      "tw": "LTT將與EcoGraf合作開發無氫氟酸 (HFfree) 技術",
+      "cn": "LTT将与EcoGraf合作开发无氢氟酸 (HFfree) 技术",
+      "en": "LTT to Partner with EcoGraf on Development of HFfree Technology",
+      "jp": "LTT、EcoGrafとHFfree技術の開発で提携へ"
+    },
+    "date": "2026-03-16",
+    "tags": [
+      "公司消息"
+    ],
+    "tagsByLang": {
+      "tw": [
+        "公司消息"
+      ],
+      "cn": [
+        "公司消息"
+      ],
+      "en": [
+        "Company News"
+      ],
+      "jp": [
+        "会社ニュース"
+      ]
+    },
+    "image": "news/photo/2026-03-16ecograf_logo.png",
+    "images": [
+      "news/photo/2026-03-16ecograf_logo.png",
+      "news/photo/2026-03-16EcoGraf to Partner with Taiwanese Battery Anode Company.jpg"
+    ],
+    "slug": "2026-03-16EcoGraf_to_Partner_with_Taiwanese_Battery_Anode_Company",
+    "url": "news/2026-03-16EcoGraf_to_Partner_with_Taiwanese_Battery_Anode_Company.md",
+    "permalink": "news/detail/?slug=2026-03-16EcoGraf_to_Partner_with_Taiwanese_Battery_Anode_Company",
+    "excerpt": "LTT 正式宣佈與 EcoGraf 簽署非約束性合作備忘錄，雙方將針對 EcoGraf 專利的 HFfree 無氫氟酸純化技術展開深度合作，共同提升電池負極材料供應鏈的競爭力與永續性。 根據協議條款，LTT 將評估將該技術整合至其位於台灣及東南亞的負極材料供應鏈中。同時，LTT 亦將針對 EcoGraf 的天然石墨負極…",
+    "excerpts": {
+      "tw": "LTT 正式宣佈與 EcoGraf 簽署非約束性合作備忘錄，雙方將針對 EcoGraf 專利的 HFfree 無氫氟酸純化技術展開深度合作，共同提升電池負極材料供應鏈的競爭力與永續性。 根據協議條款，LTT 將評估將該技術整合至其位於台灣及東南亞的負極材料供應鏈中。同時，LTT 亦將針對 EcoGraf 的天然石墨負極…",
+      "cn": "LTT将与EcoGraf合作，共同开发其获得专利的无氢氟酸 (HFfree) 纯化技术。 LTT将把 HFfree 技术引入其在东南亚与台湾的负极材料供应链中，并评估将 EcoGraf 的天然石墨负极产品用于其全球电池工厂的供应链中。 LTT将探讨承购与投资机会，以支持与 EcoGraf 位于坦尚尼亚的旗舰项目 Epa…",
+      "en": "LTT will collaborate with EcoGraf (ASX: EGR) on the development of its patented hydrofluoric acid-free purification (HFfree) technology. Under the terms of a no…",
+      "jp": "EcoGraf（ASX：EGR）は、LTTと提携し、特許取得済みのフッ化水素酸フリー（HFfree）精製技術を共同開発することを発表しました。 法的拘束力のない覚書の条件に基づき、LTTは東南アジアおよび台湾における自社の負極材サプライチェーンにHFfree技術を導入し、EcoGrafの天然黒鉛負極材製品をグローバル（…"
+    }
+  },
+  {
+    "title": "美國際貿易委員會終判：中國電池負極材料未損害美企",
+    "titles": {
+      "tw": "美國際貿易委員會終判：中國電池負極材料未損害美企",
+      "cn": "美国际贸易委员会终判：中国电池负极材料未损害美企",
+      "en": "USITC Final Ruling: Chinese Battery Anode Materials Do Not Injure US Companies",
+      "jp": "米国国際貿易委員会が最終決定：中国製電池負極材は米国企業に損害を与えず"
+    },
+    "date": "2026-03-13",
+    "tags": [
+      "產業動態"
+    ],
+    "tagsByLang": {
+      "tw": [
+        "產業動態"
+      ],
+      "cn": [
+        "产业动态"
+      ],
+      "en": [
+        "Industry News"
+      ],
+      "jp": [
+        "業界動向"
+      ]
+    },
+    "image": "news/photo/2026-03-13美國際貿易委員會終判.jpg",
+    "images": [
+      "news/photo/2026-03-13美國際貿易委員會終判.jpg"
+    ],
+    "slug": "2026-03-13美國際貿易委員會終判",
+    "url": "news/2026-03-13美國際貿易委員會終判.md",
+    "permalink": "news/detail/?slug=2026-03-13%E7%BE%8E%E5%9C%8B%E9%9A%9B%E8%B2%BF%E6%98%93%E5%A7%94%E5%93%A1%E6%9C%83%E7%B5%82%E5%88%A4",
+    "excerpt": "美國國際貿易委員會（ITC）做出最終裁決，認定從中國進口的電池負極材料，並未對美國本土製造商造成損害。這項否決判定，阻止了美國商務部與海關和邊境保護局，對來自中國的活性負極材料（Active Anode Material, AAM）徵收反傾銷稅與反補貼稅。 這項反傾銷和反補貼稅調查，源於美國活性負極材料生產商協會（Am…",
+    "excerpts": {
+      "tw": "美國國際貿易委員會（ITC）做出最終裁決，認定從中國進口的電池負極材料，並未對美國本土製造商造成損害。這項否決判定，阻止了美國商務部與海關和邊境保護局，對來自中國的活性負極材料（Active Anode Material, AAM）徵收反傾銷稅與反補貼稅。 這項反傾銷和反補貼稅調查，源於美國活性負極材料生產商協會（Am…",
+      "cn": "美国国际贸易委员会（ITC）做出最终裁决，认定从中国进口的电池负极材料，并未对美国本土制造商造成损害。这项否决判定，阻止了美国商务部与海关和边境保护局，对来自中国的活性负极材料（Active Anode Material, AAM）征收反倾销税与反补贴税。 这项反倾销和反补贴税调查，源于美国活性负极材料生产商协会（Am…",
+      "en": "The U.S. International Trade Commission (ITC) has made a final ruling that imports of battery anode materials from China do not injure domestic manufacturers. T…",
+      "jp": "米国国際貿易委員会（ITC）は、中国から輸入された電池負極材が米国内の製造業者に損害を与えていないとする最終決定を下しました。この否決判定により、米国商務省および税関・国境警備局が、中国産の活性負極材（Active Anode Material, AAM）に対して反ダンピング関税および相殺関税を課すことが阻止されました…"
+    }
+  },
+  {
     "title": "LTT 2 月營收 1.07 億元，年增 128.79%",
     "titles": {
       "tw": "LTT 2 月營收 1.07 億元，年增 128.79%",
@@ -35,9 +118,9 @@
     "excerpt": "LTT（榮炭）公告 2026 年 2 月營收為 1.07 億元，年增 128.79%、月減 13.73%。累計 2026 年 1–2 月營收達 2.32 億元，年增 294.97%。 本次營收成長主要受惠於負極產品穩定出貨。LTT 持續優化產品結構並強化量產能力，以滿足市場對高效能材料的需求，推動公司長期穩健成長。 -…",
     "excerpts": {
       "tw": "LTT（榮炭）公告 2026 年 2 月營收為 1.07 億元，年增 128.79%、月減 13.73%。累計 2026 年 1–2 月營收達 2.32 億元，年增 294.97%。 本次營收成長主要受惠於負極產品穩定出貨。LTT 持續優化產品結構並強化量產能力，以滿足市場對高效能材料的需求，推動公司長期穩健成長。 -…",
-      "cn": "LTT（榮炭）公告 2026 年 2 月營收為 1.07 億元，年增 128.79%、月減 13.73%。累計 2026 年 1–2 月營收達 2.32 億元，年增 294.97%。 本次營收成長主要受惠於負極產品穩定出貨。LTT 持續優化產品結構並強化量產能力，以滿足市場對高效能材料的需求，推動公司長期穩健成長。 -…",
-      "en": "LTT（榮炭）公告 2026 年 2 月營收為 1.07 億元，年增 128.79%、月減 13.73%。累計 2026 年 1–2 月營收達 2.32 億元，年增 294.97%。 本次營收成長主要受惠於負極產品穩定出貨。LTT 持續優化產品結構並強化量產能力，以滿足市場對高效能材料的需求，推動公司長期穩健成長。 -…",
-      "jp": "LTT（榮炭）公告 2026 年 2 月營收為 1.07 億元，年增 128.79%、月減 13.73%。累計 2026 年 1–2 月營收達 2.32 億元，年增 294.97%。 本次營收成長主要受惠於負極產品穩定出貨。LTT 持續優化產品結構並強化量產能力，以滿足市場對高效能材料的需求，推動公司長期穩健成長。 -…"
+      "cn": "",
+      "en": "",
+      "jp": "LTT（榮炭）は、2026年2月の売上高が1.07億台湾ドル、前年同月比128.79％増、前月比13.73％減と発表しました。2026年1月から2月までの累計売上高は2.32億台湾ドル、前年同期比294.97％増を記録し、前年同期を大幅に上回る力強い成長を示しています。 今回の売上増加は、主に負極製品の安定した出荷によ…"
     }
   },
   {

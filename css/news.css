@@ -377,6 +377,9 @@
   text-decoration: underline;
   color: #0782C1;
 }
+.editor_box p {
+  margin-bottom: 1.5em;
+}
 .editor_box iframe {
   max-width: 100%;
 }

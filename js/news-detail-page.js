@@ -241,7 +241,7 @@
 
                 function flushParagraph() {
                     if (!paragraphBuffer.length) return;
-                    html.push('<p>' + inlineMarkdown(paragraphBuffer.join(' ')) + '</p>');
+                    html.push('<p>' + inlineMarkdown(paragraphBuffer.join('<br>')) + '</p>');
                     paragraphBuffer = [];
                 }
 
@@ -468,7 +468,7 @@
                     return;
                 }
                 if (typeof state.parser.setOptions === 'function') {
-                    state.parser.setOptions({ mangle: false, headerIds: false });
+                    state.parser.setOptions({ mangle: false, headerIds: false, breaks: true });
                 }
                 if (!markdown) {
                     contentEl.innerHTML = '<p class="news-error">此語言尚無內容。</p>';
