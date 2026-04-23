@@ -1068,6 +1068,7 @@ footer .bgred {
 }
 footer .bgred .tel {
   color: white;
+  white-space: nowrap;
 }
 @media all and (max-width: 575px) {
   footer .bgred .tel {
