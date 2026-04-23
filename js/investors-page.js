@@ -61,7 +61,7 @@
             let dataReady = false;
             let sectionInView = !('IntersectionObserver' in window) || !sectionElement;
             let sectionAnimated = !sectionElement || sectionElement.classList.contains('animated');
-            let pendingMonths = 12;
+            let pendingMonths = 36;
             let hasPlayedInitialAnimation = false;
             let shouldPlayInitialAnimation = false;
             let initialAnimationInProgress = false;
@@ -182,7 +182,7 @@
                     button.classList.add('is-active');
                     button.setAttribute('aria-pressed', 'true');
                     const months = Number.parseInt(button.dataset.months, 10);
-                    pendingMonths = Number.isFinite(months) ? months : 12;
+                    pendingMonths = Number.isFinite(months) ? months : 36;
                     if (dataReady) {
                         triggerChartUpdate({ months: pendingMonths, animateInitial: false });
                     }
@@ -330,8 +330,8 @@
 
             function getActiveMonths() {
                 const activeButton = rangeButtons.find(btn => btn.classList.contains('is-active'));
-                const months = activeButton ? Number.parseInt(activeButton.dataset.months, 10) : 12;
-                return Number.isFinite(months) ? months : 12;
+                const months = activeButton ? Number.parseInt(activeButton.dataset.months, 10) : 36;
+                return Number.isFinite(months) ? months : 36;
             }
 
             function getDataForRange(months) {
