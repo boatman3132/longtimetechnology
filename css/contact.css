@@ -278,7 +278,7 @@
   display: none;
   width: 20px;
   height: 14px;
-  background: url("https://www.advancision.com/dist/images/agree_yes.png") no-repeat center/contain;
+  background: url("../dist/contact/agree_yes.png") no-repeat center/contain;
 }
 .formtable .check_radi input:checked ~ .checkmark:after {
   display: block;
@@ -484,7 +484,7 @@
   color: #999999;
   padding-left: 1.5em;
   padding-right: 2em;
-  background: no-repeat url(https://www.advancision.com/dist/images/contact/icon_attachment.png) left center/0.8em;
+  background: no-repeat url(../dist/contact/icon_attachment.png) left center/0.8em;
   word-break: break-word;
 }
 .contact .formtable .file-btn {
@@ -673,4 +673,54 @@
     top: 100%;
     left: 0;
   }
+}
+/* ── Success modal ── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .18s ease;
+}
+
+.modal-overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-box {
+    background: #fff;
+    border-radius: 8px;
+    max-width: 420px;
+    width: 92%;
+    padding: 20px 22px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+    text-align: center;
+}
+
+.modal-box h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.modal-box p {
+    margin: 0 0 16px;
+    color: #333;
+}
+
+.modal-box .modal-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: #222;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
 }

@@ -15,7 +15,7 @@
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <link rel="shortcut icon" href="dist/Website_Metadata_Images/16x16.ico" type="image/x-icon" />
@@ -44,44 +44,6 @@
     <link rel="stylesheet" href="css/error.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <style>
-        .tw, .cn, .en, .jp { display: none; }
-        body.lang_tw .tw,
-        body.lang_cn .cn,
-        body.lang_en .en,
-        body.lang_jp .jp { display: initial; }
-
-        .countdown-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            margin: 0 0.25rem;
-            border-radius: 999px;
-            background-color: rgba(230, 0, 54, 0.12);
-            color: #e60036;
-            font-weight: 700;
-            font-size: 1.5rem;
-            line-height: 1;
-            animation: countdownPulse 1s ease-in-out infinite;
-        }
-
-        @keyframes countdownPulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.12); opacity: 0.85; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @media (max-width: 480px) {
-            .countdown-number {
-                width: 2rem;
-                height: 2rem;
-                font-size: 1.25rem;
-                margin: 0 0.15rem;
-            }
-        }
-    </style>
 </head>
 
 <body class="lang_tw" data-page="error">

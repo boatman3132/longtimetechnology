@@ -509,7 +509,7 @@
 
 .recruit .tag-menu .select-wrap:after {
   content: "";
-  background: no-repeat url(https://www.advancision.com/dist/images/select_arrow.png) center/contain;
+  background: no-repeat url(../dist/share/select_arrow.png) center/contain;
   width: 1em;
   height: 1em;
   position: absolute;
@@ -924,3 +924,26 @@
     display: none;
   }
 }
+/* ── Background image utility classes ─────────────────────────────────────
+   Replaces inline style="background-image:url(...)" attributes.
+   Paths are relative to this CSS file (css/ → ../dist/).
+   ──────────────────────────────────────────────────────────────────────── */
+.bg-plant-gate       { background-image: url('../dist/index/plant_gate.png'); }
+.bg-plant-inside     { background-image: url('../dist/index/plant_inside.jpg'); }
+.bg-longli-outside   { background-image: url('../dist/index/index_longli_outside_2.jpg'); }
+.bg-index-20220917   { background-image: url('../dist/index/20220917130121.jpg'); }
+.bg-about-mo         { background-image: url('../dist/share/about_mo.jpg'); }
+.bg-products-section { background-image: url('../dist/index/d94fe8ddaa30e8ec479a2c310e104be8.jpg'); }
+.bg-env-1            { background-image: url('../dist/index/2023_04_07_0833481.png'); }
+.bg-env-2            { background-image: url('../dist/index/2022_11_15_1213391.png'); }
+.bg-join             { background-image: url('../dist/index/2022_11_09_1658261.jpg'); }
+.bg-esg-section      { background-image: url('../dist/index/2022_11_11_1128251.jpg'); }
+.bg-about            { background-image: url('../dist/share/about.jpg'); }
+.bg-contact          { background-image: url('../dist/contact/contact.jpeg'); }
+.bg-esg              { background-image: url('../dist/esg/2022_11_01_180511.png'); }
+.bg-investors        { background-image: url('../dist/investors/investors.png'); }
+.bg-investors-mo     { background-image: url('../dist/investors/investors_mo.png'); }
+.bg-news             { background-image: url('../dist/news/news.png'); }
+.bg-news-mo          { background-image: url('../dist/news/news_mo.png'); }
+.bg-products         { background-image: url('../dist/products/service.png'); }
+.bg-products-mo      { background-image: url('../dist/products/service_mo.png'); }

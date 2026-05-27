@@ -17,7 +17,7 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <link rel="shortcut icon" href="dist/Website_Metadata_Images/16x16.ico" type="image/x-icon" />
@@ -43,21 +43,6 @@
     <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <style>
-        .tw,
-        .cn,
-        .en,
-        .jp {
-            display: none;
-        }
-
-        body.lang_tw .tw,
-        body.lang_cn .cn,
-        body.lang_en .en,
-        body.lang_jp .jp {
-            display: initial;
-        }
-    </style>
 </head>
 
 <body class="lang_tw" data-page="about">
@@ -74,8 +59,8 @@
             </div>
         </div>
         <div class="mimg">
-            <div class="bgcover pc_use" style="background-image:url(dist/share/about.jpg)"></div>
-            <div class="bgcover mo_use" style="background-image:url(dist/share/about_mo.jpg)"></div>
+            <div class="bgcover pc_use bg-about"></div>
+            <div class="bgcover mo_use bg-about-mo"></div>
         </div>
     </div>
     <div id="Wapper" class="about intro">

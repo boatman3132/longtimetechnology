@@ -12,7 +12,7 @@
         return;
     }
 
-    var cspPolicy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;";
+    var cspPolicy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;";
 
     var metaDirectives = [
         { name: 'Content-Security-Policy', value: cspPolicy },

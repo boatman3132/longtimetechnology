@@ -1072,7 +1072,7 @@
   content: "";
   width: 100%;
   height: 100%;
-  background: no-repeat url(https://www.advancision.com/dist/images/about/milestone_bg_1.png) left 200px/320px;
+  background: no-repeat url(../dist/about/milestone_bg_1.png) left 200px/320px;
   position: absolute;
   top: 0;
   left: 0;
@@ -1082,7 +1082,7 @@
   content: "";
   width: 100%;
   height: 100%;
-  background: no-repeat url(https://www.advancision.com/dist/images/about/milestone_bg_2.png) right 95%/300px;
+  background: no-repeat url(../dist/about/milestone_bg_2.png) right 95%/300px;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -1292,7 +1292,7 @@
     content: "";
     width: 100%;
     height: 100%;
-    background: no-repeat url(https://www.advancision.com/dist/images/about/c_pattern.png) right top;
+    background: no-repeat url(../dist/about/c_pattern.png) right top;
     position: absolute;
     top: 0;
     left: 0;

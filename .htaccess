@@ -1,0 +1,94 @@
+# ============================================================
+# Long Time Technology — Apache Security Configuration
+# ============================================================
+
+# ── 1. HTTP → HTTPS 強制跳轉（301 永久）────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # 已在 HTTPS 則跳過
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # 非標準主機名稱統一導向 www.lttech.com.tw
+    RewriteCond %{HTTP_HOST} !^www\.lttech\.com\.tw$ [NC]
+    RewriteCond %{HTTPS} on
+    RewriteRule ^ https://www.lttech.com.tw%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ── 2. HTTP 安全標頭 ────────────────────────────────────────
+<IfModule mod_headers.c>
+
+    # HSTS：強制瀏覽器未來 2 年只走 HTTPS（含子網域）
+    # 注意：確認所有子網域都能 HTTPS 後再啟用 preload
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+    # 防止 MIME-sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # 防 Clickjacking：只允許同源 iframe 嵌入
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Referrer 資訊控制：只傳送 origin，不傳完整路徑
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Permissions Policy：關閉不需要的瀏覽器功能
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+
+    # Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://i.ytimg.com https://img.youtube.com https://*.googleusercontent.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self'; frame-src 'self' https://*.google.com https://*.youtube.com https://docs.google.com; frame-ancestors 'self'; form-action 'self' https://docs.google.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;"
+
+    # 移除伺服器版本資訊（需搭配 httpd.conf 的 ServerTokens Prod）
+    Header unset X-Powered-By
+    Header unset Server
+
+</IfModule>
+
+# ── 3. 隱藏目錄列表 ─────────────────────────────────────────
+Options -Indexes
+
+# ── 4. 禁止存取敏感檔案與開發目錄 ──────────────────────────
+# 禁止存取敏感單一檔案
+<FilesMatch "(^\.htaccess|^\.htpasswd|^\.env|^\.DS_Store|package\.json|package-lock\.json)$">
+    Require all denied
+</FilesMatch>
+
+# 禁止存取開發/版控目錄（.git 洩漏可重建完整原始碼）
+<IfModule mod_rewrite.c>
+    RewriteRule ^(\.git|\.github|\.vscode|node_modules|scripts)(/|$) - [F,L]
+</IfModule>
+
+# ── 5. 自訂錯誤頁面 ─────────────────────────────────────────
+ErrorDocument 404 /404.html
+
+# ── 6. 靜態資源快取策略 ─────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # HTML：不快取，確保用戶看到最新內容
+    ExpiresByType text/html                "access plus 0 seconds"
+
+    # CSS / JS：版本異動後會有新檔名，可長快取
+    ExpiresByType text/css                 "access plus 1 year"
+    ExpiresByType application/javascript   "access plus 1 year"
+
+    # 圖片資源
+    ExpiresByType image/png                "access plus 6 months"
+    ExpiresByType image/jpeg               "access plus 6 months"
+    ExpiresByType image/gif                "access plus 6 months"
+    ExpiresByType image/webp               "access plus 6 months"
+    ExpiresByType image/svg+xml            "access plus 6 months"
+    ExpiresByType image/x-icon             "access plus 1 year"
+
+    # 字型
+    ExpiresByType font/woff                "access plus 1 year"
+    ExpiresByType font/woff2               "access plus 1 year"
+    ExpiresByType application/font-woff    "access plus 1 year"
+</IfModule>
+
+# ── 7. 壓縮傳輸（減少頻寬） ─────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript
+    AddOutputFilterByType DEFLATE image/svg+xml application/json
+    AddOutputFilterByType DEFLATE font/woff font/woff2
+</IfModule>
