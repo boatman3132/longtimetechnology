@@ -123,6 +123,45 @@
     }
   },
   {
+    "title": "公告本公司總經理異動",
+    "titles": {
+      "tw": "公告本公司總經理異動",
+      "cn": "公告本公司总经理异动",
+      "en": "LTT Announces Change of General Manager",
+      "jp": "LTT、総経理交代のお知らせ"
+    },
+    "date": "2026-04-09",
+    "tags": [
+      "公司消息"
+    ],
+    "tagsByLang": {
+      "tw": [
+        "公司消息"
+      ],
+      "cn": [
+        "公司消息"
+      ],
+      "en": [
+        "Company News"
+      ],
+      "jp": [
+        "会社ニュース"
+      ]
+    },
+    "image": "",
+    "images": [],
+    "slug": "2026-04-09公告本公司總經理異動",
+    "url": "news/2026-04-09公告本公司總經理異動.md",
+    "permalink": "news/detail/?slug=2026-04-09%E5%85%AC%E5%91%8A%E6%9C%AC%E5%85%AC%E5%8F%B8%E7%B8%BD%E7%B6%93%E7%90%86%E7%95%B0%E5%8B%95",
+    "excerpt": "本公司總經理顏文群先生因個人職務調動，自 2026 年 4 月 7 日起辭任榮炭科技總經理一職，並由胡旭添先生自 2026 年 4 月 9 日起接任代理總經理。 ---…",
+    "excerpts": {
+      "tw": "本公司總經理顏文群先生因個人職務調動，自 2026 年 4 月 7 日起辭任榮炭科技總經理一職，並由胡旭添先生自 2026 年 4 月 9 日起接任代理總經理。 ---…",
+      "cn": "本公司总经理颜文群先生因个人职务调动，自 2026 年 4 月 7 日起辞任荣炭科技总经理一职，并由胡旭添先生自 2026 年 4 月 9 日起接任代理总经理。 ---…",
+      "en": "Long Time Technology (LTT) announces that General Manager Dr. Yan Wenqun has resigned from his position as General Manager due to personal job reallocation, eff…",
+      "jp": "当社総経理（社長）の顔文群氏は、個人の職務異動に伴い、2026年4月7日付で栄炭科技（LTT）の総経理職を辞任いたしました。なお、後任として2026年4月9日付で胡旭添氏が代理総経理に就任いたしました…"
+    }
+  },
+  {
     "title": "LTT 3 月營收 1.61 億元，史上最高，年增 102.31%",
     "titles": {
       "tw": "LTT 3 月營收 1.61 億元，史上最高，年增 102.31%",
