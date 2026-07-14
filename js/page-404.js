@@ -1,6 +1,14 @@
 (function () {
     'use strict';
 
+    function resolveUrl(target) {
+        try {
+            return new URL(String(target).replace(/^\//, ''), document.baseURI).href;
+        } catch (error) {
+            return target;
+        }
+    }
+
     function handleLegacyRedirects() {
         var supportedLanguages = ['tw', 'cn', 'en', 'jp'];
         var pathname = window.location.pathname || '/';
@@ -24,7 +32,7 @@
                 if (langParam) {
                     destination += '?lang=' + encodeURIComponent(langParam);
                 }
-                window.location.replace(destination);
+                window.location.replace(resolveUrl(destination));
                 return true;
             }
         }
@@ -35,7 +43,7 @@
         };
 
         if (Object.prototype.hasOwnProperty.call(redirectMap, normalizedPath)) {
-            window.location.replace(redirectMap[normalizedPath]);
+            window.location.replace(resolveUrl(redirectMap[normalizedPath]));
             return true;
         }
 
@@ -65,7 +73,7 @@
         var queryString = searchParams.toString();
         var hash = window.location.hash || '';
         var nextUrl = basePath + (queryString ? '?' + queryString : '') + hash;
-        window.location.replace(nextUrl);
+        window.location.replace(resolveUrl(nextUrl));
         return true;
     }
 
@@ -105,7 +113,7 @@
             if (remaining <= 0) {
                 updateCountdown(0);
                 window.clearInterval(countdownTimer);
-                window.location.href = targetUrl;
+                window.location.href = resolveUrl(targetUrl);
                 return;
             }
             updateCountdown(remaining);

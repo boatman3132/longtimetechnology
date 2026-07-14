@@ -142,7 +142,7 @@ function syncLanguageAttributes(lang) {
 
             if (element.dataset.baseAction) {
                 const isAbsolute = /^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(element.dataset.baseAction);
-                const url = isAbsolute ? new URL(element.dataset.baseAction) : new URL(element.dataset.baseAction, window.location.origin);
+                const url = isAbsolute ? new URL(element.dataset.baseAction) : new URL(element.dataset.baseAction, document.baseURI);
                 url.searchParams.set('lang', lang);
                 const nextAction = isAbsolute ? url.toString() : `${url.pathname}${url.search}`;
                 element.setAttribute('action', nextAction);
@@ -185,7 +185,7 @@ function updateLanguageLinks(lang) {
 
         try {
             const isAbsolute = /^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(href);
-            const url = isAbsolute ? new URL(href) : new URL(href, window.location.origin);
+            const url = isAbsolute ? new URL(href) : new URL(href, document.baseURI);
             url.searchParams.set('lang', lang);
             const nextHref = isAbsolute ? url.toString() : `${url.pathname}${url.search}${url.hash}`;
             link.setAttribute('href', nextHref);

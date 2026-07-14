@@ -2,12 +2,9 @@
     var locationRef = window.location;
     var isLocal = /^(localhost|127\.0\.0\.1)(:\d+)?$/i.test(locationRef.host);
     var isFileProtocol = locationRef.protocol === 'file:';
-    var canonicalHost = 'www.lttech.com.tw';
-    var needsCanonicalRedirect = locationRef.hostname && locationRef.hostname !== canonicalHost;
 
-    if (!isLocal && !isFileProtocol && (locationRef.protocol === 'http:' || needsCanonicalRedirect)) {
-        var targetHost = needsCanonicalRedirect ? canonicalHost : locationRef.host;
-        var target = 'https://' + targetHost + locationRef.pathname + locationRef.search + locationRef.hash;
+    if (!isLocal && !isFileProtocol && locationRef.protocol === 'http:') {
+        var target = 'https://' + locationRef.host + locationRef.pathname + locationRef.search + locationRef.hash;
         window.location.replace(target);
         return;
     }

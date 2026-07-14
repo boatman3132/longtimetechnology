@@ -3,4 +3,4 @@ Allow: /
 Disallow: /node_modules/
 Disallow: /scripts/
 
-Sitemap: https://www.lttech.com.tw/sitemap.xml
+Sitemap: https://boatman3132.github.io/longtimetechnology/sitemap.xml

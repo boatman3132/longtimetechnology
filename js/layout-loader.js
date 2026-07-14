@@ -162,10 +162,10 @@
         var footerPlaceholder = document.querySelector('[data-include="footer"]');
         var tasks = [];
         if (headerPlaceholder) {
-            tasks.push(loadPartial(headerPlaceholder, '/header.html'));
+            tasks.push(loadPartial(headerPlaceholder, 'header.html'));
         }
         if (footerPlaceholder) {
-            tasks.push(loadPartial(footerPlaceholder, '/footer.html'));
+            tasks.push(loadPartial(footerPlaceholder, 'footer.html'));
         }
         Promise.all(tasks).then(function () {
             waitForjQuery(0);

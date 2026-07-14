@@ -9,11 +9,6 @@
     # 已在 HTTPS 則跳過
     RewriteCond %{HTTPS} off
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-
-    # 非標準主機名稱統一導向 www.lttech.com.tw
-    RewriteCond %{HTTP_HOST} !^www\.lttech\.com\.tw$ [NC]
-    RewriteCond %{HTTPS} on
-    RewriteRule ^ https://www.lttech.com.tw%{REQUEST_URI} [R=301,L]
 </IfModule>
 
 # ── 2. HTTP 安全標頭 ────────────────────────────────────────

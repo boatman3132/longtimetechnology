@@ -27,7 +27,6 @@
             var params = new URLSearchParams(window.location.search);
             var slug = params.get('slug') || '';
             var escapeHelper = document.createElement('textarea');
-            var SITE_ORIGIN = 'https://www.lttech.com.tw';
             var canonicalEl = document.getElementById('news-canonical');
             var descriptionEl = document.querySelector('meta[name="description"]');
             var ogTitleEl = document.querySelector('meta[property="og:title"]');
@@ -97,20 +96,22 @@
                     return path;
                 }
                 if (path.indexOf('//') === 0) {
-                    return 'https:' + path;
+                    return window.location.protocol + path;
                 }
-                if (path.indexOf('/') === 0) {
-                    return SITE_ORIGIN + path;
+                try {
+                    return new URL(path.replace(/^\.?\//, ''), document.baseURI).href;
+                } catch (error) {
+                    return path;
                 }
-                return SITE_ORIGIN + '/' + path.replace(/^\.?\//, '');
             }
 
             function buildArticleUrl(articleSlug) {
                 var safeSlug = sanitizeSlug(articleSlug) || '';
+                var detailUrl = new URL('news/detail/', document.baseURI).href;
                 if (!safeSlug) {
-                    return SITE_ORIGIN + '/news/detail/';
+                    return detailUrl;
                 }
-                return SITE_ORIGIN + '/news/detail/?slug=' + encodeURIComponent(safeSlug);
+                return detailUrl + '?slug=' + encodeURIComponent(safeSlug);
             }
 
             function deriveMeta(value) {
